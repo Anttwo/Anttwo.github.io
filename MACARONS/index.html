@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>MACARONS</title>
+ <meta name="description" content="MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+ <meta charset="utf-8">
+ <!-- <link rel="icon" href="./icon_unicorn.png" type="image/png"> -->
+
+ <!--Facebook-->
+ <meta property="og:image" content="https://anttwo.github.io/MACARONS/example.png">
+ <meta property="og:image:type" content="image/jpg">
+ <meta property="og:image:width" content="600">
+ <meta property="og:image:height" content="400">
+ <meta property="og:type" content="website"/>
+ <meta property="og:url" content="https://anttwo.github.io/MACARONS/"/>
+ <meta property="og:title" content="MACARONS"/>
+ <meta property="og:description" content="Project page for MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision."/>
+
+ <!--Twitter-->
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="MACARONS" />
+ <meta property="twitter:description" content="Project page for MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision."/>
+ <meta name="twitter:image" content="https://anttwo.github.io/MACARONS/example.png">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:800|Roboto:400,700" rel="stylesheet"> -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+ <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
+ <!-- <link href="http://fonts.googleapis.com/css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">  -->
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ <link href="style_2.css" rel="stylesheet">
+
+<!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CDL4R10HKE');
+</script>
+<!-- End Google Analytics -->
+
+</head>
+<body>
+
+<div class="container" style="text-align:center; padding-top:2rem 15px">
+ <div class="row" style="text-align:center">
+   <h1 style="font-size: 60px;">MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision</h1>
+   <h1 style="font-size: xxx-large;">CVPR 2023</h1>
+ </div>
+ <div class="row" style="text-align:center">
+   <div class="col-xs-0 col-md-2"></div>
+   <div class="col-xs-12 col-md-8">
+     <h4 style="font-size: 22px;">
+       <nobr><a href="https://anttwo.github.io/">Antoine Gu&eacutedon</a></nobr> &emsp;
+       <nobr><a href="https://www.tmonnier.com">Tom Monnier</a></nobr>&emsp;
+       <nobr><a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a></nobr>&emsp;
+       <nobr><a href="https://vincentlepetit.github.io/">Vincent Lepetit</a></nobr>
+     </h4>
+     <p style="font-size: 20px; text-align: center;"><nobr>LIGM, Ecole des Ponts</nobr>, <nobr>Univ Gustave Eiffel</nobr>, CNRS<br></p>
+   </div>
+   <!-- <div class="hidden-xs hidden-sm col-md-1" style="text-align:left; margin-left:0px; margin-right:0px">
+     <a href="https://arxiv.org/abs/2303.03315" style="color:#448D87">
+       <i class="fa fa-file-pdf-o fa-4x"></i></a>
+   </div>
+   <div class="hidden-xs hidden-sm col-md-1" style="text-align:left; margin-left:0px;">
+     <a href="https://github.com/Anttwo/MACARONS" style="color:#448D87">
+       <i class="fa fa-github fa-4x"></i></a>
+   </div> -->
+ </div>
+</div>
+
+<div class="container" style="text-align:center; padding:0rem">
+ <div class="row">
+   <div class="col-xs-12">
+   <h3 style="text-align:center; padding-bottom:1rem">
+     <a class="label label-info" href="https://arxiv.org/abs/2303.03315"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+     <a class="label label-info" href="https://github.com/Anttwo/MACARONS"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code</a>
+     <a class="label label-info" href="https://github.com/Anttwo/MACARONS"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>&nbsp;&nbsp;Demo</a>
+     <a class="label label-info" href="https://youtu.be/8_QNKaCyr4Y"><i class="fa fa-area-chart fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;Presentation</a>
+     <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a>
+   </h3>
+   </div>
+ </div>
+
+ <div class="row" style="padding:2rem">
+   <div class="col-xs-12">
+   <img src="teaser.png" alt="teaser.png" class="text-center" style="width: 90%; max-width: 1000px">
+   <!-- <video autoplay loop muted playsinline src="teaser.mp4" style="width:95%; max-width: 900px"></video> -->
+   <!--<img src="teaser.gif" alt="teaser.gif" class="text-center" style="width: 95%; max-width: 900px">-->
+   <div class="wrapper">
+     <!-- <div class="col-xs-4 col-lg-6;"> -->
+      <p style="text-align: center">(a) NBV methods with a depth sensor (<i>e.g.</i>, <a href="https://arxiv.org/abs/2208.10449">SCONE</a> by Gu&eacutedon et al.)</p>
+      <p style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+     <!-- </div>
+     <div class="col-xs-4 col-lg-6;"> -->
+      <p style="text-align: center">(b) Our approach MACARONS with an RGB sensor</p>
+     <!-- </div> -->
+   </div>
+   </div>
+ </div>
+
+</div>
+
+<div class="container">
+ <h2>Abstract</h2>
+ <hr/>
+ <p>
+ We introduce a method that <b>simultaneously learns</b> to <b>explore new large
+ environments</b> and to <b>reconstruct them in 3D from color images</b>
+ in a <b>self-supervised fashion</b>.
+ This is closely related to the <b>Next Best View problem (NBV)</b>, where one
+ has to identify where to move the camera next to improve the coverage of an
+ unknown scene. However, most of the current NBV methods rely on depth sensors,
+ need 3D supervision and/or do not scale to large scenes.<br>
+ <br>
+ In this paper, we propose the first deep-learning-based NBV approach for dense
+ reconstruction of large 3D scenes from RGB images. We call this approach
+ <b>MACARONS</b>, for <b>Mapping And Coverage Anticipation with RGB Online
+ Self-Supervision</b>. Moreover, we provide a dedicated training procedure for
+ <b>online learning for scene mapping and automated exploration based on
+ coverage optimization in any kind of environment, with no explicit 3D
+ supervision</b>. Consequently, our approach is also the first NBV method to
+ <b>learn in real-time to reconstruct and explore arbitrarily large scenes in a
+ self-supervised fashion</b>.<br>
+<br>
+ Indeed, MACARONS simultaneously learns to predict a <b>"volume occupancy
+ field"</b> from color images and, from this field, to predict the NBV.
+ We experimentally show that this greatly improves results for NBV exploration
+ of 3D scenes. In particular, we demonstrate this on a recent dataset
+ made of various 3D scenes and show it performs even better than recent methods
+ requiring a depth sensor, which is not a realistic assumption for outdoor
+ scenes captured with a flying drone. <b>It makes our approach suitable for
+ real-life applications on small drones with a simple color camera</b>.
+ More fundamentally, it shows that an autonomous system can learn to explore and
+ reconstruct environments without any 3D information <i>a priori</i>.
+ </p>
+
+ <div class="row" style="text-align:center">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10 text-center">
+   <h4 width=100% class="highlight" style="padding:0.5em"><b>Illustration</b></h4>
+   <div class="embed-responsive embed-responsive-16by9" style="text-align:center">
+     <iframe class="embed-responsive-item text-center" src="https://www.youtube.com/embed/NlUNFJYuBGs" frameborder="0"
+       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+       style="width:100%; clip-path:inset(1px 1px);" allowfullscreen></iframe>
+   </div>
+   <p><br>
+    This video illustrates how MACARONS explores and reconstructs efficiently a
+    subset of three large 3D scenes.
+    In particular, the video shows several key-elements of our approach:
+    <ol style="text-align:left">
+        <li><b>The trajectory of the camera</b>, evolving in real-time with each
+          NBV iteration performed by the surface coverage gain module (left).</li>
+        <li><b>The RGB input</b> captured by the camera (top right).</li>
+        <li><b>The surface point cloud</b> reconstructed using the depth prediction
+          module of MACARONS (right).</li>
+        <li><b>The volume occupancy field</b> computed and updated in real-time using
+          the volume occupancy module (bottom right). In the video, we removed
+          the points with an occupancy lower or equal to 0.5 for clarity.</li>
+   </ol>
+   </p>
+   <div class="hidden-xs col-md-1"></div>
+   </div>
+ </div>
+
+ <h2>MACARONS - <b style="color:#448D87">M</b>apping
+   <b style="color:#448D87">A</b>nd
+   <b style="color:#448D87">C</b>overage
+   <b style="color:#448D87">A</b>nticipation with
+   <b style="color:#448D87">R</b>GB
+   <b style="color:#448D87">ON</b>line
+   <b style="color:#448D87">S</b>elf-supervision
+ </h2>
+ <hr/>
+ <!--
+ <div class="row" style="text-align: center">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10">
+     <h4 width=100% class="highlight" style="padding:0.5em"><b>1. Overview</b></h4>
+     <img src="teaser.jpg" alt="teaser.jpg" class="text-center" style="width: 100%; max-width: 1000px">
+     <p></p>
+     <p>
+     Given a raw categorical collection of images, we learn an autoencoder that explicitly generates shape, texture,
+     pose and background. At inference time,
+     our approach reconstructs high-quality textured meshes from single-view images.
+     </p>
+   </div>
+   <div class="hidden-xs col-md-1"></div>
+ </div>
+ -->
+ <div class="row" style="text-align:center">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10">
+     <h4 width=100% class="highlight" style="padding:0.5em"><b>1. Architecture: Reconstruct and Anticipate</b></h4>
+     <img src="pipeline.png" alt="pipeline.png" class="text-center" style="width: 50%; max-width: 1000px">
+     <p></p>
+     <p>
+     MACARONS simultaneously reconstructs the scene and selects the next best camera pose by running <b>three neural modules</b>:
+     <ul style="text-align:left">
+     <li>The <b>depth module</b> predicts the depth map for the current frame from the last capture frames,
+     which is added to a point cloud that represents the scene.</li>
+     <li>This point cloud is used by the <b>volume occupancy module</b> to predict
+     a volume occupancy field...</li>
+     <li>...Which is in turn used by the <b>surface coverage gain module</b>
+     to compute the surface coverage gain of a given camera pose.</li>
+   </ul>
+     </p>
+   </div>
+   <div class="hidden-xs col-md-1"></div>
+ </div>
+ <div class="row" style="text-align:center">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10">
+     <h4 width=100% class="highlight" style="padding:0.5em"><b>2. Online training: Collect data and Replay from Memory</b></h4>
+     <img src="steps.jpg" alt="steps.jpg" style="width: 50%; max-width: 1000px">
+     <p></p>
+     <p>
+       During online exploration, we perform a training iteration at each time
+       step <i>t</i> which consists in <b>three steps</b>.
+       <ol style="text-align:left">
+         <li>First, during the <b>Decision Making</b> step, we select the next
+           best camera pose to explore the scene by running our three modules as
+           previously described.</li>
+         <li>Second, the <b>Data Collection & Memory Building</b> step, during
+            which the camera moves toward the camera pose previously predicted,
+            creates a self-supervision signal for all three modules and stores
+            these signals into the Memory.</li>
+         <li>Third and last, the <b>Memory Replay</b> step selects randomly
+           supervision data stored into the Memory and updates the weights of
+           each of the three modules.</li>
+       </ol>
+     </p>
+   </div>
+   <div class="hidden-xs col-md-1"></div>
+ </div>
+
+ <h2>Exploration of large 3D scenes (dataset from <a href="https://arxiv.org/abs/2208.10449">SCONE, NeurIPS22</a>, Gu&eacutedon et al.)</h2>
+ <hr/>
+
+ <!-- Statue of Liberty -->
+ <div class="row" style="text-align: center; padding-bottom:1rem;">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10 text-center">
+   <h4 width=100% class="highlight" style="padding:0.5em">
+     <b>Statue of Liberty (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/statue-of-liberty-new-york-ny-usa-8401e1c10480476e8d7e3085d1aec923"><i class="fa fa-download fa-lg"></i></a></b>
+   </h4>
+   <div class="row">
+     <div class="col-xs-12">
+     <div class="wrapper" style="text-align: center">
+       <div class="col-xs-4 col-lg-6">
+         <img src="results/trajectories/liberty.png" alt="results/trajectories/liberty.png" class="text-center" style="width: 100%; max-width: 1000px">
+         Trajectory in GT scene
+       </div>
+       <div class="col-xs-4 col-lg-6">
+         <img src="results/reconstructions/liberty.png" alt="results/reconstructions/liberty.png" class="text-center" style="width: 100%; max-width: 1000px">
+         Reconstructed surface
+       </div>
+     </div>
+     </div>
+   </div>
+   <div class="hidden-xs col-md-1"></div>
+   </div>
+ </div>
+
+ <!-- Pisa Cathedral -->
+  <div class="row" style="text-align: center; padding-bottom:1rem;">
+    <div class="hidden-xs col-md-1"></div>
+    <div class="col-xs-12 col-md-10 text-center">
+    <h4 width=100% class="highlight" style="padding:0.5em">
+      <b>Pisa Cathedral (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/leaning-tower-pisa-italy-abf56101911447b7bd65ff098dcd455a"><i class="fa fa-download fa-lg"></i></a></b>
+    </h4>
+    <div class="row">
+      <div class="col-xs-12">
+      <div class="wrapper" style="text-align: center">
+        <div class="col-xs-4 col-lg-6">
+          <img src="results/trajectories/pisa.png" alt="results/trajectories/pisa.png" class="text-center" style="width: 100%; max-width: 1000px">
+          Trajectory in GT scene
+        </div>
+        <div class="col-xs-4 col-lg-6">
+          <img src="results/reconstructions/pisa.png" alt="results/reconstructions/pisa.png" class="text-center" style="width: 100%; max-width: 1000px">
+          Reconstructed surface
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="hidden-xs col-md-1"></div>
+    </div>
+  </div>
+
+
+  <!-- Alhambra Palace -->
+   <div class="row" style="text-align: center; padding-bottom:1rem;">
+     <div class="hidden-xs col-md-1"></div>
+     <div class="col-xs-12 col-md-10 text-center">
+     <h4 width=100% class="highlight" style="padding:0.5em">
+       <b>Alhambra Palace (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/alhambra-palace-fortress-granada-spain-163da113b0c74d4daa8624a5b3bce244"><i class="fa fa-download fa-lg"></i></a></b>
+     </h4>
+     <div class="row">
+       <div class="col-xs-12">
+       <div class="wrapper" style="text-align: center">
+         <div class="col-xs-4 col-lg-6">
+           <img src="results/trajectories/alhambra.png" alt="results/trajectories/alhambra.png" class="text-center" style="width: 100%; max-width: 1000px">
+           Trajectory in GT scene
+         </div>
+         <div class="col-xs-4 col-lg-6">
+           <img src="results/reconstructions/alhambra.png" alt="results/reconstructions/alhambra.png" class="text-center" style="width: 100%; max-width: 1000px">
+           Reconstructed surface
+         </div>
+       </div>
+       </div>
+     </div>
+     <div class="hidden-xs col-md-1"></div>
+     </div>
+   </div>
+
+   <!-- Pantheon -->
+    <div class="row" style="text-align: center; padding-bottom:1rem;">
+      <div class="hidden-xs col-md-1"></div>
+      <div class="col-xs-12 col-md-10 text-center">
+      <h4 width=100% class="highlight" style="padding:0.5em">
+        <b>Pantheon (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/pantheon-rome-italy-8ce20ac5fc3a4af7ab223cdc0caa7d27"><i class="fa fa-download fa-lg"></i></a></b>
+      </h4>
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="wrapper" style="text-align: center">
+          <div class="col-xs-4 col-lg-6">
+            <img src="results/trajectories/pantheon.png" alt="results/trajectories/pantheon.png" class="text-center" style="width: 100%; max-width: 1000px">
+            Trajectory in GT scene
+          </div>
+          <div class="col-xs-4 col-lg-6">
+            <img src="results/reconstructions/pantheon.png" alt="results/reconstructions/pantheon.png" class="text-center" style="width: 100%; max-width: 1000px">
+            Reconstructed surface
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="hidden-xs col-md-1"></div>
+      </div>
+    </div>
+
+    <!-- Eiffel Tower -->
+     <div class="row" style="text-align: center; padding-bottom:1rem;">
+       <div class="hidden-xs col-md-1"></div>
+       <div class="col-xs-12 col-md-10 text-center">
+       <h4 width=100% class="highlight" style="padding:0.5em">
+         <b>Eiffel Tower (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/eiffel-tower-paris-france-a68b9ffb898d4aa7a44505926a536ce3"><i class="fa fa-download fa-lg"></i></a></b>
+       </h4>
+       <div class="row">
+         <div class="col-xs-12">
+         <div class="wrapper" style="text-align: center">
+           <div class="col-xs-4 col-lg-6">
+             <img src="results/trajectories/eiffel.png" alt="results/trajectories/eiffel.png" class="text-center" style="width: 100%; max-width: 1000px">
+             Trajectory in GT scene
+           </div>
+           <div class="col-xs-4 col-lg-6">
+             <img src="results/reconstructions/eiffel.png" alt="results/reconstructions/eiffel.png" class="text-center" style="width: 100%; max-width: 1000px">
+             Reconstructed surface
+           </div>
+         </div>
+         </div>
+       </div>
+       <div class="hidden-xs col-md-1"></div>
+       </div>
+     </div>
+
+     <!-- Neuschwanstein Castle -->
+      <div class="row" style="text-align: center; padding-bottom:1rem;">
+        <div class="hidden-xs col-md-1"></div>
+        <div class="col-xs-12 col-md-10 text-center">
+        <h4 width=100% class="highlight" style="padding:0.5em">
+          <b>Neuschwanstein Castle (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/neuschwanstein-castle-bavaria-germany-7d6d970009724dbda4fc5c5ffa303577"><i class="fa fa-download fa-lg"></i></a></b>
+        </h4>
+        <div class="row">
+          <div class="col-xs-12">
+          <div class="wrapper" style="text-align: center">
+            <div class="col-xs-4 col-lg-6">
+              <img src="results/trajectories/neus.png" alt="results/trajectories/neus.png" class="text-center" style="width: 100%; max-width: 1000px">
+              Trajectory in GT scene
+            </div>
+            <div class="col-xs-4 col-lg-6">
+              <img src="results/reconstructions/neus.png" alt="results/reconstructions/neus.png" class="text-center" style="width: 100%; max-width: 1000px">
+              Reconstructed surface
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="hidden-xs col-md-1"></div>
+        </div>
+      </div>
+
+     <!-- Colosseum -->
+      <div class="row" style="text-align: center; padding-bottom:1rem;">
+        <div class="hidden-xs col-md-1"></div>
+        <div class="col-xs-12 col-md-10 text-center">
+        <h4 width=100% class="highlight" style="padding:0.5em">
+          <b>Colosseum (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/colosseum-rome-italy-535dc96e586f40bd956ea3cbff810055"><i class="fa fa-download fa-lg"></i></a></b>
+        </h4>
+        <div class="row">
+          <div class="col-xs-12">
+          <div class="wrapper" style="text-align: center">
+            <div class="col-xs-4 col-lg-6">
+              <img src="results/trajectories/colosseum.png" alt="results/trajectories/colosseum.png" class="text-center" style="width: 100%; max-width: 1000px">
+              Trajectory in GT scene
+            </div>
+            <div class="col-xs-4 col-lg-6">
+              <img src="results/reconstructions/colosseum.png" alt="results/reconstructions/colosseum.png" class="text-center" style="width: 100%; max-width: 1000px">
+              Reconstructed surface
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="hidden-xs col-md-1"></div>
+        </div>
+      </div>
+
+   <!-- Manhattan Bridge -->
+    <div class="row" style="text-align: center; padding-bottom:1rem;">
+      <div class="hidden-xs col-md-1"></div>
+      <div class="col-xs-12 col-md-10 text-center">
+      <h4 width=100% class="highlight" style="padding:0.5em">
+        <b>Manhattan Bridge (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/manhattan-bridge-brooklyn-new-york-ny-usa-70106cd239f64a31aaf1c62d41b2d373"><i class="fa fa-download fa-lg"></i></a></b>
+      </h4>
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="wrapper" style="text-align: center">
+          <div class="col-xs-4 col-lg-6">
+            <img src="results/trajectories/manhattan.png" alt="results/trajectories/manhattan.png" class="text-center" style="width: 100%; max-width: 1000px">
+            Trajectory in GT scene
+          </div>
+          <div class="col-xs-4 col-lg-6">
+            <img src="results/reconstructions/manhattan.png" alt="results/reconstructions/manhattan.png" class="text-center" style="width: 100%; max-width: 1000px">
+            Reconstructed surface
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="hidden-xs col-md-1"></div>
+      </div>
+    </div>
+
+    <!-- Fushimi Castle -->
+     <div class="row" style="text-align: center; padding-bottom:1rem;">
+       <div class="hidden-xs col-md-1"></div>
+       <div class="col-xs-12 col-md-10 text-center">
+       <h4 width=100% class="highlight" style="padding:0.5em">
+         <b>Fushimi Castle (3D mesh by Andrea Spognetta)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/momoyama-castle-rawscan-244171a3822f4f83bd7c65b432fa93b2"><i class="fa fa-download fa-lg"></i></a></b>
+       </h4>
+       <div class="row">
+         <div class="col-xs-12">
+         <div class="wrapper" style="text-align: center">
+           <div class="col-xs-4 col-lg-6">
+             <img src="results/trajectories/fushimi.png" alt="results/trajectories/fushimi.png" class="text-center" style="width: 100%; max-width: 1000px">
+             Trajectory in GT scene
+           </div>
+           <div class="col-xs-4 col-lg-6">
+             <img src="results/reconstructions/fushimi.png" alt="results/reconstructions/fushimi.png" class="text-center" style="width: 100%; max-width: 1000px">
+             Reconstructed surface
+           </div>
+         </div>
+         </div>
+       </div>
+       <div class="hidden-xs col-md-1"></div>
+       </div>
+     </div>
+
+        <!-- Christ the Redeemer -->
+         <div class="row" style="text-align: center; padding-bottom:1rem;">
+           <div class="hidden-xs col-md-1"></div>
+           <div class="col-xs-12 col-md-10 text-center">
+           <h4 width=100% class="highlight" style="padding:0.5em">
+             <b>Christ the Redeemer (3D mesh by Brian Trepanier)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/christ-the-redeemer-rio-de-janeiro-brazil-90d53b3cb4b042ce845a24baa679109e"><i class="fa fa-download fa-lg"></i></a></b>
+           </h4>
+           <div class="row">
+             <div class="col-xs-12">
+             <div class="wrapper" style="text-align: center">
+               <div class="col-xs-4 col-lg-6">
+                 <img src="results/trajectories/redeemer.png" alt="results/trajectories/redeemer.png" class="text-center" style="width: 100%; max-width: 1000px">
+                 Trajectory in GT scene
+               </div>
+               <div class="col-xs-4 col-lg-6">
+                 <img src="results/reconstructions/redeemer.png" alt="results/reconstructions/redeemer.png" class="text-center" style="width: 100%; max-width: 1000px">
+                 Reconstructed surface
+               </div>
+             </div>
+             </div>
+           </div>
+           <div class="hidden-xs col-md-1"></div>
+           </div>
+         </div>
+
+         <!-- Dunnottar Castle -->
+          <div class="row" style="text-align: center; padding-bottom:1rem;">
+            <div class="hidden-xs col-md-1"></div>
+            <div class="col-xs-12 col-md-10 text-center">
+            <h4 width=100% class="highlight" style="padding:0.5em">
+              <b>Dunnottar Castle (3D mesh by Andrea Spognetta)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/dunnottar-castle-rawscan-4f98063d11c14c84952fcfd4b798cfe4"><i class="fa fa-download fa-lg"></i></a></b>
+            </h4>
+            <div class="row">
+              <div class="col-xs-12">
+              <div class="wrapper" style="text-align: center">
+                <div class="col-xs-4 col-lg-6">
+                  <img src="results/trajectories/dunnottar.png" alt="results/trajectories/dunnottar.png" class="text-center" style="width: 100%; max-width: 1000px">
+                  Trajectory in GT scene
+                </div>
+                <div class="col-xs-4 col-lg-6">
+                  <img src="results/reconstructions/dunnottar.png" alt="results/reconstructions/dunnottar.png" class="text-center" style="width: 100%; max-width: 1000px">
+                  Reconstructed surface
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="hidden-xs col-md-1"></div>
+            </div>
+          </div>
+
+          <!-- Bannerman Castle -->
+           <div class="row" style="text-align: center; padding-bottom:1rem;">
+             <div class="hidden-xs col-md-1"></div>
+             <div class="col-xs-12 col-md-10 text-center">
+             <h4 width=100% class="highlight" style="padding:0.5em">
+               <b>Bannerman Castle (3D mesh by Andrea Spognetta)&nbsp;&nbsp;<a href="https://sketchfab.com/3d-models/bannerman-castle-new-york-rawscan-7ead86a617a14b1e85305bbe129119db"><i class="fa fa-download fa-lg"></i></a></b>
+             </h4>
+             <div class="row">
+               <div class="col-xs-12">
+               <div class="wrapper" style="text-align: center">
+                 <div class="col-xs-4 col-lg-6">
+                   <img src="results/trajectories/bannerman.png" alt="results/trajectories/bannerman.png" class="text-center" style="width: 100%; max-width: 1000px">
+                   Trajectory in GT scene
+                 </div>
+                 <div class="col-xs-4 col-lg-6">
+                   <img src="results/reconstructions/bannerman.png" alt="results/reconstructions/bannerman.png" class="text-center" style="width: 100%; max-width: 1000px">
+                   Reconstructed surface
+                 </div>
+               </div>
+               </div>
+             </div>
+             <div class="hidden-xs col-md-1"></div>
+             </div>
+           </div>
+
+
+    <h2>CVPR 2023 Presentation</h2>
+    <hr/>
+    <div class="row" style="text-align:center">
+    <div class="hidden-xs col-md-1"></div>
+    <div class="col-xs-12 col-md-10 text-center">
+    <div class="embed-responsive embed-responsive-16by9" style="text-align:center">
+      <iframe class="embed-responsive-item text-center" src="https://www.youtube.com/embed/8_QNKaCyr4Y" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        style="width:100%; clip-path:inset(1px 1px);" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+ <h2>Resources</h2>
+ <hr/>
+ <div class="row" style="text-align: center">
+   <div class="col-xs-4 col-lg-4">
+     <h4>Paper</h4>
+     <a href="https://arxiv.org/abs/2303.03315" style="color:inherit">
+       <img src="./paper.png" alt="paper.png" class="text-center" style="max-width:70%; border:0.15em solid;
+       border-radius:0.5em;"></a>
+   </div>
+   <div class="col-xs-4 col-lg-4">
+     <h4>Code</h4>
+     <a href="https://github.com/Anttwo/MACARONS" style="color:inherit;">
+       <img src="./github_repo.png" alt="github_repo.png" class="text-center" style="max-width:70%; border:0.15em solid;
+       border-radius:0.5em;"></a>
+   </div>
+   <div class="col-xs-4 col-lg-4">
+     <h4>Presentation</h4>
+     <a href="https://youtu.be/8_QNKaCyr4Y" style="color:inherit">
+       <img src="./slides.png" alt="slides.png" class="text-center"
+       style="width:63%; max-width: 250px; border:0.15em solid; border-radius:0.5em"></a>
+   </div>
+ </div>
+ <h4 style="padding-top:0.5em">BibTeX</h4>
+ If you find this work useful for your research, please cite:
+ <div class="card">
+   <div class="card-block">
+     <pre class="card-text clickselect">
+@inproceedings{guedon2023macarons,
+ title={{MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision}},
+ author={Gu&eacutedon, Antoine and Monnier, Tom and Monasse, Pascal and Lepetit, Vincent},
+ booktitle={{CVPR}},
+ year={2023},
+}</pre>
+   </div>
+ </div>
+
+ <h2>Further information</h2>
+ <hr/>
+ If you like this project, check out our previous work on NBV:
+ <ul>
+   <li>
+     <a href="https://arxiv.org/abs/2208.10449">Gu&eacutedon et al. - SCONE: Surface
+       Coverage Optimization in Unknown Environments by Volumetric Integration
+       (NeurIPS 2022, Spotlight)</a>
+   </li>
+ </ul>
+
+ <h2>Acknowledgements</h2>
+ <hr/>
+ <p>
+   This work was granted access to the HPC resources of IDRIS under the allocation 2022-AD011013387 made by GENCI.
+   We thank Elliot Vincent for inspiring discussions and valuable feedback on the manuscript.<br>
+
+ <br>
+ The template webpage is inspired from the (awesome) work <a href="https://www.tmonnier.com/UNICORN/">UNICORN (ECCV 2022)</a> by Monnier et al.
+ </p>
+</div>
+
+<div class="container" style="padding-top:3rem; padding-bottom:3rem">
+ <p style="text-align:center">
+   &#169; You are welcome to copy the code, please attribute the source with a link
+   back to this page and <a href="https://www.tmonnier.com/UNICORN/">the UNICORN webpage</a> by Tom Monnier and remove
+   the analytics.<br> Possible misspellings: tom monier, tom monnie,
+   tom monie, monniert.
+ </p>
+</div>
+
+</body>
+</html>

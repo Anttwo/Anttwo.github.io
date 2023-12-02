@@ -1,0 +1,90 @@
+body {
+  font-family: Roboto, sans-serif;
+  font-size: 17px;
+  /* 17px */
+  /*background-color: #ECE9EE;*/
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+ font-family: Roboto, sans-serif;
+}
+h1 {
+	margin-bottom: 2rem;
+}
+
+div {
+  font-size: 16px;
+}
+
+a {
+	color: #448D87;
+	/*color: #4c9d96;*/
+}
+
+a:hover {
+  color: #cb5920;
+  text-decoration: none;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid #448D87;
+}
+
+p {
+  text-align: justify;
+}
+td {
+  font-size: 5px;
+  padding: 2px;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 1.3em;
+  width:80%;
+}
+.current_tab{font-weight: bold;}
+.subdued_text{
+  /* color: #999999; */
+  color: #448D87;
+  opacity: 50;
+  margin: 0px 1em 1em 0px;
+}
+.blank{
+  height: 2em;
+  clear: both;
+}
+
+.highlight {
+  background-color: #ddd;
+}
+
+.colored {
+  color: #448D87;
+}
+
+.label-info {
+  background-color: #448D87;
+}
+
+.label-info[href]:hover {
+  background-color: #cb5920;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
