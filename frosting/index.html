@@ -1,1 +1,295 @@
-Hello world! To do.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>SuGaR</title>
+ <meta name="description" content="Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+ <meta charset="utf-8">
+ <!-- <link rel="icon" href="./icon_unicorn.png" type="image/png"> -->
+
+ <!--Facebook-->
+ <meta property="og:image" content="">
+ <meta property="og:image:type" content="image/jpg">
+ <meta property="og:image:width" content="600">
+ <meta property="og:image:height" content="400">
+ <meta property="og:type" content="website"/>
+ <meta property="og:url" content="https://anttwo.github.io/frosting/"/>
+ <meta property="og:title" content="Frosting"/>
+ <meta property="og:description" content="Project page for Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering."/>
+
+ <!--Twitter-->
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Frosting" />
+ <meta property="twitter:description" content="Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering."/>
+ <meta name="twitter:image" content="">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:800|Roboto:400,700" rel="stylesheet"> -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+ <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
+ <!-- <link href="http://fonts.googleapis.com/css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">  -->
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ <link href="style_2.css" rel="stylesheet">
+
+<!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CDL4R10HKE');
+</script>
+<!-- End Google Analytics -->
+
+</head>
+<body>
+
+<div class="container" style="text-align:center; padding-top:2rem 15px">
+ <div class="row" style="text-align:center">
+   <h1 style="font-size: 60px;">Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering
+    <br> (Webpage under construction)
+   </h1>
+   <h1 style="font-size: xxx-large;">arXiv 2024</h1>
+ </div>
+ <div class="row" style="text-align:center">
+   <div class="col-xs-0 col-md-2"></div>
+   <div class="col-xs-12 col-md-8">
+     <h4 style="font-size: 22px;">
+       <nobr><a href="https://anttwo.github.io/">Antoine Gu&eacutedon</a></nobr> &emsp;
+       <nobr><a href="https://vincentlepetit.github.io/">Vincent Lepetit</a></nobr>
+     </h4>
+     <p style="font-size: 20px; text-align: center;"><nobr>LIGM, Ecole des Ponts</nobr>, <nobr>Univ Gustave Eiffel</nobr>, CNRS<br></p>
+   </div>
+   <!-- <div class="hidden-xs hidden-sm col-md-1" style="text-align:left; margin-left:0px; margin-right:0px">
+     <a href="https://arxiv.org/abs/2303.03315" style="color:#448D87">
+       <i class="fa fa-file-pdf-o fa-4x"></i></a>
+   </div>
+   <div class="hidden-xs hidden-sm col-md-1" style="text-align:left; margin-left:0px;">
+     <a href="https://github.com/Anttwo/SuGaR" style="color:#448D87">
+       <i class="fa fa-github fa-4x"></i></a>
+   </div> -->
+ </div>
+</div>
+
+<div class="container" style="text-align:center; padding:0rem">
+ <div class="row">
+   <div class="col-xs-12">
+   <h3 style="text-align:center; padding-bottom:1rem">
+     <a class="label label-info" href="https://arxiv.org/abs/2311.12775"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+     <a class="label label-info" href="https://github.com/Anttwo/Frosting"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code (coming soon)</a>
+     <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a>
+   </h3>
+   </div>
+ </div>
+
+ <div class="row" style="padding:2rem">
+   <div class="col-xs-12">
+   <img src="https://anttwo.github.io/sugar/results/full_teaser.png" alt="full_teaser.png" class="text-center" style="width: 99%; max-width: 1920px">
+   <!-- <video autoplay loop muted playsinline src="teaser.mp4" style="width:95%; max-width: 900px"></video> -->
+   <!--<img src="teaser.gif" alt="teaser.gif" class="text-center" style="width: 95%; max-width: 900px">-->
+   <div class="wrapper">
+     <!-- <div class="col-xs-4 col-lg-6;"> -->
+      <p style="text-align: justify">
+        <br>  </p>
+     <!-- </div> -->
+   </div>
+   </div>
+ </div>
+
+ <!-- <iframe src="https://drive.google.com/file/d/12Stc42P5pQz6oHt3TXfIy_CSylB075_T/preview" 
+          width=100% height="380px" frameborder="0" allow="autoplay" allowfullscreen></iframe> -->
+  <iframe class="embed-responsive-item text-center" src="https://www.youtube.com/embed/MAkFyWfiBQo?si=mIN-4Wk3P2sWBG7C" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          style="width:100%; height:540px; clip-path:inset(1px 1px);" allowfullscreen></iframe>   
+
+</div>
+
+<div class="container">
+  <h2>Updates</h2>
+  <hr/>
+  <p>
+    <ul>
+      <li> <b>03/21/2024</b>: Initial release of the paper. </li>
+    </ul>
+  </p>
+
+<div class="container">
+ <h2>Abstract</h2>
+ <hr/>
+ <p>
+    We propose <b>Gaussian Frosting</b>, a novel <b>mesh-based representation</b> for <b>high-quality rendering</b> 
+    and <b>editing of complex 3D effects</b> in real-time. 
+    <br>
+    Our approach builds on the recent 
+    <a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3D Gaussian Splatting (SIGGRAPH 2023)</a> framework, 
+    which optimizes a set of 3D Gaussians to approximate a radiance field from images. 
+    We propose first extracting a base mesh from Gaussians during optimization, then building and refining 
+    an <b>adaptive layer of Gaussians with a variable thickness around the mesh</b> to better capture the fine 
+    details and volumetric effects near the surface, such as hair or grass. We call this layer Gaussian Frosting, 
+    as it resembles a coating of frosting on a cake. <b>The fuzzier the material, the thicker the frosting</b>.
+    <br> 
+    We also introduce a parameterization of the Gaussians to enforce them to stay inside the frosting layer and 
+    automatically adjust their parameters when deforming, rescaling, editing or animating the mesh. 
+    Our representation allows for <b>efficient rendering</b> using Gaussian splatting, as well as <b>editing 
+    and animation</b> by modifying the base mesh.
+    <br> 
+    We demonstrate the effectiveness of our method on various synthetic and real scenes, 
+    and show that it outperforms existing surface-based approaches.
+ </p>
+
+ <p><br></p>
+
+ <h2>Reconstructing complex scenes with fuzzy materials</h2>
+ <hr/>
+
+ <h2>Scene composition</h2>
+ <hr/>
+
+ <h2>Animation</h2>
+ <hr/>
+
+ <h2>Gaussian <b style="color:#448D87">Frosting</b>: Editable Complex Radiance Fields with Real-Time Rendering
+   <!-- and High-Quality Mesh Rendering -->
+ </h2>
+ <hr/>
+ <!--
+ <div class="row" style="text-align: center">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10">
+     <h4 width=100% class="highlight" style="padding:0.5em"><b>1. Overview</b></h4>
+     <img src="teaser.jpg" alt="teaser.jpg" class="text-center" style="width: 100%; max-width: 1000px">
+     <p></p>
+     <p>
+     Given a raw categorical collection of images, we learn an autoencoder that explicitly generates shape, texture,
+     pose and background. At inference time,
+     our approach reconstructs high-quality textured meshes from single-view images.
+     </p>
+   </div>
+   <div class="hidden-xs col-md-1"></div>
+ </div>
+ -->
+ <div class="row" style="text-align:center">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10">
+     <h4 width=100% class="highlight" style="padding:0.5em"><b>1. Forward Process: From Volume to Surface</b></h4>
+     <img src="https://anttwo.github.io/sugar/results/gaussian_arrangement.png" 
+     alt="gaussian_arrangement.png" class="text-center" style="width: 50%; max-width: 1000px">
+     <p></p>
+     <p>
+      To do.
+
+     </p>
+   </div>
+   <div class="hidden-xs col-md-1"></div>
+ </div>
+
+ <div class="row" style="text-align:center">
+   <div class="hidden-xs col-md-1"></div>
+   <div class="col-xs-12 col-md-10">
+     <h4 width=100% class="highlight" style="padding:0.5em"><b>1. Backward Process: From Surface to Volume</b></h4>
+     <img src="https://anttwo.github.io/sugar/results/normal_example.png"
+      alt="steps.jpg" style="width: 70%; max-width: 1000px">
+     <p></p>
+     <p>      
+      To do.
+       </ol>
+     </p>
+   </div>
+   <div class="hidden-xs col-md-1"></div>
+ </div>
+
+ <div class="row" style="text-align:center">
+    <div class="hidden-xs col-md-1"></div>
+    <div class="col-xs-12 col-md-10">
+      <h4 width=100% class="highlight" style="padding:0.5em"><b>3. Frosting optimization</b></h4>
+      <img src="https://anttwo.github.io/sugar/results/gaussian_binding_4.png" 
+      alt="bound_gaussians.jpg" style="width: 30%; max-width: 1000px">
+      <p></p>
+      <p>
+        To do.
+      </p>
+    </div>
+    <div class="hidden-xs col-md-1"></div>
+  </div>
+
+ <h2>Resources</h2>
+ <hr/>
+ <div class="row" style="text-align: center">
+   <div class="col-xs-4 col-lg-6">
+     <h4>Paper</h4>
+     <!-- <a href="https://arxiv.org/abs/2311.12775" style="color:inherit"></a> -->
+       <!-- <img src="./paper.png" alt="paper.png" class="text-center" style="max-width:70%; border:0.15em solid;
+       border-radius:0.5em;"></a> -->
+   </div>
+   <div class="col-xs-4 col-lg-6">
+     <h4>Code</h4>
+     <a href="https://github.com/Anttwo/Frosting" style="color:inherit;"></a>
+       <!-- <img src="" alt="github_repo.png" class="text-center" style="max-width:70%; border:0.15em solid;
+       border-radius:0.5em;"> -->
+   </div>
+   <!-- <div class="col-xs-4 col-lg-4">
+     <h4>Presentation</h4>
+     <a href="https://youtu.be/8_QNKaCyr4Y" style="color:inherit">
+       <img src="./slides.png" alt="slides.png" class="text-center"
+       style="width:63%; max-width: 250px; border:0.15em solid; border-radius:0.5em"></a>
+   </div> -->
+ </div>
+
+<!-- TO DO: BIBTEX -->
+ <h4 style="padding-top:0.5em">BibTeX</h4>
+ If you find this work useful for your research, please cite:
+ <div class="card">
+   <div class="card-block">
+     <pre class="card-text clickselect">
+      @article{guedon2024frosting,
+        title={Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering},
+        author={Gu{\'e}don, Antoine and Lepetit, Vincent},
+        journal={TODO},
+        year={2024}
+      }</pre>
+   </div>
+ </div>
+
+ <h2>Further information</h2>
+ <hr/>
+ If you like this project, check out our previous works related to 3D reconstruction:
+ <ul>
+    <li>
+        <a href="https://anttwo.github.io/sugar/">Gu&eacutedon et Lepetit. - 
+          SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering
+          (CVPR 2024)</a>
+    </li>
+   <li>
+    <a href="https://anttwo.github.io/MACARONS/">Gu&eacutedon et al. - 
+      MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision 
+      (CVPR 2023)</a>
+   </li>
+   <li>
+     <a href="https://arxiv.org/abs/2208.10449">Gu&eacutedon et al. - 
+      SCONE: Surface Coverage Optimization in Unknown Environments by Volumetric Integration
+       (NeurIPS 2022, Spotlight)</a>
+   </li>
+ </ul>
+
+ <h2>Acknowledgements</h2>
+ <hr/>
+ <p>
+  This work was granted access to the HPC resources of IDRIS under the allocation 2023-AD011013387R1 made by GENCI.
+ </p>
+</div>
+
+<div class="container" style="padding-top:3rem; padding-bottom:3rem">
+ <p style="text-align:center">
+   &#169; You are welcome to copy the code of the webpage, please attribute the source with a link
+   back to this page and remove the analytics.<br>
+ </p>
+</div>
+
+</body>
+</html>
