@@ -1,0 +1,120 @@
+body {
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  /* 17px */
+  /*background-color: #ECE9EE;*/
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p, div, a, td, table, b, label, .label-info, .highlight {
+  font-family: 'Roboto', sans-serif;
+}
+h1, h2 {
+  font-weight: 100;
+}
+h3, h4, p, div, a, td, table, label, .label-info {
+  font-weight: 300;
+}
+b {
+  font-weight: 500;
+}
+
+h2{
+  font-size: 30px;
+}
+
+div {
+  font-size: 18px;
+  /* 16px */
+}
+
+a {
+	color: #448D87;
+	/*color: #4c9d96;*/
+}
+
+a:hover {
+  /* color: #cb5920; */
+  text-decoration: none;
+  color: #5ee0d6;
+  /* background-color: #448D87; */
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid #448D87;
+}
+
+p {
+  text-align: justify;
+}
+td {
+  font-size: 5px;
+  padding: 2px;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 1.3em;
+  width:80%;
+}
+.current_tab{font-weight: bold;}
+.subdued_text{
+  color: #999999;
+  /* color: #448D87;
+  opacity: 50; */
+  margin: 0px 1em 1em 0px;
+}
+.blank{
+  height: 2em;
+  clear: both;
+}
+
+.highlight {
+  /* background-color: #448D87; */
+  color: #448D87;
+  opacity: 100%;
+  font-weight: 100;
+
+  border-top: 1px solid #448D87;
+  border-bottom: 1px solid #448D87;
+  border-right: 1px solid #448D87;
+  border-left: 1px solid #448D87;
+}
+
+.colored {
+  color: #448D87;
+}
+
+.label-info {
+  /* background-color: #448D87; */
+  color: #448D87;
+  background-color: #FFFFFF
+}
+
+.label-info[href]:hover {
+  color: #FFFFFF;
+  background-color: #448D87;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
