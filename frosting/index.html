@@ -196,7 +196,7 @@
  <div class="row" style="text-align:center">
    <div class="hidden-xs col-md-1"></div>
    <div class="col-xs-12 col-md-10">
-     <h4 width=100% class="highlight" style="padding:0.5em"><b>1. Backward Process: From Surface to Volume</b></h4>
+     <h4 width=100% class="highlight" style="padding:0.5em"><b>2. Backward Process: From Surface to Volume</b></h4>
      <!-- <img src="https://anttwo.github.io/sugar/results/normal_example.png"
       alt="steps.jpg" style="width: 70%; max-width: 1000px"> -->
      <p></p>
@@ -221,7 +221,11 @@
       alt="bound_gaussians.jpg" style="width: 30%; max-width: 1000px"> -->
       <p></p>
       <p>
-        To do.
+        Once we constructed the Frosting layer, we initialize a densified set of Gaussians 
+        inside this layer and optimize them using 3DGS rendering loss. 
+        To make sure the Gaussians stay inside the frosting layer during optimization, 
+        we introduce a new parameterization of the Gaussians. 
+        This parameterization also allows for easily adjusting the Gaussians' parameters when editing the scene.
       </p>
     </div>
     <div class="hidden-xs col-md-1"></div>
