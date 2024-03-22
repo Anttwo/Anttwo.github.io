@@ -96,7 +96,9 @@
    <!-- <iframe class="embed-responsive-item text-center" src="https://www.youtube.com/embed/MAkFyWfiBQo?si=mIN-4Wk3P2sWBG7C" frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           style="width:100%; height:540px; clip-path:inset(1px 1px);" allowfullscreen></iframe> -->
-  <i>The presentation video is coming soon.</i>
+  <iframe src="https://drive.google.com/file/d/1PprM89bC8_iXpen21-sxX50rPkwKff0i/preview"
+     width=100% height="540px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+  <i>The full presentation video is coming soon.</i>
    <div class="wrapper">
      <!-- <div class="col-xs-4 col-lg-6;"> -->
       <p style="text-align: justify">
@@ -146,42 +148,32 @@
 
  <h2>Reconstructing complex scenes with fuzzy materials</h2>
  <hr/>
-
  <div class="row" style="text-align: center; padding-bottom:1rem;">
   <div class="hidden-xs col-md-1"></div>
   <div class="col-xs-12 col-md-10 text-center">
   <iframe src="https://drive.google.com/file/d/1Ioe-wJhS5n46hvpdKk42og2gP15Ir31d/preview"
-     width=100% height="270px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+     width=100% height="540px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
   <div class="hidden-xs col-md-1"></div>
   </div>
 </div>
 
  <h2>Scene composition</h2>
  <hr/>
+ <div class="row" style="text-align: center; padding-bottom:1rem;">
+  <div class="hidden-xs col-md-1"></div>
+  <div class="col-xs-12 col-md-10 text-center">
+  <!-- <iframe src="https://drive.google.com/file/d/1Ioe-wJhS5n46hvpdKk42og2gP15Ir31d/preview"
+     width=100% height="540px" frameborder="0" allow="autoplay" allowfullscreen></iframe> -->
+  <div class="hidden-xs col-md-1"></div>
+  </div>
+</div>
 
  <h2>Animation</h2>
  <hr/>
 
  <h2>Gaussian <b style="color:#448D87">Frosting</b>: Editable Complex Radiance Fields with Real-Time Rendering
-   <!-- and High-Quality Mesh Rendering -->
  </h2>
  <hr/>
- <!--
- <div class="row" style="text-align: center">
-   <div class="hidden-xs col-md-1"></div>
-   <div class="col-xs-12 col-md-10">
-     <h4 width=100% class="highlight" style="padding:0.5em"><b>1. Overview</b></h4>
-     <img src="teaser.jpg" alt="teaser.jpg" class="text-center" style="width: 100%; max-width: 1000px">
-     <p></p>
-     <p>
-     Given a raw categorical collection of images, we learn an autoencoder that explicitly generates shape, texture,
-     pose and background. At inference time,
-     our approach reconstructs high-quality textured meshes from single-view images.
-     </p>
-   </div>
-   <div class="hidden-xs col-md-1"></div>
- </div>
- -->
  <div class="row" style="text-align:center">
    <div class="hidden-xs col-md-1"></div>
    <div class="col-xs-12 col-md-10">
@@ -190,8 +182,12 @@
      alt="gaussian_arrangement.png" class="text-center" style="width: 50%; max-width: 1000px"> -->
      <p></p>
      <p>
-      To do.
-
+      We start by optimizing a 3D Gaussian Splatting reconstruction for a short period of time and we 
+      extract an editable surface mesh with optimal resolution. 
+      We improve the surface reconstruction from SuGaR by automatically estimating a good value for a critical 
+      hyperparameter used by Poisson reconstruction, namely the octree depth D.
+      Selecting the right value for D can drastically improve both the quality of the mesh and the rendering performance of
+      our model.
      </p>
    </div>
    <div class="hidden-xs col-md-1"></div>
@@ -205,7 +201,12 @@
       alt="steps.jpg" style="width: 70%; max-width: 1000px"> -->
      <p></p>
      <p>      
-      To do.
+      After extracting a base mesh, we build a Frosting layer with a variable thickness 
+      and containing Gaussians around this mesh. We want this layer to be thicker
+      in areas where more volumetric rendering is necessary near the surface, such as
+      fuzzy material like hair or grass for example. On the contrary, this layer should
+      be very thin near the parts of the scene that corresponds to well-defined flat
+      surfaces, such as wood or plastic for example.
        </ol>
      </p>
    </div>
