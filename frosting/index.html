@@ -97,7 +97,7 @@
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           style="width:100%; height:540px; clip-path:inset(1px 1px);" allowfullscreen></iframe> -->
   <iframe src="https://drive.google.com/file/d/1PprM89bC8_iXpen21-sxX50rPkwKff0i/preview"
-     width=100% height="540px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+     width=100% height="620px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
   <i>The full presentation video is coming soon.</i>
    <div class="wrapper">
      <!-- <div class="col-xs-4 col-lg-6;"> -->
@@ -120,6 +120,7 @@
     </ul>
   </p>
 <!-- </div> -->
+<p><br></p>
 
 <!-- <div class="container"> -->
  <h2>Abstract</h2>
@@ -150,17 +151,73 @@
 
  <h2>Scene composition</h2>
  <hr/>
- <div class="row" style="text-align: center; padding-bottom:1rem;">
-  <div class="hidden-xs col-md-1"></div>
-  <div class="col-xs-12 col-md-10 text-center">
-  <!-- <iframe src="https://drive.google.com/file/d/1Ioe-wJhS5n46hvpdKk42og2gP15Ir31d/preview"
-     width=100% height="540px" frameborder="0" allow="autoplay" allowfullscreen></iframe> -->
-  <div class="hidden-xs col-md-1"></div>
+ <div class="row" style="text-align:center">
+  <div class="col-xs-4 col-lg-4">
+    <iframe src="https://drive.google.com/file/d/1kCkjtIfzGb5ZkbeX6LDJm5LCwORHhBF7/preview"
+     width=100% height="207px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+    <p style="text-align:center">(a) Scene 1: Bicycle</p>
+  </div>
+  <div class="col-xs-4 col-lg-4">
+    <iframe src="https://drive.google.com/file/d/1XSlVnRxL9y7NfRxK7zr3-YK6rRBnf7hU/preview"
+     width=100% height="207px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+    <p style="text-align:center">(b) Scene 2: Buzz</p>
+  </div>
+  <div class="col-xs-4 col-lg-4">
+    <iframe src="https://drive.google.com/file/d/1bFI6kUoMkoPl126aSGLOYU4tkXIVUT42/preview"
+     width=100% height="207px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+    <p style="text-align:center">(c) Scene 3: Kitten</p>
   </div>
 </div>
+<div class="row" style="text-align:center">
+  <div class="col-xs-4 col-lg-6">
+    <img src="https://anttwo.github.io/frosting/results/composition/buzz_riding_cat/mesh.png" 
+    alt="buzz_kitten_composition.png" class="text-center" style="width: 100%; max-width: 1000px">
+   <p style="text-align:center">(d) Posing meshes</p>
+ </div>
+  <div class="col-xs-4 col-lg-6">
+    <iframe src="https://drive.google.com/file/d/1viJZaWVve2t48R5v_yQAQn3nQGtqfXph/preview"
+     width=100% height="310px" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+    <p style="text-align:center">(e) Rendering composition</p>
+  </div>
+</div>
+<p>
+  In the example above, we were able to animate both Buzz and the kitten, changing their original pose (d) while preserving 
+  high-quality rendering (e). Contrary to <a href="https://anttwo.github.io/sugar">SuGaR</a> (g), very fine and fuzzy details such as the
+  kitten's hair can be seen covering Buzz's legs in a realistic way (f):
+</p>
+<div class="row" style="text-align:center">
+  <div class="col-xs-4 col-lg-3">
+    <img src="https://anttwo.github.io/frosting/results/composition/buzz_riding_cat/closeup_1.png" 
+    alt="gt_detail.png" class="text-center" style="width: 100%; max-width: 1000px">
+  </div>
+  <div class="col-xs-4 col-lg-3">
+   <img src="https://anttwo.github.io/frosting/results/composition/buzz_riding_cat/closeup_2.png" 
+   alt="3dgs_detail.png" class="text-center" style="width: 100%; max-width: 1000px">
+ </div>
+ <div class="col-xs-4 col-lg-3">
+  <img src="https://anttwo.github.io/frosting/results/composition/buzz_riding_cat/closeup_1_flat.png" 
+  alt="gt_detail.png" class="text-center" style="width: 100%; max-width: 1000px">
+</div>
+<div class="col-xs-4 col-lg-3">
+ <img src="https://anttwo.github.io/frosting/results/composition/buzz_riding_cat/closeup_2_flat.png" 
+ alt="3dgs_detail.png" class="text-center" style="width: 100%; max-width: 1000px">
+</div>
+</div>
+<div class="row" style="text-align:center">
+  <div class="col-xs-4 col-lg-6">
+    <p style="text-align:center">(f) Fuzzy details with Frosting - occlusions are correctly rendered</p>
+  </div>
+  <div class="col-xs-4 col-lg-6">
+   <p style="text-align:center">(g)  Rendering with <a href="https://anttwo.github.io/sugar">SuGaR</a> - the fur does not occlude the legs correctly</p>
+ </div>
+</div>
+
+<p><br></p>
 
  <h2>Animation</h2>
  <hr/>
+
+<p><br></p>
 
  <h2>Reconstructing complex scenes with fuzzy materials</h2>
  <hr/>
@@ -198,6 +255,8 @@
    <p style="text-align:center">(c) Frosting (Ours)</p>
  </div>
 </div>
+
+<p><br></p>
 
  <h2>Gaussian <b style="color:#448D87">Frosting</b>: Editable Complex Radiance Fields with Real-Time Rendering
  </h2>
@@ -318,6 +377,8 @@
     <div class="hidden-xs col-md-1"></div>
   </div>
 
+  <p><br></p>
+
  <h2>Resources</h2>
  <hr/>
  <div class="row" style="text-align: center">
@@ -356,6 +417,8 @@
    </div>
  </div>
 
+ <p><br></p>
+
  <h2>Further information</h2>
  <hr/>
  If you like this project, check out our previous works related to 3D reconstruction:
@@ -376,6 +439,8 @@
        (NeurIPS 2022, Spotlight)</a>
    </li>
  </ul>
+
+ <p><br></p>
 
  <h2>Acknowledgements</h2>
  <hr/>
