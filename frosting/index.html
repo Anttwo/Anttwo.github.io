@@ -291,7 +291,7 @@
 
 <p><br></p>
 
- <h2>Gaussian <b style="color:#448D87">Frosting</b>: Editable Complex Radiance Fields with Real-Time Rendering
+ <h2>Gaussian <b style="color:#448D87">Frosting</b>: Overview
  </h2>
  <hr/>
 
@@ -339,12 +339,12 @@
     <div>(b) Using our automatically computed D that adapts to the complexity of the 3DGS</div>
       <p></p><br>
       <p>      
-       After extracting a base mesh, we build a Frosting layer with a variable thickness 
-       and containing Gaussians around this mesh. We want this layer to be thicker
-       in areas where more volumetric rendering is necessary near the surface, such as
-       fuzzy material like hair or grass for example. On the contrary, this layer should
-       be very thin near the parts of the scene that corresponds to well-defined flat
-       surfaces, such as wood or plastic for example.
+        We start by optimizing a 3D Gaussian Splatting reconstruction for a short period of time and we 
+        extract an editable surface mesh with optimal resolution. 
+        We improve the surface reconstruction from <a href="https://anttwo.github.io/sugar">SuGaR</a> by automatically estimating a good value for a critical 
+        hyperparameter used by Poisson reconstruction, namely the octree depth D.
+        Selecting the right value for D can drastically improve both the quality of the mesh and the rendering performance of
+        our model.
         </ol>
       </p>
     </div>
