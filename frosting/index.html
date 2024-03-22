@@ -148,6 +148,25 @@
 
  <h2>Reconstructing complex scenes with fuzzy materials</h2>
  <hr/>
+
+ <div class="row" style="text-align:center">
+  <div class="col-xs-4 col-lg-4">
+    <img src="https://anttwo.github.io/frosting/results/closeup/khady_gt_22_detail.png" 
+    alt="gt_detail.png" class="text-center" style="width: 100%; max-width: 1000px">
+    <p style="text-align:center">(a) Ground Truth</p>
+  </div>
+  <div class="col-xs-4 col-lg-4">
+   <img src="https://anttwo.github.io/frosting/results/closeup/khady_gt_22_detail.png" 
+   alt="3dgs_detail.png" class="text-center" style="width: 100%; max-width: 1000px">
+   <p style="text-align:center">(b) 3D Gaussian Splatting</p>
+ </div>
+ <div class="col-xs-4 col-lg-4">
+   <img src="https://anttwo.github.io/frosting/results/closeup/khady_gt_22_detail.png" 
+   alt="frosting_detail.png" class="text-center" style="width: 100%; max-width: 1000px">
+   <p style="text-align:center">(c) Frosting (Ours)</p>
+ </div>
+</div>
+
  <div class="row" style="text-align: center; padding-bottom:1rem;">
   <div class="hidden-xs col-md-1"></div>
   <div class="col-xs-12 col-md-10 text-center">
@@ -217,7 +236,7 @@
      </div>
     </div>
     <div>(b) Using our automatically computed D that adapts to the complexity of the 3DGS</div>
-      <p></p>
+      <p></p><br>
       <p>      
        After extracting a base mesh, we build a Frosting layer with a variable thickness 
        and containing Gaussians around this mesh. We want this layer to be thicker
@@ -268,12 +287,12 @@
       <div class="row" style="text-align:center">
         <div class="col-xs-4 col-lg-6">
           <img src="https://anttwo.github.io/frosting/results/edition/faraam0_rgb_166.png" 
-          alt="khady_mesh.png" class="text-center" style="width: 100%; max-width: 1000px">
+          alt="original_pose.png" class="text-center" style="width: 100%; max-width: 1000px">
           <p style="text-align:center">(a) Original pose</p>
         </div>
         <div class="col-xs-4 col-lg-6">
           <img src="https://anttwo.github.io/frosting/results/edition/faraam0_rgb_64.png" 
-          alt="khady_mesh.png" class="text-center" style="width: 100%; max-width: 1000px">
+          alt="edited_pose.png" class="text-center" style="width: 100%; max-width: 1000px">
           <p style="text-align:center">(b) Edited pose</p>
         </div>
       </div>
