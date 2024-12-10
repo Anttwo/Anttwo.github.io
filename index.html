@@ -36,7 +36,8 @@
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
  <link rel="shortcut icon" href="resrc/icons/mathis_square_thumb_nobg.jpg">
 
- <link href="style.css" rel="stylesheet">
+ <!-- <link href="style.css" rel="stylesheet"> -->
+ <link href="./base.css" rel="stylesheet">
 
 <!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
@@ -48,6 +49,9 @@
   gtag('config', 'G-CDL4R10HKE');
 </script>
 <!-- End Google Analytics -->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 </head>
 
@@ -100,6 +104,10 @@
     <div class="container">
         <h2>News</h2>
         <hr/>
+        <p class="label date">11-2024</p> I am very honored to be selected as one of the Top Reviewers for NeurIPS 2024!<br>
+        <p class="label date">10-2024</p> I was in Milan for ECCV 2024, and had the pleasure to give an oral presentation of <a href="https://anttwo.github.io/frosting/">Frosting</a> and to meet many great people in the field.<br>
+        <p class="label date">09-2024</p> I am very honored to be selected as one of the Outstanding Reviewers for ECCV 2024!<br>
+        <p class="label date">09-2024</p> We just released a <a href="https://github.com/Anttwo/sugar_frosting_blender_addon/">Blender Add-On</a> to import, edit and animate 3D scenes reconstructed with SuGaR and Frosting without a single line of code. <br>
         <p class="label date">08-2024</p> <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been selected for an oral presentation at ECCV 2024!<br>
         <p class="label date">07-2024</p> <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been accepted to ECCV 2024!<br>
         <p class="label date">04-2024</p> I was invited by <a href="https://scholar.google.com/citations?user=SXXEZhYAAAAJ&hl=en">Pr. Ko Nishino from Kyoto University</a> to work in Japan for 6 weeks. It really was a great experience!<br>
@@ -116,6 +124,45 @@
     <div class="container">
         <h2>Publications</h2>
         <hr/>
+
+        <!-- MAtCha -->
+        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
+            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
+                <a href="https://anttwo.github.io/matcha/">
+                    <img src="./media/matcha.png" alt="matcha" style="width: 350px;">
+                </a>
+            </div>
+            <div  class="col-lg-8" style="text-align: left;">
+                <a href="https://anttwo.github.io/matcha/">
+                    <h4>MAtCha Gaussians: Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views</h4>
+                </a>
+                <p style="font-size: 20px;">arXiv 2024 (preprint)</p>
+                <div>
+                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>, 
+                    <a href="https://scholar.google.com/citations?user=-LzEJVwAAAAJ&hl=en">Tomoki Ichikawa</a>,
+                    <a href="https://kyamashita5.github.io/">Kohei Yamashita</a>,
+                    <a href="https://scholar.google.com/citations?user=SXXEZhYAAAAJ&hl=en">Ko Nishino</a>
+                </div>
+                We propose a novel surface representation for reconstructing high-quality 3D meshes with photorealistic rendering from sparse-view images.
+                Our key idea is to model the underlying scene geometry as an Atlas of Charts which we render with 2D Gaussian surfels.
+                Combined with a sparse-view SfM model like MASt3R-SfM, MAtCha can recover sharp meshes of both foreground and background objects within minutes from a few unposed RGB images.  <br>
+                <a class="label label-info" href=""><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+                <a class="label label-info" href="https://github.com/Anttwo/MAtCha"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code (coming soon)</a>
+                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
+                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
+                </a>
+                <div class="collapse" id="collapse4">
+                    <div class="card">
+                        <div class="card-block">
+                            <pre class="card-text clickselect">
+                                To do.
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+        </div><br>
 
         <!-- Frosting -->
         <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
@@ -295,5 +342,27 @@
         &copy You are welcome to copy the code, please attribute the source with a link back to this page.<br>
         Template inspired from <a href="https://www.tmonnier.com/">Tom Monnier</a> and <a href="https://mathis.petrovich.fr/">Mathis Petrovich</a>.
     </p>
+
+    <!-- Dark mode toggle -->
+    <script>
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = '<span class="material-icons-outlined">dark_mode</span>';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.innerHTML = newTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
+        });
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = savedTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
+
+        document.body.appendChild(themeToggle);
+    </script>
 
 </body>

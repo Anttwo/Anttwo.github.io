@@ -34,7 +34,8 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
- <link href="style_2.css" rel="stylesheet">
+ <!-- <link href="style_2.css" rel="stylesheet"> -->
+ <link href="../base2.css" rel="stylesheet">
 
 <!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
@@ -46,6 +47,9 @@
   gtag('config', 'G-CDL4R10HKE');
 </script>
 <!-- End Google Analytics -->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 </head>
 <body>
@@ -582,8 +586,12 @@
        style="width:63%; max-width: 250px; border:0.15em solid; border-radius:0.5em"></a>
    </div>
  </div>
- <h4 style="padding-top:0.5em">BibTeX</h4>
+
+ <h2>BibTeX</h2>
+ <hr/>
  If you find this work useful for your research, please cite:
+ <br><br>
+ 
  <div class="card">
    <div class="card-block">
      <pre class="card-text clickselect">
@@ -627,6 +635,28 @@
    tom monie, monniert.
  </p>
 </div>
+
+<!-- Dark mode toggle -->
+<script>
+  const themeToggle = document.createElement('button');
+  themeToggle.className = 'theme-toggle';
+  themeToggle.innerHTML = '<span class="material-icons-outlined">dark_mode</span>';
+
+  themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.innerHTML = newTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
+  });
+
+  // Check for saved theme preference
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeToggle.innerHTML = savedTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
+
+  document.body.appendChild(themeToggle);
+</script>
 
 </body>
 </html>
