@@ -87,7 +87,7 @@
  <div class="row">
    <div class="col-xs-12">
    <h3 style="text-align:center; padding-bottom:1rem">
-     <a class="label label-info" href="https://arxiv.org/"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+     <a class="label label-info" href="https://arxiv.org/abs/2412.06767"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
      <a class="label label-info" href="https://github.com/Anttwo/MAtCha"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code (Coming Soon)</a>
      <!-- <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>&nbsp;&nbsp;Blender Add-On</a> -->
      <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a>
@@ -142,11 +142,75 @@
 <!-- <div class="container"> -->
  <h2>Overview</h2>
  <hr/>
- <!-- <p>
-  TODO: Add some results here.
- </p> -->
- 
- <p>
+ <div id="resultsCarousel" class="carousel slide" data-ride="carousel" data-interval="30000">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#resultsCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#resultsCarousel" data-slide-to="1"></li>
+    <li data-target="#resultsCarousel" data-slide-to="2"></li>
+    <!-- Add more indicators as needed -->
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <div class="row">
+        <div class="col-xs-6">
+          <img src="./images/results/bicycle/render.png" alt="Result 1" style="width:100%; max-width:1200px; margin:auto;">
+        </div>
+        <div class="col-xs-6">
+          <img src="./images/results/bicycle/rend_normal.png" alt="Result 1" style="width:100%; max-width:1200px; margin:auto;">
+        </div>
+      </div>
+      <div class="carousel-caption">
+        <h3>Bicycle (Mip-NeRF 360)</h3>
+        <p>10 training images.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="row">
+        <div class="col-xs-6">
+          <img src="./images/results/scan21/render.png" alt="Result 2" style="width:100%; max-width:1200px; margin:auto;">
+        </div>
+        <div class="col-xs-6">
+          <img src="./images/results/scan21/rend_normal.png" alt="Result 2" style="width:100%; max-width:1200px; margin:auto;">
+        </div>
+      </div>
+      <div class="carousel-caption">
+        <h3>Scan 21 (DTU)</h3>
+        <p>3 training images.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="row">
+        <div class="col-xs-6">
+          <img src="./images/results/garden/render.png" alt="Result 3" style="width:100%; max-width:1200px; margin:auto;">
+        </div>
+        <div class="col-xs-6">
+          <img src="./images/results/garden/rend_normal.png" alt="Result 3" style="width:100%; max-width:1200px; margin:auto;">
+        </div>
+      </div>
+      <div class="carousel-caption">
+        <h3>Garden (Mip-NeRF 360)</h3>
+        <p>10 training images.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#resultsCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#resultsCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<p>
     We present a novel appearance model that simultaneously realizes explicit <b>high-quality 3D surface mesh recovery</b> 
     and <b>photorealistic novel view synthesis</b> from <b>sparse view samples</b>. <br><br>
 

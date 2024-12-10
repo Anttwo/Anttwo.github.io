@@ -178,3 +178,13 @@ table {
     font-size: 18px;
   }
 }
+
+.carousel-caption {
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+[data-theme='dark'] .carousel-caption {
+    background: rgba(255,255,255,0.2);
+}
