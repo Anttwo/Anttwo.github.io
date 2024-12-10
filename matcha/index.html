@@ -335,16 +335,26 @@
   Moreover, applying TSDF fusion on 2D Gaussian Surfels can over-smooth the geometry, erode fine details, 
   and produce artifacts, such as <i>"disk-aliasing"</i> patterns on the surface.<br><br>
 
-  In this regard, while we propose a custom multi-resolution TSDF fusion including foreground and background objects in our implementation, 
-  we also propose to adapt the tetrahedralization from 
-  <a href="https://niujinshuchong.github.io/gaussian-opacity-fields/">Gaussian Opacity Fields (GOF)</a> 
+  In this regard, while we propose <b>(a) a custom multi-resolution TSDF fusion</b> including foreground and background objects in our implementation, 
+  we also propose <b>(b) to adapt the tetrahedralization from 
+  <a href="https://niujinshuchong.github.io/gaussian-opacity-fields/">Gaussian Opacity Fields (GOF)</a></b>
   to make it compatible with any Gaussian-based method capable of rendering perspective-accurate depth maps.
-  To this end, for any set of input depth maps, we define a binary opacity field from the depth maps as well as an adaptive dilation operation 
-  to avoid eroding geometry during mesh extraction. 
-  Because we noticed that the tetrahedralization generally produces meshes with more than 10M vertices, we also modified the implementation 
-  to allow users to choose the resolution of the mesh.<br><br>
 
-  We believe that our adaptation of GOF tetrahedralization could provide a high-quality alternative to TSDF fusion for most Gaussian-based surface reconstruction methods.
+  <ul>
+    <li>
+      First, we propose to change the definition of the opacity field, 
+      using depth maps instead of 3D Gaussians as in GOF:
+      For any set of input depth maps, we define a binary opacity field from the depth maps as well as an adaptive dilation operation 
+      to avoid eroding geometry during mesh extraction.
+    </li>
+    <li>
+      Second, because the tetrahedralization introduced in GOF generally produces very large meshes with more than 10M vertices, 
+      we propose a new sampling strategy to build the initial tetrahedron grid to easily adjust or lower the resolution of the output mesh.
+    </li>
+  </ul>
+
+  We believe that our adaptation of GOF tetrahedralization provides a high-quality alternative to TSDF fusion and
+  can generalize to most Gaussian-based surface reconstruction methods.
  </p>
 
  <h2>BibTex</h2>
