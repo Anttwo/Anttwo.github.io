@@ -180,11 +180,29 @@ table {
 }
 
 .carousel-caption {
-    background: rgba(0,0,0,0.5);
-    padding: 10px;
-    border-radius: 5px;
+    background: rgba(0,0,0,0.8);
+    padding: 5px;
+    border-radius: 3px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
+
+.carousel-caption h3 {
+    font-size: 16px;
+    margin: 2px 0;
+}
+
+.carousel-caption p {
+    font-size: 14px;
+    margin: 2px 0;
 }
 
 [data-theme='dark'] .carousel-caption {
-    background: rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.8);
+}
+
+.carousel-indicators {
+    bottom: 40px;
 }
