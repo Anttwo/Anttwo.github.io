@@ -225,6 +225,72 @@
         }
     </style>
 
+    <!-- JavaScript for video autoplay and carousel control -->
+    <script>
+        $(document).ready(function() {
+            var carousel = $('#videoCarousel');
+            var carouselPaused = false;
+
+            // Function to pause carousel
+            function pauseCarousel() {
+                if (!carouselPaused) {
+                    carousel.carousel('pause');
+                    carouselPaused = true;
+                    console.log('Carousel paused');
+                }
+            }
+
+            // Function to resume carousel
+            function resumeCarousel() {
+                if (carouselPaused) {
+                    carousel.carousel('cycle');
+                    carouselPaused = false;
+                    console.log('Carousel resumed');
+                }
+            }
+
+            // Pause carousel when user clicks on video area
+            $(document).on('click', '.carousel-inner iframe', function() {
+                pauseCarousel();
+            });
+
+            // Resume carousel when user clicks carousel controls
+            $('.carousel-control, .carousel-indicators li').on('click', function() {
+                setTimeout(function() {
+                    resumeCarousel();
+                }, 500);
+            });
+
+            // Resume carousel after period of inactivity (30 seconds)
+            var inactivityTimer;
+            function resetInactivityTimer() {
+                clearTimeout(inactivityTimer);
+                inactivityTimer = setTimeout(function() {
+                    resumeCarousel();
+                }, 180000);
+            }
+
+            // Reset timer on any interaction outside video area
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.carousel-inner iframe').length) {
+                    resetInactivityTimer();
+                }
+            });
+
+            // Start inactivity timer
+            resetInactivityTimer();
+
+            // Ensure carousel resumes after slide change
+            carousel.on('slid.bs.carousel', function() {
+                setTimeout(function() {
+                    if (!carouselPaused) {
+                        resumeCarousel();
+                    }
+                }, 1000);
+            });
+        });
+    </script>
+
     <!-- JavaScript for video autoplay -->
     <!-- <script>
         $(document).ready(function() {
