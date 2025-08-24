@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Antoine Guédon - PhD Defense</title>
+ <meta name="description" content="PhD Defense of Antoine Guédon"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+ <meta charset="utf-8">
+
+ <!--Facebook-->
+ <meta property="og:image" content="https://anttwo.github.io/media/profile.jpg">
+ <meta property="og:image:type" content="image/jpg">
+ <meta property="og:image:width" content="600">
+ <meta property="og:image:height" content="400">
+ <meta property="og:type" content="website"/>
+ <meta property="og:url" content="https://anttwo.github.io/defense.html"/>
+ <meta property="og:title" content="Antoine Guédon - PhD Defense"/>
+ <meta property="og:description" content="PhD Defense of Antoine Guédon - Computer Vision and 3D Reconstruction"/>
+
+ <!--Twitter-->
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Antoine Guédon - PhD Defense" />
+ <meta property="twitter:description" content="PhD Defense of Antoine Guédon - Computer Vision and 3D Reconstruction"/>
+ <meta name="twitter:image" content="https://anttwo.github.io/media/profile.jpg">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+ <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ <script src="https://kit.fontawesome.com/bacac70704.js" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+ <link rel="shortcut icon" href="resrc/icons/mathis_square_thumb_nobg.jpg">
+
+ <link href="../base.css" rel="stylesheet">
+
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Video Carousel Banner -->
+    <div class="container-fluid" style="padding: 0; margin-bottom: 2rem;">
+        <div id="videoCarousel" class="carousel slide" data-ride="carousel" data-interval="8000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators" style="bottom: 50px; z-index: 15;">
+                <li data-target="#videoCarousel" data-slide-to="0"></li>
+                <li data-target="#videoCarousel" data-slide-to="1"></li>
+                <li data-target="#videoCarousel" data-slide-to="2" class="active"></li>
+                <li data-target="#videoCarousel" data-slide-to="3"></li>
+                <li data-target="#videoCarousel" data-slide-to="4"></li>
+            </ol>
+
+            <!-- Scroll indicator inside carousel -->
+            <div style="position: absolute; bottom: 0px; left: 0; right: 0; text-align: center; z-index: 15;">
+                <p style="color: white; margin-bottom: 5px; font-size: 14px; opacity: 0.8;">Scroll down for defense details</p>
+                <div style="animation: bounce 2s infinite;">
+                    <i class="fa fa-chevron-down" style="color: white; font-size: 18px; opacity: 0.9;"></i>
+                </div>
+            </div>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <!-- SCONE Video -->
+                <!-- <div class="item active">
+                    <div style="width: 100%; background: #000;">
+                        <div style="position: relative; width: 100%; height: 80vh;">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/VIDEO_ID_SCONE?autoplay=1&mute=1&rel=0&showinfo=0&modestbranding=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                style="border: none;">
+                            </iframe>
+                        </div>
+                        <div style="background: #000; padding: 20px 20px 60px 20px; text-align: center;">
+                            <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">SCONE</h3>
+                            <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Surface Coverage Optimization in Unknown Environments</p>
+                            <p style="color: white; opacity: 0.7; margin: 0;">NeurIPS 2022 (Spotlight)</p>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- MACARONS Video -->
+                <div class="item">
+                    <div style="width: 100%; background: #000;">
+                        <div style="position: relative; width: 100%; height: 77vh;">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/NlUNFJYuBGs?autoplay=1&mute=0&loop=1&playlist=NlUNFJYuBGs&rel=0&showinfo=0&modestbranding=1&controls=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                style="border: none;">
+                            </iframe>
+                        </div>
+                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                            <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">MACARONS</h3>
+                            <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Mapping And Coverage Anticipation with RGB ONline Self-supervision</p>
+                            <p style="color: white; opacity: 0.7; margin: 0;">CVPR 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SuGaR Video -->
+                <div class="item">
+                    <div style="width: 100%; background: #000;">
+                        <div style="position: relative; width: 100%; height: 77vh;">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/MAkFyWfiBQo?autoplay=1&mute=0&loop=1&playlist=MAkFyWfiBQo&rel=0&showinfo=0&modestbranding=1&controls=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                style="border: none;">
+                            </iframe>
+                        </div>
+                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                            <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">SuGaR</h3>
+                            <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction</p>
+                            <p style="color: white; opacity: 0.7; margin: 0;">CVPR 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frosting Video -->
+                <div class="active item">
+                    <div style="width: 100%; background: #000;">
+                        <div style="position: relative; width: 100%; height: 77vh;">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/h7LeWq8sG78?autoplay=1&mute=0&loop=1&playlist=h7LeWq8sG78&rel=0&showinfo=0&modestbranding=1&controls=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                style="border: none;">
+                            </iframe>
+                        </div>
+                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                            <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">Gaussian Frosting</h3>
+                            <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Editable Complex Radiance Fields with Real-Time Rendering</p>
+                            <p style="color: white; opacity: 0.7; margin: 0;">ECCV 2024 (Oral)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SuGaR x Frosting Video -->
+                <div class="item">
+                    <div style="width: 100%; background: #000;">
+                        <div style="position: relative; width: 100%; height: 77vh;">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/xHNTS41RkXg?autoplay=1&mute=0&loop=1&playlist=xHNTS41RkXg&rel=0&showinfo=0&modestbranding=1&controls=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                style="border: none;">
+                            </iframe>
+                        </div>
+                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                            <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">SuGaR x Frosting</h3>
+                            <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Blender Addon</p>
+                            <p style="color: white; opacity: 0.7; margin: 0;">ECCV 2024 (Oral)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAtCha Video -->
+                <div class="item">
+                    <div style="width: 100%; background: #000;">
+                        <div style="position: relative; width: 100%; height: 77vh;">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/8yK8W-IFDL4?autoplay=1&mute=0&loop=1&playlist=8yK8W-IFDL4&rel=0&showinfo=0&modestbranding=1&controls=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                style="border: none;">
+                            </iframe>
+                        </div>
+                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                            <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">MAtCha Gaussians</h3>
+                            <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Atlas of Charts for High-Quality Geometry from Sparse Views</p>
+                            <p style="color: white; opacity: 0.7; margin: 0;">CVPR 2025 (Highlight)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#videoCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#videoCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- CSS for bounce animation -->
+    <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+
+    <!-- JavaScript for video autoplay -->
+    <!-- <script>
+        $(document).ready(function() {
+            // Function to reload iframe to trigger autoplay
+            function reloadCurrentVideo() {
+                var activeSlide = $('#videoCarousel .item.active');
+                var iframe = activeSlide.find('iframe');
+                if (iframe.length > 0) {
+                    var src = iframe.attr('src');
+                    iframe.attr('src', '');
+                    setTimeout(function() {
+                        iframe.attr('src', src);
+                    }, 100);
+                }
+            }
+
+            // Reload video when carousel slides
+            $('#videoCarousel').on('slid.bs.carousel', function() {
+                reloadCurrentVideo();
+            });
+
+            // Initial load for first video
+            setTimeout(function() {
+                reloadCurrentVideo();
+            }, 1000);
+
+            // Try to enable autoplay on user interaction
+            $(document).one('click touchstart', function() {
+                reloadCurrentVideo();
+            });
+        });
+    </script> -->
+
+    <!-- Header -->
+    <div class="container" style="padding-top:2rem;">
+        <div class="col-lg-8" style="text-align:left; font-size: xx-large;">
+            <div class="row" style="padding-left: 1.5rem;">
+                <h1 style="font-size: 60px;">PhD Defense</h1>
+                <h2 style="font-size: 40px; margin-top: 1rem;">
+                    <i>Exploring and Rebuilding Reality:</i> Learning 3D Reconstruction from Capturing Images to Building Photorealistic Representations
+                </h2>
+                <p style="font-size: 30px;">
+                    <a href="https://anttwo.github.io/" style="font-size: 40px; font-weight: 100;">Antoine Gu&eacutedon</a><br>
+                    <a href="https://imagine.enpc.fr/" style="font-weight: 100;">IMAGINE</a> /
+                    <a href="http://ligm.u-pem.fr/accueil/" style="font-weight: 100;">LIGM</a><br>
+                    <a href="https://www.ecoledesponts.fr/en" style="font-weight: 100;">&Eacutecole des Ponts ParisTech (ENPC)</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="col-lg-4" style="text-align:center; padding-top: 1rem;">
+          <img src="../media/profile.jpg" alt="Profile picture" style="height: 400px; border-radius: 10px;"><br>
+          <div style="margin-top: 1rem;">
+            <!-- <a href="https://anttwo.github.io/" class="label label-info" style="margin: 5px;">
+                <i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;Home Page
+            </a> -->
+          </div>
+        </div>
+    </div>
+
+    <!-- Defense Information -->
+    <div class="container">
+        <!-- <h2>Defense Information</h2>
+        <hr/> -->
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <h4><i class="fa fa-calendar"></i>&nbsp;&nbsp;Date & Time</h4>
+                <hr/>
+                <p style="font-size: 18px; margin-left: 2rem;">
+                    <strong>Date:</strong> September 25th, 2025<br>
+                    <strong>Time:</strong> 05:00 PM<br>
+                    <strong>Duration of the presentation:</strong> Approximately 45 minutes<br>
+                    <strong>Duration of the questions:</strong> Between 1 and 2 hours
+                </p>
+                
+                <!-- Map -->
+                <h4><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Map</h4>
+                <hr/>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.898621678393!2d2.5900363!3d48.841072399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60f03c613b30d%3A0x6b8b64cf7bd53e66!2sB%C3%A2timent%20Coriolis!5e0!3m2!1sfr!2sfr!4v1756048788394!5m2!1sfr!2sfr" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            
+            <div class="col-lg-6">
+                <h4><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Location</h4>
+                <hr/>
+                <p style="font-size: 18px; margin-left: 2rem;">
+                    <strong>Venue:</strong> Amphithéâtre Caquot, Coriolis building<br>
+                    <strong>Address:</strong><br>
+                    École des Ponts ParisTech<br>
+                    6-8, Av Blaise Pascal - Cité Descartes<br>
+                    Champs-sur-Marne<br>
+                    77455 Marne-la-Vallée cedex 2<br>
+                    France
+                </p>
+
+                <h4><i class="fa fa-users"></i>&nbsp;&nbsp;Thesis Committee</h4>
+                <hr/>
+                <p style="font-size: 18px; margin-left: 2rem;">
+                    <strong>Thesis Advisors:</strong><br>
+                    • <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a> (ENPC)<br>
+                    • <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a> (ENPC)<br><br>
+                    
+                    <strong>Jury Members:</strong><br>
+                    • <a href="https://www.umr-lastig.fr/vgouet/">Valérie Gouet</a> (LaSTIG - IGN) - President<br>
+                    • <a href="https://theialab.ca/">Andrea Tagliasacchi</a> (Simon Fraser University) - Reviewer<br>
+                    • <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a> (Ecole polytechnique) - Reviewer<br>
+                    • <a href="https://cosmer.univ-tln.fr/claire-dune/">Claire Dune</a> (Université de Toulon) - Examiner<br>
+                </p>
+                
+                <h4><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Attendance</h4>
+                <hr/>
+                <p style="font-size: 18px; margin-left: 2rem;">
+                    The defense is public and open to all.<br>
+                    <strong>Online streaming:</strong> <a href="">Link is coming soon.</a><br>
+                    <strong>Contact:</strong> antoine (dot) guedon (at) enpc.fr for any questions
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thesis Abstract -->
+    <div class="container">
+        <h2>Thesis Abstract</h2>
+        <hr/>
+        <p style="font-size: 18px; text-align: justify; line-height: 1.6;">
+
+            This thesis addresses two fundamental challenges in computer vision: Autonomous scene exploration and photorealistic 3D reconstruction. 
+            While recent advances in neural rendering have revolutionized the field of 3D reconstruction, existing methods face significant limitations. 
+            They typically require dense sets of carefully captured images, struggle with geometric ambiguities, and often produce representations that are difficult to edit or integrate into standard graphics pipelines. Additionally, the challenge of efficiently acquiring these input images remains largely unexplored, creating a barrier for non-expert users attempting to create high-quality 3D content.<br><br>
+            
+            We present five complementary contributions that progressively tackle these challenges: For acquiring optimal input images through autonomous scene exploration, we first introduce <a href="https://arxiv.org/abs/2208.10449">SCONE</a> and <a href="https://anttwo.github.io/MACARONS/">MACARONS</a>. For photorealistic 3D reconstruction, we then propose <a href="https://anttwo.github.io/sugar/">SuGaR</a>, <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> and <a href="https://anttwo.github.io/matcha/">MAtCha</a>. More details are provided in the following sections.<br><br>
+
+            Together, these contributions advance both autonomous exploration and 3D reconstruction by providing more practical, efficient, and accessible solutions for real-world applications. Our work bridges the gap between neural rendering and traditional computer graphics while making high-quality 3D reconstruction more accessible to non-expert users. The developed methods have potential applications across various domains, from virtual reality and digital content creation to robotics and cultural heritage preservation.        
+        </p>
+    </div>
+
+    <!-- Research Projects -->
+    <div class="container">
+        <h2>Presented Projects</h2>
+        <hr/>
+        <p style="font-size: 18px; margin-bottom: 2rem;">
+            This thesis encompasses five research projects that participated to advance the state-of-the-art in 3D reconstruction and neural rendering.
+        </p>
+
+        <!-- Exploration Projects -->
+        <h3 style="color: var(--highlight-color); margin-top: 3rem; margin-bottom: 1.5rem;">
+            <i class="fa fa-search"></i>&nbsp;&nbsp;Autonomous Scene Exploration
+        </h3>
+        <p style="font-size: 16px; margin-bottom: 2rem; font-style: italic;">
+            The first part of this thesis focuses on autonomous exploration strategies for efficiently capturing optimal input images for 3D reconstruction.
+        </p>
+
+        <!-- SCONE -->
+        <div class="container" style="text-align:left; padding-top: 1rem; padding-bottom: 2rem;">
+            <div class="col-lg-3" style="text-align:center; padding-top: 1rem;">
+                <a href="https://arxiv.org/abs/2208.10449">
+                    <img src="../media/scone.png" alt="scone" style="width: 250px;">
+                </a>
+            </div>
+            <div class="col-lg-9" style="text-align: left;">
+                <a href="https://arxiv.org/abs/2208.10449">
+                    <h4>SCONE: Surface Coverage Optimization in uNknown Environments</h4>
+                </a>
+                <p style="font-size: 16px; color: #999;">NeurIPS 2022 (Spotlight)</p>
+                <div style="font-size: 14px; margin-bottom: 1rem;">
+                    <a href="https://anttwo.github.io/"><b>Antoine Guédon</b></a>, 
+                    <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>, 
+                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+                </div>
+                <a data-toggle="collapse" href="#sconeDetails" aria-expanded="false" aria-controls="sconeDetails" style="text-decoration: none; color: var(--text-color);">
+                    <p style="font-size: 16px;">
+                        A novel approach to solve the Next Best View problem for dense 3D reconstruction in unknown environments. Our method scales to large 3D scenes and handles completely free camera motion at inference.
+                        <span style="color: var(--highlight-color);">
+                            Details
+                            <i class="fa fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                        </span>
+                    </p>
+                </a>
+                <div class="collapse" id="sconeDetails">
+                    <p style="font-size: 16px;">
+                        We introduce SCONE, a novel mathematical framework for surface coverage-based exploration using depth sensors. Unlike previous approaches that rely on reinforcement learning, this supervised learning approach enables efficient exploration of arbitrarily large scenes with unrestricted camera motion. The framework's purely geometric considerations allow for better generalization to unseen scenes, making it particularly valuable for real-world applications.
+                    </p>
+                </div>
+                <a class="label label-info" href="https://arxiv.org/abs/2208.10449">
+                    <i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper
+                </a> &nbsp;
+                <a class="label label-info" href="https://github.com/Anttwo/MACARONS">
+                    <i class="fa fa-code"></i>&nbsp;&nbsp;Code
+                </a>
+            </div>
+        </div>
+
+        <!-- MACARONS -->
+        <div class="container" style="text-align:left; padding-top: 1rem; padding-bottom: 2rem;">
+            <div class="col-lg-3" style="text-align:center; padding-top: 1rem;">
+                <a href="https://anttwo.github.io/MACARONS/">
+                    <img src="../media/macarons.png" alt="macarons" style="width: 250px;">
+                </a>
+            </div>
+            <div class="col-lg-9" style="text-align: left;">
+                <a href="https://anttwo.github.io/MACARONS/">
+                    <h4>MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision</h4>
+                </a>
+                <p style="font-size: 16px; color: #999;">CVPR 2023</p>
+                <div style="font-size: 14px; margin-bottom: 1rem;">
+                    <a href="https://anttwo.github.io/"><b>Antoine Guédon</b></a>, 
+                    <a href="https://www.tmonnier.com/">Tom Monnier</a>, 
+                    <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>, 
+                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+                </div>
+                <a data-toggle="collapse" href="#macaronsDetails" aria-expanded="false" aria-controls="macaronsDetails" style="text-decoration: none; color: var(--text-color);">
+                    <p style="font-size: 16px;">
+                        A method that simultaneously learns to explore new large environments and to reconstruct them in 3D from color images only, in a self-supervised fashion.
+                        <span style="color: var(--highlight-color);">
+                            Details
+                            <i class="fa fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                        </span>
+                    </p>
+                </a>
+                <div class="collapse" id="macaronsDetails">
+                    <p style="font-size: 16px;">
+                        We present MACARONS, which eliminates the need for depth sensors and explicit 3D ground truth by leveraging self-supervised learning from RGB images alone. This advancement enables online learning in large unknown environments, making autonomous exploration more practical and cost-effective. MACARONS learns to generate 3D reconstructions directly from RGB images and uses these reconstructions to supervise its coverage predictions, creating a self-improving system suitable for deployment in real-world scenarios.
+                    </p>
+                </div>
+                <a class="label label-info" href="https://arxiv.org/abs/2303.03315">
+                    <i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper
+                </a>&nbsp;
+                <a class="label label-info" href="https://github.com/Anttwo/MACARONS">
+                    <i class="fa fa-code"></i>&nbsp;&nbsp;Code
+                </a>&nbsp;
+                <a class="label label-info" href="https://anttwo.github.io/MACARONS/">
+                    <i class="fa fa-globe"></i>&nbsp;&nbsp;Project Page
+                </a>
+            </div>
+        </div>
+
+        <!-- Reconstruction Projects -->
+        <h3 style="color: var(--highlight-color); margin-top: 3rem; margin-bottom: 1.5rem;">
+            <i class="fa fa-cube"></i>&nbsp;&nbsp;Photorealistic 3D Reconstruction
+        </h3>
+        <p style="font-size: 16px; margin-bottom: 2rem; font-style: italic;">
+            The second part of this thesis develops novel neural rendering approaches for high-quality 3D reconstruction from captured images.
+        </p>
+
+        <!-- SuGaR -->
+        <div class="container" style="text-align:left; padding-top: 1rem; padding-bottom: 2rem;">
+            <div class="col-lg-3" style="text-align:center; padding-top: 1rem;">
+                <a href="https://anttwo.github.io/sugar/">
+                    <img src="../media/sugar.png" alt="sugar" style="width: 250px;">
+                </a>
+            </div>
+            <div class="col-lg-9" style="text-align: left;">
+                <a href="https://anttwo.github.io/sugar/">
+                    <h4>SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction</h4>
+                </a>
+                <p style="font-size: 16px; color: #999;">CVPR 2024</p>
+                <div style="font-size: 14px; margin-bottom: 1rem;">
+                    <a href="https://anttwo.github.io/"><b>Antoine Guédon</b></a>, 
+                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+                </div>
+                <a data-toggle="collapse" href="#sugarDetails" aria-expanded="false" aria-controls="sugarDetails" style="text-decoration: none; color: var(--text-color);">
+                    <p style="font-size: 16px;">
+                        A method that extracts accurate and editable meshes from 3D Gaussian Splatting representations within minutes on a single GPU. Enables easy editing using traditional 3D software.
+                        <span style="color: var(--highlight-color);">
+                            Details
+                            <i class="fa fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                        </span>
+                    </p>
+                </a>
+                <div class="collapse" id="sugarDetails">
+                    <p style="font-size: 16px;">
+                        We propose SuGaR, a method that combines explicit surface representation with Gaussian splatting for fast, high-quality mesh reconstruction. SuGaR first introduces a regularization strategy for extracting explicit surface meshes from Gaussian Splatting representations. Then, SuGaR introduces a hybrid representation that binds Gaussians to the extracted surface meshes and refines the structure through differentiable rendering. This approach achieves photorealistic rendering within remarkably short optimization times (less than an hour) and enables unprecedented fine-grained editing capabilities based on meshes, including surface sculpting, character animation, and scene compositing—features previously unavailable in radiance field models.
+                    </p>
+                </div>
+                <a class="label label-info" href="https://arxiv.org/abs/2311.12775">
+                    <i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper
+                </a>&nbsp;
+                <a class="label label-info" href="https://github.com/Anttwo/SuGaR">
+                    <i class="fa fa-code"></i>&nbsp;&nbsp;Code
+                </a>&nbsp;
+                <a class="label label-info" href="https://anttwo.github.io/sugar/">
+                    <i class="fa fa-globe"></i>&nbsp;&nbsp;Project Page
+                </a>
+            </div>
+        </div>
+
+        <!-- Frosting -->
+        <div class="container" style="text-align:left; padding-top: 1rem; padding-bottom: 2rem;">
+            <div class="col-lg-3" style="text-align:center; padding-top: 1rem;">
+                <a href="https://anttwo.github.io/frosting/">
+                    <img src="../media/frosting.png" alt="frosting" style="width: 250px;">
+                </a>
+            </div>
+            <div class="col-lg-9" style="text-align: left;">
+                <a href="https://anttwo.github.io/frosting/">
+                    <h4>Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering</h4>
+                </a>
+                <p style="font-size: 16px; color: #999;">ECCV 2024 (Oral)</p>
+                <div style="font-size: 14px; margin-bottom: 1rem;">
+                    <a href="https://anttwo.github.io/"><b>Antoine Guédon</b></a>, 
+                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+                </div>
+                <a data-toggle="collapse" href="#frostingDetails" aria-expanded="false" aria-controls="frostingDetails" style="text-decoration: none; color: var(--text-color);">
+                    <p style="font-size: 16px;">
+                        A representation that captures complex volumetric effects and flat surfaces by reconstructing and covering meshes with a "Frosting" layer of 3D Gaussians. Enables real-time rendering and traditional animation workflows.
+                        <span style="color: var(--highlight-color);">
+                            Details
+                            <i class="fa fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                        </span>
+                    </p>
+                </a>
+                <div class="collapse" id="frostingDetails">
+                    <p style="font-size: 16px;">
+                        We extend SuGaR with Gaussian Frosting, which significantly improves material handling and rendering efficiency while maintaining SuGaR's interactive features. The method introduces a novel occlusion culling strategy and achieves rendering quality comparable to vanilla Gaussian Splatting. Notably, Frosting excels at reconstructing challenging materials like hair, fur, and grass, which are traditionally difficult to represent with pure surface-based methods but essential for building photorealistic scenes and virtual avatars. To democratize these capabilities, we developed a dedicated Blender add-on that enables artists and content creators to edit, sculpt, combine, and animate their reconstructions without programming expertise.
+                    </p>
+                </div>
+                <a class="label label-info" href="https://arxiv.org/abs/2403.14554">
+                    <i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper
+                </a>&nbsp;
+                <a class="label label-info" href="https://github.com/Anttwo/Frosting">
+                    <i class="fa fa-code"></i>&nbsp;&nbsp;Code
+                </a>&nbsp;
+                <a class="label label-info" href="https://anttwo.github.io/frosting/">
+                    <i class="fa fa-globe"></i>&nbsp;&nbsp;Project Page
+                </a>
+            </div>
+        </div>
+
+        <!-- MAtCha -->
+        <div class="container" style="text-align:left; padding-top: 1rem; padding-bottom: 2rem;">
+            <div class="col-lg-3" style="text-align:center; padding-top: 1rem;">
+                <a href="https://anttwo.github.io/matcha/">
+                    <img src="../media/matcha.png" alt="matcha" style="width: 250px;">
+                </a>
+            </div>
+            <div class="col-lg-9" style="text-align: left;">
+                <a href="https://anttwo.github.io/matcha/">
+                    <h4>MAtCha Gaussians: Atlas of Charts for High-Quality Geometry from Sparse Views</h4>
+                </a>
+                <p style="font-size: 16px; color: #999;">CVPR 2025 (Highlight)</p>
+                <div style="font-size: 14px; margin-bottom: 1rem;">
+                    <a href="https://anttwo.github.io/"><b>Antoine Guédon</b></a>, 
+                    <a href="https://scholar.google.com/citations?user=-LzEJVwAAAAJ&hl=en">Tomoki Ichikawa</a>,
+                    <a href="https://kyamashita5.github.io/">Kohei Yamashita</a>,
+                    <a href="https://vision.ist.i.kyoto-u.ac.jp/">Ko Nishino</a>
+                </div>
+                <a data-toggle="collapse" href="#matchaDetails" aria-expanded="false" aria-controls="matchaDetails" style="text-decoration: none; color: var(--text-color);">
+                    <p style="font-size: 16px;">
+                        A novel surface representation using Atlases of Charts rendered with 2D Gaussian surfels. Recovers sharp meshes from sparse unposed RGB images within minutes.
+                        <span style="color: var(--highlight-color);">
+                            Details
+                            <i class="fa fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                        </span>
+                    </p>
+                </a>
+                <div class="collapse" id="matchaDetails">
+                    <p style="font-size: 16px;">
+                        Finally, we introduce MAtCha, which tackles the challenge of sparse-view reconstruction. By leveraging learned priors, MAtCha enables high-quality mesh reconstruction from just 3-10 input images—a significant advancement over previous methods that required hundreds of images and complex preprocessing steps. The method produces sharp, detailed meshes of both foreground and background elements while maintaining high geometric quality across the entire scene. This capability might make high-quality 3D reconstruction more accessible to everyday users, potentially democratizing the technology for widespread adoption.
+                    </p>
+                </div>
+                <a class="label label-info" href="https://arxiv.org/abs/2412.06767">
+                    <i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper
+                </a>&nbsp;
+                <a class="label label-info" href="https://github.com/Anttwo/MAtCha">
+                    <i class="fa fa-code"></i>&nbsp;&nbsp;Code
+                </a>&nbsp;
+                <a class="label label-info" href="https://anttwo.github.io/matcha/">
+                    <i class="fa fa-globe"></i>&nbsp;&nbsp;Project Page
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="container">
+        <h2>Defense Schedule</h2>
+        <hr/>
+        <div style="font-size: 18px;">
+            <p class="label date">05:00 PM</p> 
+            <a data-toggle="collapse" href="#presentationDetails" aria-expanded="false" aria-controls="presentationDetails" style="text-decoration: none; color: var(--text-color);">
+                Presentation (45 minutes). <span style="color: var(--highlight-color);">
+                    Details
+                    <i class="fa fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i>
+                </span>
+            </a>
+            
+            <div class="collapse" id="presentationDetails">
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li>Introduction</li>
+                    <li>Project 1: SCONE - Autonomous Exploration</li>
+                    <li>Project 2: MACARONS - Self-Supervised Exploration from RGB images</li>
+                    <li>Project 3: SuGaR - Surface-Aligned Gaussian Splatting</li>
+                    <li>Project 4: Frosting - Editable Radiance Fields</li>
+                    <li>Project 5: MAtCha - Sparse-View Reconstruction</li>
+                    <li>Conclusions and Future Work</li>
+                </ul>
+            </div><br>
+            
+            <p class="label date">05:45 PM</p> Questions from the Jury (between 1 and 2.5 hours)<br>
+            
+            <p class="label date">08:00 PM</p> Results Announcement and short toast at the Lab<br>
+            
+            <p class="label date">After Defense</p> Reception in Paris (Location TBD)<br>
+        </div>
+    </div>
+
+    <!-- Resources -->
+    <div class="container">
+        <h2>Resources</h2>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4>Thesis Document</h4>
+                <p>
+                    <a class="label label-info" href="#" style="font-size: 16px;">
+                        <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;Download Thesis PDF (coming soon)
+                    </a>
+                </p>
+                
+                <h4>Presentation Slides</h4>
+                <p>
+                    <a class="label label-info" href="#" style="font-size: 16px;">
+                        <i class="fa fa-file-powerpoint-o"></i>&nbsp;&nbsp;Download Slides (coming soon)
+                    </a>
+                </p>
+            </div>
+            
+            <div class="col-lg-6">
+                <h4>Contact Information</h4>
+                <p style="font-size: 16px;">
+                    <strong>Antoine Guédon</strong><br>
+                    PhD Candidate<br>
+                    IMAGINE Team, LIGM<br>
+                    École des Ponts ParisTech<br>
+                    ✉ antoine (dot) guedon (at) enpc.fr
+                </p>
+                
+                <h4>Links</h4>
+                <p>
+                    <a class="label label-info" href="mailto:antoine.guedon@enpc.fr">
+                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Email
+                    </a> &nbsp;
+                    <a class="label label-info" href="https://github.com/Anttwo">
+                        <i class="fa fa-github"></i>&nbsp;&nbsp;GitHub
+                    </a> &nbsp;
+                    <a class="label label-info" href="https://scholar.google.com/citations?user=uvg-I8sAAAAJ">
+                        <i class="ai ai-google-scholar"></i>&nbsp;&nbsp;Scholar
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <p style="text-align: center; padding-top: 2rem; font-size: 15px;">
+        &copy; 2025 Antoine Guédon. You are welcome to copy the code, please attribute the source with a link back to this page.
+    </p>
+
+    <!-- Dark mode toggle -->
+    <script>
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = '<span class="material-icons-outlined">dark_mode</span>';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.innerHTML = newTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
+        });
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = savedTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
+
+        document.body.appendChild(themeToggle);
+
+        // Animate chevron arrow for expandable sections
+        $('#presentationDetails').on('show.bs.collapse', function () {
+            $('a[href="#presentationDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        });
+        $('#presentationDetails').on('hide.bs.collapse', function () {
+            $('a[href="#presentationDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        });
+
+        // SCONE details
+        $('#sconeDetails').on('show.bs.collapse', function () {
+            $('a[href="#sconeDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        });
+        $('#sconeDetails').on('hide.bs.collapse', function () {
+            $('a[href="#sconeDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        });
+
+        // MACARONS details
+        $('#macaronsDetails').on('show.bs.collapse', function () {
+            $('a[href="#macaronsDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        });
+        $('#macaronsDetails').on('hide.bs.collapse', function () {
+            $('a[href="#macaronsDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        });
+
+        // SuGaR details
+        $('#sugarDetails').on('show.bs.collapse', function () {
+            $('a[href="#sugarDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        });
+        $('#sugarDetails').on('hide.bs.collapse', function () {
+            $('a[href="#sugarDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        });
+
+        // Frosting details
+        $('#frostingDetails').on('show.bs.collapse', function () {
+            $('a[href="#frostingDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        });
+        $('#frostingDetails').on('hide.bs.collapse', function () {
+            $('a[href="#frostingDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        });
+
+        // MAtCha details
+        $('#matchaDetails').on('show.bs.collapse', function () {
+            $('a[href="#matchaDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        });
+        $('#matchaDetails').on('hide.bs.collapse', function () {
+            $('a[href="#matchaDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        });
+    </script>
+
+</body>
+</html> 
