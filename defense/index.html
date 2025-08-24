@@ -56,7 +56,7 @@
             </ol>
 
             <!-- Scroll indicator inside carousel -->
-            <div style="position: absolute; bottom: 0px; left: 0; right: 0; text-align: center; z-index: 15;">
+            <div class="carousel-scroll-indicator" style="position: absolute; bottom: 0px; left: 0; right: 0; text-align: center; z-index: 15;">
                 <p style="color: white; margin-bottom: 5px; font-size: 14px; opacity: 0.8;">Scroll down for defense details</p>
                 <div style="animation: bounce 2s infinite;">
                     <i class="fa fa-chevron-down" style="color: white; font-size: 18px; opacity: 0.9;"></i>
@@ -90,7 +90,7 @@
                 <!-- MACARONS Video -->
                 <div class="item">
                     <div style="width: 100%; background: #000;">
-                        <div style="position: relative; width: 100%; height: 77vh;">
+                        <div class="carousel-video-container" style="position: relative; width: 100%; height: 77vh;">
                             <iframe 
                                 width="100%" 
                                 height="100%" 
@@ -101,7 +101,7 @@
                                 style="border: none;">
                             </iframe>
                         </div>
-                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                        <div class="carousel-text-container" style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
                             <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">MACARONS</h3>
                             <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Mapping And Coverage Anticipation with RGB ONline Self-supervision</p>
                             <p style="color: white; opacity: 0.7; margin: 0;">CVPR 2023</p>
@@ -112,7 +112,7 @@
                 <!-- SuGaR Video -->
                 <div class="item">
                     <div style="width: 100%; background: #000;">
-                        <div style="position: relative; width: 100%; height: 77vh;">
+                        <div class="carousel-video-container" style="position: relative; width: 100%; height: 77vh;">
                             <iframe 
                                 width="100%" 
                                 height="100%" 
@@ -123,7 +123,7 @@
                                 style="border: none;">
                             </iframe>
                         </div>
-                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                        <div class="carousel-text-container" style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
                             <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">SuGaR</h3>
                             <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction</p>
                             <p style="color: white; opacity: 0.7; margin: 0;">CVPR 2024</p>
@@ -132,9 +132,9 @@
                 </div>
 
                 <!-- Frosting Video -->
-                <div class="active item">
+                <div class="item active">
                     <div style="width: 100%; background: #000;">
-                        <div style="position: relative; width: 100%; height: 77vh;">
+                        <div class="carousel-video-container" style="position: relative; width: 100%; height: 77vh;">
                             <iframe 
                                 width="100%" 
                                 height="100%" 
@@ -145,7 +145,7 @@
                                 style="border: none;">
                             </iframe>
                         </div>
-                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                        <div class="carousel-text-container" style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
                             <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">Gaussian Frosting</h3>
                             <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Editable Complex Radiance Fields with Real-Time Rendering</p>
                             <p style="color: white; opacity: 0.7; margin: 0;">ECCV 2024 (Oral)</p>
@@ -156,7 +156,7 @@
                 <!-- SuGaR x Frosting Video -->
                 <div class="item">
                     <div style="width: 100%; background: #000;">
-                        <div style="position: relative; width: 100%; height: 77vh;">
+                        <div class="carousel-video-container" style="position: relative; width: 100%; height: 77vh;">
                             <iframe 
                                 width="100%" 
                                 height="100%" 
@@ -167,7 +167,7 @@
                                 style="border: none;">
                             </iframe>
                         </div>
-                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                        <div class="carousel-text-container" style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
                             <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">SuGaR x Frosting</h3>
                             <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Blender Addon</p>
                             <p style="color: white; opacity: 0.7; margin: 0;">ECCV 2024 (Oral)</p>
@@ -178,7 +178,7 @@
                 <!-- MAtCha Video -->
                 <div class="item">
                     <div style="width: 100%; background: #000;">
-                        <div style="position: relative; width: 100%; height: 77vh;">
+                        <div class="carousel-video-container" style="position: relative; width: 100%; height: 77vh;">
                             <iframe 
                                 width="100%" 
                                 height="100%" 
@@ -189,7 +189,7 @@
                                 style="border: none;">
                             </iframe>
                         </div>
-                        <div style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                        <div class="carousel-text-container" style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
                             <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">MAtCha Gaussians</h3>
                             <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Atlas of Charts for High-Quality Geometry from Sparse Views</p>
                             <p style="color: white; opacity: 0.7; margin: 0;">CVPR 2025 (Highlight)</p>
@@ -210,7 +210,7 @@
         </div>
     </div>
 
-    <!-- CSS for bounce animation -->
+    <!-- CSS for bounce animation and responsive design -->
     <style>
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
@@ -221,6 +221,51 @@
             }
             60% {
                 transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive carousel height for mobile devices */
+        @media screen and (max-width: 768px) {
+            .carousel-video-container {
+                height: 50vh !important;
+            }
+            
+            .carousel-text-container {
+                padding: 15px 15px 70px 15px !important;
+            }
+            
+            .carousel-indicators {
+                bottom: 40px !important;
+            }
+            
+            .carousel-scroll-indicator {
+                bottom: 5px !important;
+            }
+            
+            .carousel-scroll-indicator p {
+                font-size: 12px !important;
+            }
+            
+            .carousel-scroll-indicator i {
+                font-size: 16px !important;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .carousel-video-container {
+                height: 55vh !important;
+            }
+            
+            .carousel-text-container {
+                padding: 10px 10px 80px 10px !important;
+            }
+            
+            .carousel-text-container h3 {
+                font-size: 18px !important;
+            }
+            
+            .carousel-text-container p {
+                font-size: 14px !important;
             }
         }
     </style>
