@@ -337,6 +337,16 @@
         $(document).ready(function() {
             var carousel = $('#videoCarousel');
             var carouselPaused = false;
+            
+            // Check if device is mobile (screen width <= 768px)
+            var isMobile = window.innerWidth <= 768;
+            
+            // Disable automatic cycling on mobile devices
+            if (isMobile) {
+                carousel.carousel({
+                    interval: false
+                });
+            }
 
             // Function to pause carousel
             function pauseCarousel() {
@@ -349,7 +359,7 @@
 
             // Function to resume carousel
             function resumeCarousel() {
-                if (carouselPaused) {
+                if (carouselPaused && !isMobile) {
                     carousel.carousel('cycle');
                     carouselPaused = false;
                     console.log('Carousel resumed');
@@ -390,7 +400,7 @@
             // Ensure carousel resumes after slide change
             carousel.on('slid.bs.carousel', function() {
                 setTimeout(function() {
-                    if (!carouselPaused) {
+                    if (!carouselPaused && !isMobile) {
                         resumeCarousel();
                     }
                 }, 1000);
