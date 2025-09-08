@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILo WebGL Viewer</title>
+    
+    <!-- Roboto Font Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: #e0e0e0;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #e0e0e0;
+            z-index: 100;
+            background: rgba(45, 45, 45, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #5ee0d6;
+            font-weight: 300;
+        }
+        
+        #info h3 {
+            margin: 0 0 10px 0;
+            color: #5ee0d6;
+            font-weight: 300;
+        }
+        
+        #info p {
+            margin: 5px 0;
+            font-weight: 100;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #5ee0d6;
+            font-size: 18px;
+            font-weight: 300;
+            z-index: 100;
+            text-align: center;
+            min-width: 300px;
+            background: rgba(26, 26, 26, 0.85);
+            padding: 25px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(94, 224, 214, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        #progress-container {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(45, 45, 45, 0.9);
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 1px solid rgba(94, 224, 214, 0.2);
+        }
+        
+        #progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #5ee0d6, #7ff4ea);
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(94, 224, 214, 0.4);
+        }
+        
+        #progress-text {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #e0e0e0;
+            font-weight: 100;
+        }
+        
+        #toggle-button {
+            background: #5ee0d6;
+            border: 1px solid #5ee0d6;
+            color: #1a1a1a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        #toggle-button:hover {
+            background: #7ff4ea;
+            border-color: #7ff4ea;
+        }
+
+        #scene-info {
+            font-size: 12px;
+            color: #777777;
+            margin-top: 10px;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            #info {
+                top: 5px;
+                left: 5px;
+                padding: 10px;
+                font-size: 12px;
+                max-width: calc(100vw - 20px);
+                box-sizing: border-box;
+            }
+            
+            #info h3 {
+                font-size: 14px;
+                margin: 0 0 8px 0;
+            }
+            
+            #info p {
+                margin: 3px 0;
+                font-size: 11px;
+            }
+            
+            #toggle-button {
+                padding: 6px 10px;
+                font-size: 12px;
+                margin-top: 8px;
+            }
+            
+            #scene-info {
+                font-size: 10px;
+                margin-top: 8px;
+            }
+        }
+
+        /* Extra small devices (phones in portrait) */
+        @media (max-width: 480px) {
+            #info {
+                padding: 8px;
+                font-size: 11px;
+            }
+            
+            #info h3 {
+                font-size: 13px;
+                margin: 0 0 6px 0;
+            }
+            
+            #info p {
+                margin: 2px 0;
+                font-size: 10px;
+            }
+            
+            #toggle-button {
+                padding: 5px 8px;
+                font-size: 11px;
+                margin-top: 6px;
+            }
+            
+            #scene-info {
+                font-size: 9px;
+                margin-top: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="info">
+        <h3 id="viewer-title">MILo WebGL Viewer - 3DGS</h3>
+        <p>Mouse: Rotate camera</p>
+        <p>Scroll: Zoom in/out</p>
+        <p>Right click + drag: Pan</p>
+        <button id="toggle-button" onclick="toggleViewer()">Switch to Mesh</button>
+        <div id="scene-info">Loading scene...</div>
+    </div>
+    <div id="loading">
+        <div>Loading...</div>
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <div id="progress-text">0%</div>
+    </div>
+
+    <!-- Import map for ES6 modules -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.174.0/three.module.js",
+            "@sparkjsdev/spark": "https://sparkjs.dev/releases/spark/0.1.8/spark.module.js"
+        }
+    }
+    </script>
+    
+    <!-- Main Script -->
+    <script type="module">
+        import { MiloViewer, SCENE_CONFIGS } from './viewer.js';
+        
+        // Get scene from URL parameter or use default
+        const urlParams = new URLSearchParams(window.location.search);
+        const sceneParam = urlParams.get('scene') || 'risingfreedom1'; // Default scene
+        
+        // Get scene configuration
+        const sceneConfig = SCENE_CONFIGS[sceneParam];
+        
+        if (!sceneConfig) {
+            console.error(`Scene "${sceneParam}" not found. Available scenes:`, Object.keys(SCENE_CONFIGS));
+            document.getElementById('scene-info').textContent = `Error: Scene "${sceneParam}" not found`;
+            document.getElementById('loading').innerHTML = `
+                <div>Scene "${sceneParam}" not found</div>
+                <div>Available scenes: ${Object.keys(SCENE_CONFIGS).join(', ')}</div>
+            `;
+        } else {
+            // Update scene info
+            document.getElementById('scene-info').textContent = `Scene: ${sceneConfig.name}`;
+            
+            // Initialize viewer
+            const viewer = new MiloViewer('container', sceneConfig);
+            viewer.init();
+            
+            console.log(`Gallery initialized with scene: ${sceneParam}`);
+        }
+    </script>
+</body>
+</html> 

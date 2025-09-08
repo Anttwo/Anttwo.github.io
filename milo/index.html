@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>MILo</title>
+ <meta name="description" content="MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+ <meta charset="utf-8">
+ <!-- <link rel="icon" href="./icon_unicorn.png" type="image/png"> -->
+
+ <!--Facebook-->
+ <meta property="og:image" content="">
+ <meta property="og:image:type" content="image/jpg">
+ <meta property="og:image:width" content="600">
+ <meta property="og:image:height" content="400">
+ <meta property="og:type" content="website"/>
+ <meta property="og:url" content="https://anttwo.github.io/milo/"/>
+ <meta property="og:title" content="MILo"/>
+ <meta property="og:description" content="Project page for MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction"/>
+
+ <!--Twitter-->
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="MILo" />
+ <meta property="twitter:description" content="MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction."/>
+ <meta name="twitter:image" content="">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:800|Roboto:400,700" rel="stylesheet"> -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+ <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
+ <!-- <link href="http://fonts.googleapis.com/css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">  -->
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ <!-- <link href="style_2.css" rel="stylesheet"> -->
+ <!-- <link href="style.css" rel="stylesheet"> -->
+ <link href="../base.css" rel="stylesheet">
+
+<!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CDL4R10HKE');
+</script>
+<!-- End Google Analytics -->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Video Carousel Banner -->
+<div class="container-fluid" style="padding: 0; margin-bottom: 2rem;">
+  <div id="videoCarousel" class="carousel slide" data-ride="carousel" data-interval="8000">
+      <!-- Indicators -->
+      <!-- <ol class="carousel-indicators" style="bottom: 50px; z-index: 15;">
+          <li data-target="#videoCarousel" data-slide-to="0" class="active"></li>
+      </ol> -->
+
+      <!-- Scroll indicator inside carousel -->
+      <div class="carousel-scroll-indicator" style="position: absolute; bottom: 0px; left: 0; right: 0; text-align: center; z-index: 15;">
+          <p style="color: white; margin-bottom: 5px; font-size: 14px; opacity: 0.8;">Scroll down for code and more details</p>
+          <div style="animation: bounce 2s infinite;">
+              <i class="fa fa-chevron-down" style="color: white; font-size: 18px; opacity: 0.9;"></i>
+          </div>
+      </div>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+          <!-- MILo Video -->
+          <div class="item active">
+              <div style="width: 100%; background: #000;">
+                  <div class="carousel-video-container" style="position: relative; width: 100%; height: 77vh;">
+                      <iframe 
+                          width="100%" 
+                          height="100%" 
+                          src="https://www.youtube.com/embed/rOBs2yyYaJM?autoplay=0&mute=0&loop=1&playlist=rOBs2yyYaJM&rel=0&showinfo=0&modestbranding=1&controls=1" 
+                          frameborder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowfullscreen
+                          style="border: none;">
+                      </iframe>
+                  </div>
+                  <div class="carousel-text-container" style="background: #000; padding: 20px 20px 90px 20px; text-align: center;">
+                      <h3 style="color: white; font-weight: 300; margin-bottom: 5px;">MILo</h3>
+                      <p style="color: white; opacity: 0.9; margin-bottom: 3px;">Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction</p>
+                      <p style="color: white; opacity: 0.7; margin: 0;">SIGGRAPH Asia 2025 - TOG</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <!-- <a class="left carousel-control" href="#videoCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#videoCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+      </a> -->
+  </div>
+  <!-- Gradient transition band -->
+  <div style="height: 60px; background: linear-gradient(to bottom, #000000, var(--bg-color)); width: 100%;"></div>
+</div>
+
+<!-- JavaScript for video autoplay and carousel control -->
+<script>
+  $(document).ready(function() {
+      var carousel = $('#videoCarousel');
+      var carouselPaused = false;
+      
+      // Check if device is mobile (screen width <= 768px)
+      var isMobile = window.innerWidth <= 768;
+      
+      // Disable automatic cycling on mobile devices
+      if (isMobile) {
+          carousel.carousel({
+              interval: false
+          });
+      }
+
+      // Function to pause carousel
+      function pauseCarousel() {
+          if (!carouselPaused) {
+              carousel.carousel('pause');
+              carouselPaused = true;
+              console.log('Carousel paused');
+          }
+      }
+
+      // Function to resume carousel
+      function resumeCarousel() {
+          if (carouselPaused && !isMobile) {
+              carousel.carousel('cycle');
+              carouselPaused = false;
+              console.log('Carousel resumed');
+          }
+      }
+
+      // Pause carousel when user clicks on video area
+      $(document).on('click', '.carousel-inner iframe', function() {
+          pauseCarousel();
+      });
+
+      // Resume carousel when user clicks carousel controls
+      $('.carousel-control, .carousel-indicators li').on('click', function() {
+          setTimeout(function() {
+              resumeCarousel();
+          }, 500);
+      });
+
+      // Resume carousel after period of inactivity (30 seconds)
+      var inactivityTimer;
+      function resetInactivityTimer() {
+          clearTimeout(inactivityTimer);
+          inactivityTimer = setTimeout(function() {
+              resumeCarousel();
+          }, 180000);
+      }
+
+      // Reset timer on any interaction outside video area
+      $(document).on('click', function(e) {
+          if (!$(e.target).closest('.carousel-inner iframe').length) {
+              resetInactivityTimer();
+          }
+      });
+
+      // Start inactivity timer
+      resetInactivityTimer();
+
+      // Ensure carousel resumes after slide change
+      carousel.on('slid.bs.carousel', function() {
+          setTimeout(function() {
+              if (!carouselPaused && !isMobile) {
+                  resumeCarousel();
+              }
+          }, 1000);
+      });
+  });
+</script>
+
+<div class="container" style="text-align:center; padding-top:2rem 15px">
+ <div class="row" style="text-align:center">
+   <h1>MILo: Mesh-In-the-Loop <br>Gaussian Splatting for Detailed<br> and Efficient Surface Reconstruction</h1>
+   <h1 class="secondary">SIGGRAPH Asia 2025 - Journal Track <br>ACM Transactions on Graphics</h1>
+ </div>
+ <div class="row" style="text-align:center">
+   <div class="col-xs-0 col-md-2"></div>
+   <div class="col-xs-12 col-md-8">
+     <h4 style="font-size: 22px;">
+       <nobr><a href="https://anttwo.github.io/">Antoine Gu&eacutedon<sup>1</sup>*</a></nobr> &emsp;
+       <nobr><a href="https://www.lix.polytechnique.fr/Labo/Diego.GOMEZ/">Diego Gomez<sup>1</sup>*</a></nobr> &emsp;
+       <nobr><a href="https://nissmar.github.io/">Nissim Maruani<sup>2</sup></a></nobr> &emsp;
+       <nobr><a href="https://s2.hk/">Bingchen Gong<sup>1</sup></a></nobr> <br>
+       <nobr><a href="https://www-sop.inria.fr/members/George.Drettakis/">George Drettakis<sup>2</sup></a></nobr> &emsp;
+       <nobr><a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov<sup>1</sup></a></nobr>
+     </h4>
+     <p style="font-size: 20px; text-align: center;"><nobr><sup>1</sup>LIX</nobr>, Ecole Polytechnique</nobr>, IP Paris</nobr>, France<br></p>
+     <p style="font-size: 20px; text-align: center;"><nobr><sup>2</sup>Inria</nobr> &</nobr> Université</nobr> Côte</nobr> d'Azur</nobr>, France<br></p>
+     <p style="font-size: 14px; text-align: center;"><nobr>*Both</nobr> authors</nobr> contributed</nobr> equally</nobr> to</nobr> the</nobr> paper.<br></p>
+   </div>
+   <!-- <div class="hidden-xs hidden-sm col-md-1" style="text-align:left; margin-left:0px; margin-right:0px">
+     <a href="https://arxiv.org/abs/2303.03315" style="color:#448D87">
+       <i class="fa fa-file-pdf-o fa-4x"></i></a>
+   </div>
+   <div class="hidden-xs hidden-sm col-md-1" style="text-align:left; margin-left:0px;">
+     <a href="https://github.com/Anttwo/SuGaR" style="color:#448D87">
+       <i class="fa fa-github fa-4x"></i></a>
+   </div> -->
+ </div>
+</div>
+
+<div class="container" style="text-align:center; padding:0rem">
+ <div class="row">
+   <div class="col-xs-12">
+   <h3 style="text-align:center; padding-bottom:1rem">
+     <a class="label label-info" href="https://arxiv.org/abs/2506.24096"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+     <a class="label label-info" href="https://github.com/Anttwo/MILo"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code</a>
+     <!-- <a class="label label-info" href=""><i class="fa fa-camera" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Gallery</a> -->
+     <a class="label label-info" href="#gallery-section"><i class="fa fa-picture-o" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Gallery</a>
+     <!-- <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>&nbsp;&nbsp;Blender Add-On</a> -->
+     <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a> -->
+   </h3>
+   </div>
+ </div>
+
+ <div class="row" style="padding:2rem">
+   <div class="col-xs-12">
+  <!-- <iframe class="embed-responsive-item text-center" src="https://www.youtube.com/embed/_SGNhhNz0fE?si=mYvAGyCsU0HQvn3Z" frameborder="0"
+     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+     style="width:100%; height:620px; clip-path:inset(1px 1px);" allowfullscreen></iframe> -->
+    <div class="col-xs-12 col-lg-12" style="text-align:center">
+      <img src="./images/teaser.png" 
+      alt="teaser.png" class="text-center" style="width: 100%;">
+      <br><br>
+    </div>
+
+   <div class="wrapper">
+     <!-- <div class="col-xs-4 col-lg-6;"> -->
+      <p style="text-align: justify">
+        <br>We propose <b>Mesh-in-the-Loop Gaussian Splatting (MILo)</b>, a novel <b>differentiable mesh extraction framework</b> that operates during the optimization of 3D Gaussian Splatting representations.<br><br>
+        
+        <b>At every training iteration, we differentiably extract a mesh</b>—including both vertex locations and connectivity—<b>only from Gaussian parameters</b>. This enables <b>gradient flow from the mesh to Gaussians</b>, allowing us to promote bidirectional consistency between volumetric
+        (Gaussians) and surface (extracted mesh) representations.<br><br>
+        
+        This approach guides Gaussians toward configurations better suited for surface reconstruction, resulting in <b>higher quality meshes with significantly fewer vertices</b>. As a result, MILo makes the reconstructions more practical for downstream applications like physics simulations and animation.<br><br>
+
+        <b>MILo can be plugged into any Gaussian splatting representation</b>, opening the door to new applications for Gaussian Splatting requiring differentiable surface processing during training.
+      </p>
+     <!-- </div> -->
+   </div>
+   </div>
+ </div>
+</div>
+
+<div class="container">
+  <h2>Updates</h2>
+  <hr/>
+  <p>
+    <p class="label date">09-2025</p> <a href="https://github.com/Anttwo/MILo">Code</a> release.<br>
+    <p class="label date">08-2025</p> MILo has been accepted to SIGGRAPH Asia 2025 - Journal Track (TOG)!<br>
+    <p class="label date">06-2025</p> Preprint release on <a href="https://arxiv.org/abs/2506.24096">arXiv</a>
+  </p>
+<!-- </div> -->
+<p><br></p>
+
+ <h2>Differentiable Gaussians-to-Mesh Extraction</h2>
+ <hr/>
+
+ <div class="col-xs-12 col-lg-12" style="text-align:center">
+  <br>
+  <!-- <img src="https://anttwo.github.io/matcha/images/pipeline/pipeline.png" -->
+  <img src="./images/pipeline.JPG" 
+  alt="pipeline.png" class="text-center" style="width: 85%; max-width: 1920px; border-radius: 20px;">
+  <br><br>
+ </div>
+ <p style="text-align: justify">
+    MILo provides a differentiable pipeline for extracting a mesh only from Gaussian parameters, including both vertex locations and connectivity.
+    At each training iteration, MILo proceeds as follows:
+  </p>
+  <ol style="text-align: justify">
+    <li> <b>Each Gaussians spawns a set of pivots.</b> These pivots are likely to be located near the surface of the scene, and their coordinates are differentiable with respect to the Gaussian parameters.
+    <li> <b>Delaunay triangulation is applied</b> to the pivots. The triangulation can be cached to avoid recomputing it at every iteration.
+    <li> <b>SDF values are assigned</b> to the pivots.
+    <li> <b>Differentiable Marching Tetrahedra</b> is used to extract a mesh from the pivots and SDF values.
+  </ol>
+  <p style="text-align: justify">
+    MILo enables gradient flow from the extracted mesh to Gaussians. Supervision on this mesh (through differentiable depth and normal renderings) allows us to impose a soft prior on the Gaussians which results in better reconstructed surfaces.
+    Conceptually, Gaussians can be seen as proxies for parameterizing a surface mesh extracted at every iteration.
+ </p>
+ <p><br></p>
+
+ <h2>Higher-Quality Meshes with Fewer Vertices</h2>
+ <hr/>
+ <div class="row" style="text-align:center">
+  <div class="col-xs-4 col-lg-4">
+    <img src="./images/stump2.png"
+      alt="stump2.png" class="text-center" style="width: 100%; max-width: 1000px">
+    <p style="text-align:center">(a) Stump (320 MB)</p>
+  </div>
+  <div class="col-xs-4 col-lg-4">
+    <img src="./images/garden0.png"
+      alt="garden0.png" class="text-center" style="width: 100%; max-width: 1000px">
+    <p style="text-align:center">(b) Garden (301 MB)</p>
+  </div>
+  <div class="col-xs-4 col-lg-4">
+    <img src="./images/barn1.png"
+      alt="barn1.png" class="text-center" style="width: 100%; max-width: 1000px">
+    <p style="text-align:center">(c) Barn (313 MB)</p>
+  </div>
+</div>
+<br>
+
+<p style="text-align: justify">
+  MILo produces significantly lighter meshes, weighing between 60MB and 400MB depending on the scene and configurations used. Compared to previous approaches such as <a href="https://niujinshuchong.github.io/gaussian-opacity-fields/">Gaussian Opacity Fields</a> or <a href="https://baowenz.github.io/radegs/">RaDe-GS</a>, MILo increases performance while generating an order of magnitude fewer mesh vertices.<br><br>
+  
+  Part of this efficiency is achieved by selecting only a subset of Gaussians to spawn pivots, specifically targeting those most likely to be located on the surface. To this end, we repurpose the importance sampling strategy introduced in <a href="https://github.com/fatPeter/mini-splatting2?tab=readme-ov-file">Mini-Splatting2</a>.<br><br>
+  
+  Despite their lightweight nature, our meshes capture the complete scene, including all background elements. This makes our method significantly more scalable than many concurrent approaches that rely on TSDF applied to regular grids—a technique that scales poorly and is typically limited to foreground-only reconstruction.
+</p>
+ <p><br></p>
+
+ <h2>Depth-Order Regularization</h2>
+ <hr/>
+ <div class="row" style="text-align:center">
+  <div class="col-xs-4 col-lg-4">
+    <img src="./images/blue_robot_color.png"
+      alt="stump2.png" class="text-center" style="width: 100%; max-width: 1000px">
+    <p style="text-align:center">(a) Colored mesh</p>
+  </div>
+  <div class="col-xs-4 col-lg-4">
+    <img src="./images/blue_robot_no_depth_order.png"
+      alt="garden0.png" class="text-center" style="width: 100%; max-width: 1000px">
+    <p style="text-align:center">(b) Mesh without depth-order regul.</p>
+  </div>
+  <div class="col-xs-4 col-lg-4">
+    <img src="./images/blue_robot_depth_order.png"
+      alt="barn1.png" class="text-center" style="width: 100%; max-width: 1000px">
+    <p style="text-align:center">(c) Mesh with depth-order regul.</p>
+  </div>
+</div>
+<br>
+
+<p style="text-align: justify">
+  MILo scales to full scenes, and allows for extracting <b>meshes including all background elements</b>. However, without any additional learned prior, the background can contain inaccurate geometry and messy structures.<br><br>
+
+  In our codebase, we propose an optional <b>depth-order regularization loss</b> to drastically improve the quality of the background. This loss relies on <a href="https://depth-anything-v2.github.io/">DepthAnythingV2</a>, and enforces the order of the depth values in the rendered depth maps to match the order of the depth values in predicted depth maps: If one pixel is predicted to be closer than another, it should also be closer in the rendered depth map. <br><br>
+  
+  This loss does not require the predicted depth maps to be multi-view consistent. Please note that this loss is not used in the paper.
+</p>
+ <p><br></p>
+
+ <h2>Animation</h2>
+ <hr/>
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-4 col-lg-4">
+      <img src="./images/initial_scene.png"
+        alt="stump2.png" class="text-center" style="width: 100%; max-width: 1000px">
+      <p style="text-align:center">(a) Initial scenes</p>
+    </div>
+    <div class="col-xs-4 col-lg-4">
+      <img src="./images/blender_texture.png"
+        alt="garden0.png" class="text-center" style="width: 100%; max-width: 1000px">
+      <p style="text-align:center">(b) Editing and animating in Blender</p>
+    </div>
+    <div class="col-xs-4 col-lg-4">
+      <img src="./images/woody1_4.gif"
+        alt="barn1.png" class="text-center" style="width: 100%; max-width: 1000px">
+      <p style="text-align:center">(c) Resulting animated Gaussians</p>
+    </div>
+  </div>
+
+  <p style="text-align: justify">
+  While MILo provides a differentiable solution for extracting meshes from 3DGS representations, it also implicitly encourages Gaussians to align with the surface of the mesh. As a result, any modification made to the mesh can be easily propagated to the Gaussians, making the reconstructed mesh an excellent proxy for editing and animating the 3DGS representation.<br><br>
+  
+  Similarly to previous works <a href="https://anttwo.github.io/sugar/">SuGaR</a> and <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a>, we provide a Blender addon allowing to combine, edit and animate 3DGS representations just by manipulating meshes reconstructed with MILo in Blender. No code is needed to use the addon.
+ </p>
+ <p><br></p>
+
+ <h2>Integrating MILo to your Own Project</h2>
+ <hr/>
+
+ <p style="text-align: justify">
+  MILo can be easily integrated into your existing Gaussian Splatting pipeline. In <code>milo.functional</code>, we provide straightforward functions to leverage our differentiable <b>Gaussians-to-Mesh pipeline</b> in your own 3DGS projects.<br><br>
+
+  These functions only require Gaussian parameters as inputs (<code>means</code>, <code>scales</code>, <code>rotations</code>, <code>opacities</code>) and can extract a mesh from these parameters in a differentiable manner, allowing for <b>performing differentiable operations on the surface mesh and backpropating gradients directly to the Gaussians</b>.<br><br>
+
+  An example is provided below. Please refer to our <a href="https://github.com/Anttwo/MILo">codebase</a> for more details.<br>
+  
+  <!-- We only assume that your own <code>Camera</code> class has the same structure as the class from the original <a href="https://github.com/graphdeco-inria/gaussian-splatting">3DGS</a> implementation.
+  
+  Specifically, we propose the following functions:
+  <ul>
+    <li><code>sample_gaussians_on_surface</code>: This function samples Gaussians that are the most likely to be located on the surface of the scene. For more efficiency, we propose using only these Gaussians for generating pivots and applying Delaunay triangulation.</li>
+    <li><code>extract_gaussian_pivots</code>: This differentiable function builds pivots from the parameters of the sampled Gaussians. In practice, there is no need to explicitely call this function, as our other functions can recompute pivots on the fly. However, you might want to perform special treatment on the pivots.</li>
+    <li><code>compute_initial_sdf_values</code>: This function estimates initial truncated SDF values for any set of Gaussian pivots by performing depth-fusion over the provided viewpoints. You can directly provide the gaussian parameters to this function, in which case pivots will be computed on the fly. In the paper, we propose to learn optimal SDF values by maximizing the consistency between volumetric GS renderings and surface mesh renderings; We use this function to initialize the SDF values.</li>
+    <li><code>compute_delaunay_triangulation</code>: This function computes the Delaunay triangulation for a set of sampled Gaussians pivots. You can provide either pivots as inputs, or directly the parameters of the Gaussians (means, scales, rotations...), in which case the pivots will be recomputed on the fly. This function should not be applied at every training iteration as it is very slow, and the Delaunay graph does not change that much during training.</li>
+    <li><code>extract_mesh</code>: This differentiable function extracts the mesh from the Gaussian parameters, given a Delaunay triangulation and SDF values for the Gaussian pivots.</li>
+  </ul>
+  
+  We also propose additional functions such as <code>frustum_cull_mesh</code> which culls mesh vertices based on the view frustum of an input camera.
+  
+  We provide an example of how to use these functions below, using our codebase or any codebase following the same template as the original <a href="https://github.com/graphdeco-inria/gaussian-splatting">3DGS</a> implementation. -->
+</p>
+
+<p style="text-align: center;">
+  <a class="label label-info" data-toggle="collapse" href="#codeExample" role="button" aria-expanded="false" aria-controls="codeExample" style="font-size: 16px;">
+    <i class="fa fa-code"></i> Show/Hide Code Example <i class="fa fa-chevron-down"></i>
+  </a>
+</p>
+
+<div class="collapse" id="codeExample">
+  <div class="card">
+    <div class="card-block">
+      <pre 
+        class="card-text clickselect" 
+        style="
+          text-align: left; 
+          color: #e6e6e6; 
+          background-color: #1e1e1e; 
+          padding: 20px; 
+          border-radius: 8px; 
+          overflow-x: auto;
+          font-family: 'Courier New', monospace;
+          line-height: 1.4;"
+      >
+<code><span style="color: #c586c0;">from</span> <span style="color: #4fc1ff;">functional</span> <span style="color: #c586c0;">import</span> (
+    <span style="color: #4ec9b0;">sample_gaussians_on_surface</span>,
+    <span style="color: #4ec9b0;">extract_gaussian_pivots</span>,
+    <span style="color: #4ec9b0;">compute_initial_sdf_values</span>,
+    <span style="color: #4ec9b0;">compute_delaunay_triangulation</span>,
+    <span style="color: #4ec9b0;">extract_mesh</span>,
+    <span style="color: #4ec9b0;">frustum_cull_mesh</span>,
+)
+
+<span style="color: #608b4e;"># Load or initialize a 3DGS-like model and training cameras</span>
+<span style="color: #9cdcfe;">gaussians</span> = ...
+<span style="color: #9cdcfe;">training_cameras</span> = ...
+
+<span style="color: #608b4e;"># Define a simple wrapper for your Gaussian Splatting rendering function, </span>
+<span style="color: #608b4e;"># following this template. It will be used only for initializing SDF values.</span>
+<span style="color: #608b4e;"># The wrapper should accept just a camera as input, and return a dictionary </span>
+<span style="color: #608b4e;"># with "render" and "depth" keys. Here is an example:</span>
+<span style="color: #c586c0;">from</span> <span style="color: #4fc1ff;">gaussian_renderer.radegs</span> <span style="color: #c586c0;">import</span> <span style="color: #4ec9b0;">render_radegs</span>
+<span style="color: #9cdcfe;">pipe</span> = ...
+<span style="color: #9cdcfe;">background</span> = <span style="color: #4fc1ff;">torch</span>.<span style="color: #dcdcaa;">tensor</span>([<span style="color: #b5cea8;">0.</span>, <span style="color: #b5cea8;">0.</span>, <span style="color: #b5cea8;">0.</span>], <span style="color: #9cdcfe;">device</span>=<span style="color: #ce9178;">"cuda"</span>)
+<span style="color: #c586c0;">def</span> <span style="color: #dcdcaa;">render_func</span>(<span style="color: #9cdcfe;">view</span>):
+    <span style="color: #9cdcfe;">render_pkg</span> = <span style="color: #dcdcaa;">render_radegs</span>(
+        <span style="color: #9cdcfe;">viewpoint_camera</span>=<span style="color: #9cdcfe;">view</span>, 
+        <span style="color: #9cdcfe;">pc</span>=<span style="color: #9cdcfe;">gaussians</span>, 
+        <span style="color: #9cdcfe;">pipe</span>=<span style="color: #9cdcfe;">pipe</span>, 
+        <span style="color: #9cdcfe;">bg_color</span>=<span style="color: #9cdcfe;">background</span>, 
+        <span style="color: #9cdcfe;">kernel_size</span>=<span style="color: #b5cea8;">0.0</span>, 
+        <span style="color: #9cdcfe;">scaling_modifier</span> = <span style="color: #b5cea8;">1.0</span>, 
+        <span style="color: #9cdcfe;">require_coord</span>=<span style="color: #569cd6;">False</span>, 
+        <span style="color: #9cdcfe;">require_depth</span>=<span style="color: #569cd6;">True</span>
+    )
+    <span style="color: #c586c0;">return</span> {
+        <span style="color: #ce9178;">"render"</span>: <span style="color: #9cdcfe;">render_pkg</span>[<span style="color: #ce9178;">"render"</span>],
+        <span style="color: #ce9178;">"depth"</span>: <span style="color: #9cdcfe;">render_pkg</span>[<span style="color: #ce9178;">"median_depth"</span>],
+    }
+
+<span style="color: #608b4e;"># Only the parameters of the Gaussians are needed for extracting the mesh.</span>
+<span style="color: #9cdcfe;">means</span> = <span style="color: #9cdcfe;">gaussians</span>.<span style="color: #9cdcfe;">get_xyz</span>
+<span style="color: #9cdcfe;">scales</span> = <span style="color: #9cdcfe;">gaussians</span>.<span style="color: #9cdcfe;">get_scaling</span>
+<span style="color: #9cdcfe;">rotations</span> = <span style="color: #9cdcfe;">gaussians</span>.<span style="color: #9cdcfe;">get_rotation</span>
+<span style="color: #9cdcfe;">opacities</span> = <span style="color: #9cdcfe;">gaussians</span>.<span style="color: #9cdcfe;">get_opacity</span>
+
+<span style="color: #608b4e;"># Sample Gaussians on the surface.</span>
+<span style="color: #608b4e;"># Should be performed only once, or just once in a while.</span>
+<span style="color: #608b4e;"># In this example, we sample at most 600_000 Gaussians.</span>
+<span style="color: #9cdcfe;">surface_gaussians_idx</span> = <span style="color: #dcdcaa;">sample_gaussians_on_surface</span>(
+    <span style="color: #9cdcfe;">views</span>=<span style="color: #9cdcfe;">train_cameras</span>,
+    <span style="color: #9cdcfe;">means</span>=<span style="color: #9cdcfe;">means</span>,
+    <span style="color: #9cdcfe;">scales</span>=<span style="color: #9cdcfe;">scales</span>,
+    <span style="color: #9cdcfe;">rotations</span>=<span style="color: #9cdcfe;">rotations</span>,
+    <span style="color: #9cdcfe;">opacities</span>=<span style="color: #9cdcfe;">opacities</span>,
+    <span style="color: #9cdcfe;">n_max_samples</span>=<span style="color: #b5cea8;">600_000</span>,
+    <span style="color: #9cdcfe;">scene_type</span>=<span style="color: #ce9178;">'indoor'</span>,
+)
+
+<span style="color: #608b4e;"># Compute initial SDF values for pivots. Should be performed only once.</span>
+<span style="color: #608b4e;"># In the paper, we propose to learn optimal SDF values by maximizing the </span>
+<span style="color: #608b4e;"># consistency between volumetric renderings and surface mesh renderings.</span>
+<span style="color: #9cdcfe;">initial_pivots_sdf</span> = <span style="color: #dcdcaa;">compute_initial_sdf_values</span>(
+    <span style="color: #9cdcfe;">views</span>=<span style="color: #9cdcfe;">train_cameras</span>,
+    <span style="color: #9cdcfe;">render_func</span>=<span style="color: #9cdcfe;">render_func</span>,
+    <span style="color: #9cdcfe;">means</span>=<span style="color: #9cdcfe;">means</span>,
+    <span style="color: #9cdcfe;">scales</span>=<span style="color: #9cdcfe;">scales</span>,
+    <span style="color: #9cdcfe;">rotations</span>=<span style="color: #9cdcfe;">rotations</span>,
+    <span style="color: #9cdcfe;">gaussian_idx</span>=<span style="color: #9cdcfe;">surface_gaussians_idx</span>,
+)
+
+<span style="color: #608b4e;"># Compute Delaunay Triangulation.</span>
+<span style="color: #608b4e;"># Can be performed once in a while.</span>
+<span style="color: #9cdcfe;">delaunay_tets</span> = <span style="color: #dcdcaa;">compute_delaunay_triangulation</span>(
+    <span style="color: #9cdcfe;">means</span>=<span style="color: #9cdcfe;">means</span>,
+    <span style="color: #9cdcfe;">scales</span>=<span style="color: #9cdcfe;">scales</span>,
+    <span style="color: #9cdcfe;">rotations</span>=<span style="color: #9cdcfe;">rotations</span>,
+    <span style="color: #9cdcfe;">gaussian_idx</span>=<span style="color: #9cdcfe;">surface_gaussians_idx</span>,
+)
+
+<span style="color: #608b4e;"># Differentiably extract a mesh from Gaussian parameters, including initial </span>
+<span style="color: #608b4e;"># or updated SDF values for the Gaussian pivots.</span>
+<span style="color: #608b4e;"># This function is differentiable with respect to the parameters of the Gaussians, </span>
+<span style="color: #608b4e;"># as well as the SDF values. Can be performed at every training iteration.</span>
+<span style="color: #9cdcfe;">mesh</span> = <span style="color: #dcdcaa;">extract_mesh</span>(
+    <span style="color: #9cdcfe;">delaunay_tets</span>=<span style="color: #9cdcfe;">delaunay_tets</span>,
+    <span style="color: #9cdcfe;">pivots_sdf</span>=<span style="color: #9cdcfe;">initial_pivots_sdf</span>,
+    <span style="color: #9cdcfe;">means</span>=<span style="color: #9cdcfe;">means</span>,
+    <span style="color: #9cdcfe;">scales</span>=<span style="color: #9cdcfe;">scales</span>,
+    <span style="color: #9cdcfe;">rotations</span>=<span style="color: #9cdcfe;">rotations</span>,
+    <span style="color: #9cdcfe;">gaussian_idx</span>=<span style="color: #9cdcfe;">surface_gaussians_idx</span>,
+)
+
+<span style="color: #608b4e;"># You can now apply any differentiable operation on the extracted mesh, </span>
+<span style="color: #608b4e;"># and backpropagate gradients back to the Gaussians!</span>
+<span style="color: #608b4e;"># In the paper, we propose to use differentiable mesh rendering.</span>
+<span style="color: #c586c0;">from</span> <span style="color: #4fc1ff;">scene.mesh</span> <span style="color: #c586c0;">import</span> <span style="color: #4ec9b0;">MeshRasterizer</span>, <span style="color: #4ec9b0;">MeshRenderer</span>
+<span style="color: #9cdcfe;">renderer</span> = <span style="color: #4ec9b0;">MeshRenderer</span>(<span style="color: #4ec9b0;">MeshRasterizer</span>(<span style="color: #9cdcfe;">cameras</span>=<span style="color: #9cdcfe;">train_cameras</span>))
+
+<span style="color: #608b4e;"># We cull the mesh based on the view frustum for more efficiency</span>
+<span style="color: #9cdcfe;">i_view</span> = <span style="color: #4fc1ff;">np</span>.<span style="color: #4fc1ff;">random</span>.<span style="color: #dcdcaa;">randint</span>(<span style="color: #b5cea8;">0</span>, <span style="color: #dcdcaa;">len</span>(<span style="color: #9cdcfe;">train_cameras</span>))
+<span style="color: #9cdcfe;">mesh_render_pkg</span> = <span style="color: #9cdcfe;">renderer</span>(
+    <span style="color: #dcdcaa;">frustum_cull_mesh</span>(<span style="color: #9cdcfe;">mesh</span>, <span style="color: #9cdcfe;">train_cameras</span>[<span style="color: #9cdcfe;">i_view</span>]), 
+    <span style="color: #9cdcfe;">cam_idx</span>=<span style="color: #9cdcfe;">i_view</span>, 
+    <span style="color: #9cdcfe;">return_depth</span>=<span style="color: #569cd6;">True</span>, <span style="color: #9cdcfe;">return_normals</span>=<span style="color: #569cd6;">True</span>
+)
+<span style="color: #9cdcfe;">mesh_depth</span> = <span style="color: #9cdcfe;">mesh_render_pkg</span>[<span style="color: #ce9178;">"depth"</span>]
+<span style="color: #9cdcfe;">mesh_normals</span> = <span style="color: #9cdcfe;">mesh_render_pkg</span>[<span style="color: #ce9178;">"normals"</span>]</code>
+      </pre>
+    </div>
+  </div>
+</div>
+<p><br></p>
+
+ <h2 id="gallery-section">Gallery</h2>
+ <hr/>
+
+ <p style="text-align: justify">
+  Click on any scene below to open the interactive 3D viewer with both mesh and Gaussian Splatting representations. <b>For a smooth 60 FPS experience, please make sure WebGL uses your graphics card and not your CPU</b>.<br><br>
+  
+  For resource constraints, we only display in this gallery results obtained with the <b>low-resolution, base version of MILo</b>: As a result, Gaussian Splatting representations contain much fewer Gaussians than usual, and the meshes have much fewer vertices than concurrent approaches.<br><br>
+
+  Still, these lighter meshes reach <b>higher quality on T&T and DTU benchmarks than concurrent approaches</b>. The mesh sizes reported below include vertex colors.<br><br>
+
+  Please note that these meshes were not optimized with depth-order regularization; As a result, the background can contain inaccurate geometry and messy structures.
+ </p>
+
+ <div class="row" style="margin-top: 30px;">
+  <!-- Scene 5: stump -->
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+    <div class="scene-card" onclick="openScene('stump')" style="cursor: pointer;">
+      <div class="scene-image-container">
+        <img src="./gallery_preview/stump.png" alt="Stump Scene" class="scene-image">
+        <div class="scene-overlay">
+          <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+        </div>
+      </div>
+      <div class="scene-info">
+        <h4 class="scene-title">Stump</h4>
+        <div class="scene-stats">
+          <div class="stat-item">
+            <i class="fa fa-cube"></i>
+            <span>Mesh size: 349 MB</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-circle-o"></i>
+            <span>Nb Gaussians: 582K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 8: ignatius -->
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+    <div class="scene-card" onclick="openScene('ignatius')" style="cursor: pointer;">
+      <div class="scene-image-container">
+        <img src="./gallery_preview/ignatius.png" alt="Ignatius Scene" class="scene-image">
+        <div class="scene-overlay">
+          <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+        </div>
+      </div>
+      <div class="scene-info">
+        <h4 class="scene-title">Ignatius</h4>
+        <div class="scene-stats">
+          <div class="stat-item">
+            <i class="fa fa-cube"></i>
+            <span>Mesh size: 256 MB</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-circle-o"></i>
+            <span>Nb Gaussians: 417K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Scene 1: shinegrey0 -->
+   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+     <div class="scene-card" onclick="openScene('shinegrey0')" style="cursor: pointer;">
+       <div class="scene-image-container">
+         <img src="./gallery_preview/red_robot.jpg" alt="Shine Grey Scene" class="scene-image">
+         <div class="scene-overlay">
+           <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+         </div>
+       </div>
+       <div class="scene-info">
+         <h4 class="scene-title">Red Robot</h4>
+         <div class="scene-stats">
+           <div class="stat-item">
+             <i class="fa fa-cube"></i>
+             <span>Mesh size: 150 MB</span>
+           </div>
+           <div class="stat-item">
+             <i class="fa fa-circle-o"></i>
+             <span>Nb Gaussians: 261K</span>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- Scene 3: garden -->
+   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+    <div class="scene-card" onclick="openScene('garden')" style="cursor: pointer;">
+      <div class="scene-image-container">
+        <img src="./gallery_preview/garden.png" alt="Garden Scene" class="scene-image">
+        <div class="scene-overlay">
+          <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+        </div>
+      </div>
+      <div class="scene-info">
+        <h4 class="scene-title">Garden</h4>
+        <div class="scene-stats">
+          <div class="stat-item">
+            <i class="fa fa-cube"></i>
+            <span>Mesh size: 354 MB</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-circle-o"></i>
+            <span>Nb Gaussians: 684K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 7: buzz -->
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+    <div class="scene-card" onclick="openScene('buzz')" style="cursor: pointer;">
+      <div class="scene-image-container">
+        <img src="./gallery_preview/buzz.jpg" alt="Buzz Scene" class="scene-image">
+        <div class="scene-overlay">
+          <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+        </div>
+      </div>
+      <div class="scene-info">
+        <h4 class="scene-title">Buzz</h4>
+        <div class="scene-stats">
+          <div class="stat-item">
+            <i class="fa fa-cube"></i>
+            <span>Mesh size: 68 MB</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-circle-o"></i>
+            <span>Nb Gaussians: 120K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: bicycle -->
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+    <div class="scene-card" onclick="openScene('bicycle')" style="cursor: pointer;">
+      <div class="scene-image-container">
+        <img src="./gallery_preview/bicycle.png" alt="Bicycle Scene" class="scene-image">
+        <div class="scene-overlay">
+          <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+        </div>
+      </div>
+      <div class="scene-info">
+        <h4 class="scene-title">Bicycle</h4>
+        <div class="scene-stats">
+          <div class="stat-item">
+            <i class="fa fa-cube"></i>
+            <span>Mesh size: 298 MB</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-circle-o"></i>
+            <span>Nb Gaussians: 563K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 6: knight -->
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+    <div class="scene-card" onclick="openScene('knight')" style="cursor: pointer;">
+      <div class="scene-image-container">
+        <img src="./gallery_preview/knight.jpg" alt="Knight Scene" class="scene-image">
+        <div class="scene-overlay">
+          <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+        </div>
+      </div>
+      <div class="scene-info">
+        <h4 class="scene-title">Knight</h4>
+        <div class="scene-stats">
+          <div class="stat-item">
+            <i class="fa fa-cube"></i>
+            <span>Mesh size: 58 MB</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-circle-o"></i>
+            <span>Nb Gaussians: 103K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Scene 2: risingfreedom1 -->
+   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+    <div class="scene-card" onclick="openScene('risingfreedom1')" style="cursor: pointer;">
+      <div class="scene-image-container">
+        <img src="./gallery_preview/blue_robot.jpg" alt="Rising Freedom Scene" class="scene-image">
+        <div class="scene-overlay">
+          <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+        </div>
+      </div>
+      <div class="scene-info">
+        <h4 class="scene-title">Blue Robot</h4>
+        <div class="scene-stats">
+          <div class="stat-item">
+            <i class="fa fa-cube"></i>
+            <span>Mesh size: 61 MB</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-circle-o"></i>
+            <span>Nb Gaussians: 105K</span>
+          </div>
+        </div>
+      </div>
+         </div>
+   </div>
+
+   <!-- Scene 9: kitchen -->
+   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+     <div class="scene-card" onclick="openScene('kitchen')" style="cursor: pointer;">
+       <div class="scene-image-container">
+         <img src="./gallery_preview/kitchen.png" alt="Kitchen Scene" class="scene-image">
+         <div class="scene-overlay">
+           <i class="fa fa-play-circle" style="font-size: 48px; color: white; opacity: 0.9;"></i>
+         </div>
+       </div>
+       <div class="scene-info">
+         <h4 class="scene-title">Kitchen</h4>
+         <div class="scene-stats">
+           <div class="stat-item">
+             <i class="fa fa-cube"></i>
+             <span>Mesh size: 217 MB</span>
+           </div>
+           <div class="stat-item">
+             <i class="fa fa-circle-o"></i>
+             <span>Nb Gaussians: 409K</span>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+     <!-- Placeholder for more scenes -->
+   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
+     <div class="scene-card placeholder-card" style="opacity: 0.6;">
+       <div class="scene-image-container">
+         <div class="placeholder-image">
+           <i class="fa fa-plus" style="font-size: 48px; color: #5ee0d6; opacity: 0.5;"></i>
+         </div>
+       </div>
+       <div class="scene-info">
+         <h4 class="scene-title">More Scenes</h4>
+         <p style="font-size: 12px; color: #777; margin: 0;">Coming Soon</p>
+         <p style="font-size: 12px;"> &nbsp; </p>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <style>
+   .scene-card {
+     background: var(--bg-color);
+     border: 2px solid var(--border-color);
+     border-radius: 12px;
+     overflow: hidden;
+     transition: all 0.3s ease;
+     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+   }
+
+   .scene-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 8px 25px rgba(94, 224, 214, 0.2);
+     border-color: var(--link-hover-color);
+   }
+
+   .scene-image-container {
+     position: relative;
+     width: 100%;
+     height: 200px;
+     overflow: hidden;
+   }
+
+   .scene-image {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     transition: transform 0.3s ease;
+   }
+
+   .scene-card:hover .scene-image {
+     transform: scale(1.05);
+   }
+
+   .scene-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0,0,0,0.3);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     opacity: 0;
+     transition: opacity 0.3s ease;
+   }
+
+   .scene-card:hover .scene-overlay {
+     opacity: 1;
+   }
+
+   .scene-info {
+     padding: 20px;
+   }
+
+   .scene-title {
+     margin: 0 0 15px 0;
+     color: var(--text-color);
+     font-weight: 300;
+     font-size: 18px;
+   }
+
+   .scene-stats {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+   }
+
+   .stat-item {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     font-size: 13px;
+     color: var(--subdued-text-color);
+   }
+
+   .stat-item i {
+     color: var(--link-color);
+     width: 16px;
+     text-align: center;
+   }
+
+   .placeholder-card {
+     border-style: dashed;
+     cursor: default !important;
+   }
+
+   .placeholder-card:hover {
+     transform: none;
+     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+     border-color: var(--border-color);
+   }
+
+   .placeholder-image {
+     width: 100%;
+     height: 100%;
+     background: var(--highlight-bg);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+   }
+
+   /* Responsive adjustments */
+   @media (max-width: 768px) {
+     .scene-image-container {
+       height: 150px;
+     }
+     
+     .scene-info {
+       padding: 15px;
+     }
+     
+     .scene-title {
+       font-size: 16px;
+     }
+   }
+ </style>
+
+ <script>
+   function openScene(sceneName) {
+     window.open(`./gallery-simple.html?scene=${sceneName}`, '_blank');
+   }
+ </script>
+
+ <h2>BibTex</h2>
+ <hr/>
+ If you find this work useful for your research, please cite:
+ <br><br>
+
+ <div class="card">
+   <div class="card-block">
+     <pre class="card-text clickselect" style="background-color: #000000; color: #ffffff;">
+      @article{guedon2025milo,
+        author       = {Gu{\'e}don, Antoine and Gomez, Diego and Maruani, Nissim and Gong, Bingchen and Drettakis, George and Ovsjanikov, Maks},
+        title        = {MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction},
+        journal      = {ACM Transactions on Graphics},
+        number       = {},
+        volume       = {},
+        month        = {},
+        year         = {2025},
+        url          = {https://anttwo.github.io/milo/}
+      }
+    </pre>
+   </div>
+ </div>
+ <p><br></p>
+
+ <h2>Acknowledgements</h2>
+ <hr/>
+ <p style="text-align: justify">
+  Parts of this work were supported by:
+  <ul>
+    <li>The <b>ERC Consolidator Grant "VEGA" (No. 101087347)</b></li>
+    <li>The <b>ERC Advanced Grant "explorer" (No. 101097259)</b></li>
+    <li>The <b>ERC Advanced Grant "NERPHYS" (No. 101141721)</b></li>
+    <li>The <b>ANR AI Chair AIGRETTE</b></li>
+  </ul>
+  
+  This work was granted access to the HPC resources of <b>IDRIS</b> under the allocation 
+  <b>2024-AD011013387R2</b> made by <b>GENCI</b>.<br><br>
+
+  We also thank the authors of the following awesome projects for their inspiring works and open-source implementations:
+  <ul>
+    <li><a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3D Gaussian Splatting for Real-Time Radiance Field Rendering</a></li>
+    <li><a href="https://niujinshuchong.github.io/gaussian-opacity-fields/">Gaussian Opacity Fields: Efficient Adaptive Surface Reconstruction in Unbounded Scenes</a></li>
+    <li><a href="https://baowenz.github.io/radegs/">RaDe-GS: Rasterizing Depth in Gaussian Splatting</a></li>
+    <li><a href="https://github.com/fatPeter/mini-splatting2?tab=readme-ov-file">Mini-Splatting2: Building 360 Scenes within Minutes via Aggressive Gaussian Densification</a></li>
+    <li><a href="https://nvlabs.github.io/nvdiffrast/">Modular Primitives for High-Performance Differentiable Rendering</a></li>
+  </ul>
+ </p>
+ <p><br></p>
+
+ <h2>Further information</h2>
+ <hr/>
+ <p style="text-align: justify">
+ If you like this project, check out our previous works related to 3D reconstruction, radiance fields or Gaussian splatting:
+ <ul>
+    <li>
+      <a href="https://anttwo.github.io/matcha/">Gu&eacutedon et al. - 
+        MAtCha Gaussians: Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views
+        (CVPR 2025)</a>
+    </li>
+    <li>
+      <a href="https://www.lix.polytechnique.fr/~gomez/FourieRF/index.html">Gomez et al. - 
+        FourieRF: Few-Shot NeRFs via Progressive Fourier Frequency Control
+        (3DV 2025)</a>
+     </li>
+    <li>
+      <a href="https://anttwo.github.io/frosting/">Gu&eacutedon and Lepetit. - 
+        Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering
+        (ECCV 2024)</a>
+    </li>
+    <li>
+      <a href="https://nissmar.github.io/projects/ponq/">Maruani et al. - 
+        PoNQ: a Neural QEM-based Mesh Representation
+        (CVPR 2024)</a>
+     </li>
+    <li>
+    <a href="https://anttwo.github.io/sugar/">Gu&eacutedon and Lepetit. - 
+      SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering
+      (CVPR 2024)</a>
+    </li>
+    <li>
+    <a href="https://nissmar.github.io/voromesh.github.io/">Maruani et al. - 
+      VoroMesh: Learning Watertight Surface Meshes with Voronoi Diagrams
+      (ICCV 2023)</a>
+   </li>
+ </ul>
+</p>
+</div>
+
+<div class="container" style="padding-top:3rem; padding-bottom:3rem">
+ <p style="text-align:center">
+   &#169; You are welcome to copy the code of the webpage, please attribute the source with a link
+   back to this page and remove the analytics.<br>
+ </p>
+</div>
+
+<!-- Dark mode toggle -->
+<script>
+  const themeToggle = document.createElement('button');
+  themeToggle.className = 'theme-toggle';
+  themeToggle.innerHTML = '<span class="material-icons-outlined">dark_mode</span>';
+
+  themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.innerHTML = newTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
+  });
+
+  // Force dark mode as default, ignore system preferences
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  // Always ensure dark mode is set on initial load
+  document.documentElement.setAttribute('data-theme', 'dark');
+  localStorage.setItem('theme', 'dark');
+  themeToggle.innerHTML = '<span class="material-icons-outlined">light_mode</span>';
+  
+  // Only respect saved theme if user explicitly chose light mode
+  if (savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeToggle.innerHTML = '<span class="material-icons-outlined">dark_mode</span>';
+  }
+
+  document.body.appendChild(themeToggle);
+
+  // Animate chevron arrow for expandable sections
+  $('#presentationDetails').on('show.bs.collapse', function () {
+      $('a[href="#presentationDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+  });
+  $('#presentationDetails').on('hide.bs.collapse', function () {
+      $('a[href="#presentationDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+  });
+
+    // MILo details
+  $('#miloDetails').on('show.bs.collapse', function () {
+      $('a[href="#miloDetails"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+  });
+  $('#miloDetails').on('hide.bs.collapse', function () {
+      $('a[href="#miloDetails"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+  });
+
+  // Code example collapse
+  $('#codeExample').on('show.bs.collapse', function () {
+      $('a[href="#codeExample"] i.fa-chevron-down').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+  });
+  $('#codeExample').on('hide.bs.collapse', function () {
+      $('a[href="#codeExample"] i.fa-chevron-up').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+  });
+
+</script>
+
+</body>
+</html>

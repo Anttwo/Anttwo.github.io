@@ -36,7 +36,7 @@
 
  <!-- <link href="style_2.css" rel="stylesheet"> -->
  <!-- <link href="style.css" rel="stylesheet"> -->
- <link href="../base2.css" rel="stylesheet">
+ <link href="../base.css" rel="stylesheet">
 
 <!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
@@ -58,7 +58,7 @@
 <div class="container" style="text-align:center; padding-top:2rem 15px">
  <div class="row" style="text-align:center">
    <h1 style="font-size: 60px;">MAtCha Gaussians: <br>Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views</h1>
-   <h1 style="font-size: xxx-large;">CVPR 2025 (Highlight)</h1>
+   <h1 class="secondary" style="font-size: xxx-large;">CVPR 2025 (Highlight)</h1>
  </div>
  <div class="row" style="text-align:center">
    <div class="col-xs-0 col-md-2"></div>
@@ -89,7 +89,6 @@
    <h3 style="text-align:center; padding-bottom:1rem">
      <a class="label label-info" href="https://arxiv.org/abs/2412.06767"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
      <a class="label label-info" href="https://github.com/Anttwo/MAtCha"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code</a>
-     <!-- <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>&nbsp;&nbsp;Blender Add-On</a> -->
      <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a>
    </h3>
    </div>
@@ -97,19 +96,9 @@
 
  <div class="row" style="padding:2rem">
    <div class="col-xs-12">
-   <!-- <video autoplay loop muted playsinline src="teaser.mp4" style="width:95%; max-width: 900px"></video> -->
-   <!-- <iframe class="embed-responsive-item text-center" src="https://www.youtube.com/embed/MAkFyWfiBQo?si=mIN-4Wk3P2sWBG7C" frameborder="0"
+   <iframe class="embed-responsive-item text-center" src="https://www.youtube.com/embed/8yK8W-IFDL4?si=4GXs8ScoA1VfNfTr" frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          style="width:100%; height:540px; clip-path:inset(1px 1px);" allowfullscreen></iframe> -->
-  <!-- <iframe src="https://drive.google.com/file/d/1oov9S0Cw0LKr31M-bWpr1JAdG-fG49Er/preview"
-     width=100% height="620px" frameborder="0" allow="autoplay" allowfullscreen></iframe> -->
-  <!-- <iframe class="embed-responsive-item text-center" src="https://drive.google.com/file/d/1eisdCFnWs8cAI8flOJ93ZQ8tkqSZmcEB/preview" frameborder="0"
-     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-     style="width:100%; height:620px; clip-path:inset(1px 1px);" allowfullscreen></iframe> -->
-  <iframe class="embed-responsive-item text-center" src="https://drive.google.com/file/d/1fwgtkZzLcpbPf5CFjmG5YZKfDo0rQSWg/preview" frameborder="0"
-     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-     style="width:100%; height:620px; clip-path:inset(1px 1px);" allowfullscreen></iframe>
-  <!-- <i><b>The full presentation video is coming soon.</b></i> -->
+          style="width:100%; height:620px; clip-path:inset(1px 1px);" allowfullscreen></iframe>
    <div class="wrapper">
      <!-- <div class="col-xs-4 col-lg-6;"> -->
       <p style="text-align: justify">
@@ -135,9 +124,10 @@
   <h2>Updates</h2>
   <hr/>
   <p>
-    <ul>
-      <li> <b>12-2024</b>: Initial release of the paper. </li>
-    </ul>
+    <p class="label date">04-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> has been selected for a Highlight at CVPR 2025!<br>
+    <p class="label date">04-2025</p> We released <a href="https://github.com/Anttwo/MAtCha">MAtCha's code</a>!<br>
+    <p class="label date">03-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> paper has been accepted to CVPR 2025!<br>
+    <p class="label date">12-2024</p> Initial release of the paper. <br>
   </p>
 <!-- </div> -->
 <p><br></p>
@@ -399,7 +389,7 @@
 
  <div class="card">
    <div class="card-block">
-     <pre class="card-text clickselect">
+     <pre class="card-text clickselect" style="background-color: #000000; color: #ffffff;">
       @article{guedon2025matcha,
         title={MAtCha Gaussians: Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views}, 
         author={Gu{\'e}don, Antoine and Ichikawa, Tomoki and Yamashita, Kohei and Nishino, Ko},
@@ -472,6 +462,67 @@
 
   document.body.appendChild(themeToggle);
 </script>
+
+<style>
+  .carousel-caption {
+    background: rgba(0,0,0,0.8);
+    padding: 5px;
+    border-radius: 3px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+
+  .carousel-caption h3 {
+      font-size: 16px;
+      margin: 2px 0;
+  }
+
+  .carousel-caption p {
+      font-size: 14px;
+      margin: 2px 0;
+  }
+
+  [data-theme='dark'] .carousel-caption {
+      background: rgba(0,0,0,0.8);
+  }
+
+  .carousel-indicators {
+      bottom: 40px;
+  }
+
+  .video-container {
+      position: relative;
+      padding-bottom: 75%; /* This maintains 4:3 aspect ratio */
+      height: 0;
+      overflow: hidden;
+  }
+
+  .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+
+  .carousel-control {
+      width: 5%;  /* Make the clickable area thinner (default is 15%) */
+  }
+
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-right {
+      font-size: 20px;  /* Make the arrow icons smaller (default is 30px) */
+      width: 20px;      /* Reduce width */
+      height: 20px;     /* Reduce height */
+      margin-top: -10px;  /* Adjust vertical centering */
+  }
+
+  .carousel-control.left, .carousel-control.right {
+      background-image: none;  /* Remove the default gradient */
+  }
+</style>
 
 </body>
 </html>

@@ -60,7 +60,7 @@
         <div class="col-lg-6" style="text-align:left; font-size: xx-large;">
             <div class="row" style="padding-left: 1.5rem;">
                 <h1 style="font-size: 70px;">Antoine Gu&eacutedon</h1>
-                <h1 style="font-size: 55px;">PhD Student</h1>
+                <h1 class="secondary" style="font-size: 55px;">PhD Student</h1>
             </div>
           <a href="https://imagine.enpc.fr/" style="font-weight: 400;">IMAGINE</a> /
           <a href="http://ligm.u-pem.fr/accueil/" style="font-weight: 400;">LIGM</a><br>
@@ -74,7 +74,7 @@
         </div>
         
         <div class="col-lg-6" style="text-align:center; padding-top: 2rem;">
-          <img src="./media/profile.jpg" alt="Profile picture" style="height: 400px;"><br>
+          <img src="./media/profile.jpg" alt="Profile picture" style="height: 400px; border-radius: 10px;"><br>
 
           <h5 style="padding-top: 5px;">
             <a href="mailto:antoine.guedon@enpc.fr" title="e-Mail" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a>
@@ -86,6 +86,8 @@
 
         </div>
        </div>
+
+    
 
     <div class="container">
         <h2>Introduction</h2>
@@ -104,13 +106,20 @@
     <div class="container">
         <h2>News</h2>
         <hr/>
-        <p class="label date">05-2025</p> I am very honored to be selected as one of the <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">Outstanding Reviewers for CVPR 2025</a>!<br>
+        <p class="label date">09-2025</p> We just released the code for <a href="https://github.com/Anttwo/MILo">MILo</a>!<br>
+        <p class="label date">08-2025</p> <a href="https://anttwo.github.io/milo/">MILo</a> has been accepted to SIGGRAPH Asia 2025 - Journal Track (TOG)!<br>
+        <p class="label date">05-2025</p> I am very honored to be selected as one of the <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">Outstanding Reviewers for CVPR 2025</a>.<br>
         <p class="label date">04-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> has been selected for a Highlight at CVPR 2025!<br>
         <p class="label date">04-2025</p> We just released the code for <a href="https://anttwo.github.io/matcha/">MAtCha</a>!<br>
         <p class="label date">03-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> paper has been accepted to CVPR 2025!<br>
-        <p class="label date">11-2024</p> I am very honored to be selected as one of the <a href="https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers">Top Reviewers for NeurIPS 2024</a>!<br>
+        <p class="label date">11-2024</p> I am very honored to be selected as one of the <a href="https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers">Top Reviewers for NeurIPS 2024</a>.<br>
+        <!-- Old news are hidden by default-->
+        <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+            More <i class="fa fa-chevron-down"></i>
+        </a>
+        <div class="collapse" id="collapse6">
         <p class="label date">10-2024</p> I was in Milan for ECCV 2024, and had the pleasure to give an oral presentation of <a href="https://anttwo.github.io/frosting/">Frosting</a> and to meet many great people in the field.<br>
-        <p class="label date">09-2024</p> I am very honored to be selected as one of the <a href="https://eccv.ecva.net/Conferences/2024/Reviewers#all-outstanding-reviewers">Outstanding Reviewers for ECCV 2024</a>!<br>
+        <p class="label date">09-2024</p> I am very honored to be selected as one of the <a href="https://eccv.ecva.net/Conferences/2024/Reviewers#all-outstanding-reviewers">Outstanding Reviewers for ECCV 2024</a>.<br>
         <p class="label date">09-2024</p> We just released a <a href="https://github.com/Anttwo/sugar_frosting_blender_addon/">Blender Add-On</a> to import, edit and animate 3D scenes reconstructed with SuGaR and Frosting without a single line of code. <br>
         <p class="label date">08-2024</p> <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been selected for an oral presentation at ECCV 2024!<br>
         <p class="label date">07-2024</p> <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been accepted to ECCV 2024!<br>
@@ -122,6 +131,7 @@
         <p class="label date">11-2022</p> <a href="https://arxiv.org/abs/2208.10449">SCONE</a> paper has received a Spotlight at NeurIPS 2022!<br>
         <p class="label date">08-2022</p> <a href="https://arxiv.org/abs/2208.10449">SCONE</a> paper has been accepted to NeurIPS 2022!<br>
         <p class="label date">09-2021</p> I'm starting my PhD!<br>
+        </div>
     </div>
 
     <!-- Publications -->
@@ -130,11 +140,64 @@
         <h2>Publications</h2>
         <hr/>
 
+        <!-- MILo -->
+        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
+            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
+                <a href="https://anttwo.github.io/milo/">
+                    <img src="./media/milo.png" alt="milo" style="width: 100%;">
+                </a>
+            </div>
+            <div  class="col-lg-8" style="text-align: left;">
+                <a href="https://anttwo.github.io/milo/">
+                    <h4>MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction</h4>
+                </a>
+                <p style="font-size: 20px;">SIGGRAPH Asia 2025 - Journal Track (TOG)</p>
+                <div>
+                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>,
+                    <a href="https://www.lix.polytechnique.fr/Labo/Diego.GOMEZ/">Diego Gomez</a>,
+                    <a href="https://nissmar.github.io/">Nissim Maruani</a>,
+                    <a href="https://s2.hk/">Bingchen Gong</a>,
+                    <a href="https://www-sop.inria.fr/members/George.Drettakis/">George Drettakis</a>,
+                    <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>
+                </div>
+                We propose a novel differentiable mesh extraction framework that operates during the optimization 
+                of 3DGS representations. At every training iteration, we differentiably extract a mesh only
+                from Gaussian parameters. This enables gradient flow from the mesh to Gaussians, and guides 
+                Gaussians toward configurations better suited for surface reconstruction, resulting in better 
+                meshes with significantly fewer vertices. <br>
+                <a class="label label-info" href="https://arxiv.org/abs/2506.24096"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+                <a class="label label-info" href="https://github.com/Anttwo/MILo"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
+                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
+                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse4">
+                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
+                </a>
+                <div class="collapse" id="collapse5">
+                    <div class="card">
+                        <div class="card-block">
+                            <pre class="card-text clickselect">
+                                @article{guedon2025milo,
+                                    author       = {Gu{\'e}don, Antoine and Gomez, Diego and Maruani, Nissim and Gong, Bingchen and Drettakis, George and Ovsjanikov, Maks},
+                                    title        = {MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction},
+                                    journal      = {ACM Transactions on Graphics},
+                                    number       = {},
+                                    volume       = {},
+                                    month        = {},
+                                    year         = {2025},
+                                    url          = {https://anttwo.github.io/milo/}
+                                }
+                            </pre>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+        </div><br>
+
         <!-- MAtCha -->
         <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
             <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
                 <a href="https://anttwo.github.io/matcha/">
-                    <img src="./media/matcha.png" alt="matcha" style="width: 350px;">
+                    <img src="./media/matcha.png" alt="matcha" style="width: 100%;">
                 </a>
             </div>
             <div  class="col-lg-8" style="text-align: left;">
@@ -179,7 +242,7 @@
         <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
             <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
                 <a href="https://anttwo.github.io/frosting/">
-                    <img src="./media/frosting.png" alt="frosting" style="width: 350px;">
+                    <img src="./media/frosting.png" alt="frosting" style="width: 100%;">
                 </a>
             </div>
             <div  class="col-lg-8" style="text-align: left;">
@@ -223,7 +286,7 @@
         <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
             <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
                 <a href="https://anttwo.github.io/sugar/">
-                    <img src="./media/sugar.png" alt="sugar" style="width: 350px;">
+                    <img src="./media/sugar.png" alt="sugar" style="width: 100%;">
                 </a>
             </div>
             <div  class="col-lg-8" style="text-align: left;">
@@ -268,7 +331,7 @@
         <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
             <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
                 <a href="https://anttwo.github.io/MACARONS/">
-                    <img src="./media/macarons.png" alt="macarons" style="width: 350px;">
+                    <img src="./media/macarons.png" alt="macarons" style="width: 100%;">
                 </a>
             </div>
             <div  class="col-lg-8" style="text-align: left;">
@@ -312,7 +375,7 @@
         <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
             <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
                 <a href="https://arxiv.org/abs/2208.10449">
-                    <img src="./media/scone.png" alt="scone" style="width: 350px;">
+                    <img src="./media/scone.png" alt="scone" style="width: 100%;">
                 </a>
             </div>
             <div  class="col-lg-8" style="text-align: left;">
@@ -354,8 +417,7 @@
     </div>
 
     <p style="text-align: center; padding-top: 2rem; font-size: 15px;">
-        &copy You are welcome to copy the code, please attribute the source with a link back to this page.<br>
-        Template inspired from <a href="https://www.tmonnier.com/">Tom Monnier</a> and <a href="https://mathis.petrovich.fr/">Mathis Petrovich</a>.
+        &copy 2025 Antoine Guédon. You are welcome to copy the code, please attribute the source with a link back to this page.
     </p>
 
     <!-- Dark mode toggle -->
@@ -378,6 +440,14 @@
         themeToggle.innerHTML = savedTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
 
         document.body.appendChild(themeToggle);
+
+        // Animate chevron arrow for older news collapse
+        $('#collapse6').on('show.bs.collapse', function () {
+            $('a[data-target="#collapse6"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        });
+        $('#collapse6').on('hide.bs.collapse', function () {
+            $('a[data-target="#collapse6"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        });
     </script>
 
 </body>
