@@ -24,8 +24,10 @@ export class MiloViewer {
         
         // URLs
         this.corsProxy = "https://corsproxy.io/?";
-        this.plyMeshUrl = this.corsProxy + `https://imagine.enpc.fr/~antoine.guedon/milo/${sceneConfig.name}/mesh.ply`;
-        this.splatUrl = this.corsProxy + `https://imagine.enpc.fr/~antoine.guedon/milo/${sceneConfig.name}/gs.ply`;
+        // this.plyMeshUrl = this.corsProxy + `https://imagine.enpc.fr/~antoine.guedon/milo/${sceneConfig.name}/mesh.ply`;
+        // this.splatUrl = this.corsProxy + `https://imagine.enpc.fr/~antoine.guedon/milo/${sceneConfig.name}/gs.ply`;
+        this.plyMeshUrl = this.corsProxy + `https://antoineguedon.fr/milo_gallery/${sceneConfig.name}/mesh.ply`;
+        this.splatUrl = this.corsProxy + `https://antoineguedon.fr/milo_gallery/${sceneConfig.name}/gs.ply`;
         
         // Transformation parameters
         this.transforms = {
