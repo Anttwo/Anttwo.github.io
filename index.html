@@ -139,6 +139,7 @@
     <div class="container">
         <h2>News</h2>
         <hr/>
+        <p class="label date">04-2026</p> <a href="https://shiyao-li.github.io/magician/">MAGICIAN</a> has been accepted and selected for an oral presentation at CVPR 2026!<br>
         <p class="label date">10-2025</p> I am very honored to be selected as one of the <a href="https://iccv.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">Outstanding Reviewers for ICCV 2025</a>.<br>
         <p class="label date">09-2025</p> We just released the code for <a href="https://github.com/Anttwo/MILo">MILo</a>!<br>
         <p class="label date">08-2025</p> <a href="https://anttwo.github.io/milo/">MILo</a> has been accepted to SIGGRAPH Asia 2025 - Journal Track (TOG)!<br>
@@ -173,6 +174,101 @@
     <div class="container">
         <h2>Publications</h2>
         <hr/>
+
+        <!-- From Blobs to Spokes -->
+        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
+            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
+                <a href="https://diego1401.github.io/BlobsToSpokesWebsite/">
+                    <img src="./media/wrapping.jpg" alt="blobs_to_spokes" style="width: 100%;">
+                </a>
+            </div>
+            <div  class="col-lg-8" style="text-align: left;">
+                <a href="https://diego1401.github.io/BlobsToSpokesWebsite/">
+                    <h4>From Blobs to Spokes: High-Fidelity Surface Reconstruction via Oriented Gaussians</h4>
+                </a>
+                <p style="font-size: 20px;">arXiv 2026</p>
+                <div>
+                    <a href="https://www.lix.polytechnique.fr/Labo/Diego.GOMEZ/">Diego Gomez</a>*,
+                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>*,
+                    <a href="https://nissmar.github.io/">Nissim Maruani</a>,
+                    <a href="https://s2.hk/">Bingchen Gong</a>,
+                    <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>
+                </div>
+                We interpret 3D Gaussians as stochastic oriented surface elements and derive closed-form
+                vacancy and normal fields, enabling fast, watertight, and compact mesh extraction of full 3D scenes.
+                Our method recovers extremely thin structures such as bicycle spokes while producing
+                meshes with significantly fewer vertices than concurrent works. <br>
+                <span style="font-size: 13px;">*Both authors contributed equally to the paper.</span><br>
+                <a class="label label-info" href="https://arxiv.org/abs/2604.07337"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+                <a class="label label-info" href="https://github.com/diego1401/GaussianWrapping"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
+                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
+                </a>
+                <div class="collapse" id="collapse7">
+                    <div class="card">
+                        <div class="card-block">
+                            <pre class="card-text clickselect">
+                                @misc{gomez2026blobsspokeshighfidelitysurface,
+                                    title={From Blobs to Spokes: High-Fidelity Surface Reconstruction via Oriented Gaussians}, 
+                                    author={Gomez, Diego and Gu{\'e}don, Antoine and Maruani, Nissim and Gong, Bingchen and Ovsjanikov, Maks},
+                                    year={2026},
+                                    eprint={2604.07337},
+                                    archivePrefix={arXiv},
+                                    primaryClass={cs.CV},
+                                    url={https://arxiv.org/abs/2604.07337},
+                                }
+                            </pre>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+        </div><br>
+        
+        <!-- MAGICIAN -->
+        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
+            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
+                <a href="https://shiyao-li.github.io/magician/">
+                    <img src="./media/magician.jpg" alt="magician" style="width: 100%;">
+                </a>
+            </div>
+            <div  class="col-lg-8" style="text-align: left;">
+                <a href="https://shiyao-li.github.io/magician/">
+                    <h4>MAGICIAN: Efficient Long-Term Planning with Imagined Gaussians for Active Mapping</h4>
+                </a>
+                <p style="font-size: 20px;">CVPR 2026 (Oral)</p>
+                <div>
+                    <a href="https://shiyao-li.github.io/">Shiyao Li</a>,
+                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>,
+                    <a href="https://cshizhe.github.io/">Shizhe Chen</a>,
+                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+                </div>
+                We introduce MAGICIAN, a novel framework capable of generating long-horizon trajectories
+                for active 3D mapping. We propose Imagined Gaussians, derived from a neural occupancy field,
+                to enable efficient and reliable coverage gain prediction from new viewpoints in unknown scenes,
+                supporting feasible long-term planning with tree search. <br>
+                <a class="label label-info" href="https://arxiv.org/abs/2603.22650"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
+                <a class="label label-info" href="https://github.com/shiyao-li/MAGICIAN"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
+                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
+                </a>
+                <div class="collapse" id="collapse8">
+                    <div class="card">
+                        <div class="card-block">
+                            <pre class="card-text clickselect">
+                                @inproceedings{li2026magician,
+                                    title={MAGICIAN: Efficient Long-Term Planning with Imagined Gaussians for Active Mapping},
+                                    author={Li, Shiyao and Gu{\'e}don, Antoine and Chen, Shizhe and Lepetit, Vincent},
+                                    booktitle={CVPR},
+                                    year={2026},
+                                }
+                            </pre>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+        </div><br>
 
         <!-- MILo -->
         <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
