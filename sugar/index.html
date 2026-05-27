@@ -36,6 +36,7 @@
 
  <!-- <link href="style_2.css" rel="stylesheet"> -->
  <link href="../base.css" rel="stylesheet">
+ <link href="../assets/project.css" rel="stylesheet">
 
 <!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
@@ -52,7 +53,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 </head>
-<body>
+<body class="project-page">
 
 <div class="container" style="text-align:center; padding-top:2rem 15px">
  <div class="row" style="text-align:center">
@@ -83,11 +84,11 @@
  <div class="row">
    <div class="col-xs-12">
    <h3 style="text-align:center; padding-bottom:1rem">
-     <a class="label label-info" href="https://arxiv.org/abs/2311.12775"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-     <a class="label label-info" href="https://github.com/Anttwo/SuGaR"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code</a>
-     <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>&nbsp;&nbsp;Blender Add-On</a>
-     <!-- <a class="label label-info" href="https://youtu.be/8_QNKaCyr4Y"><i class="fa fa-area-chart fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;Presentation</a> -->
-     <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a>
+     <a class="label label-info" href="https://arxiv.org/abs/2311.12775"><i class="fa fa-file-text"></i>Paper</a>
+     <a class="label label-info" href="https://github.com/Anttwo/SuGaR"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>Code</a>
+     <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>Blender Add-On</a>
+     <!-- <a class="label label-info" href="https://youtu.be/8_QNKaCyr4Y"><i class="fa fa-area-chart fa-lg" style="vertical-align:top;margin-top:6px"></i>Presentation</a> -->
+     <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>BibTeX</a>
    </h3>
    </div>
  </div>
@@ -120,28 +121,45 @@
 <div class="container">
   <h2>Updates</h2>
   <hr/>
-  <p>
-    <ul>
-      <li> <b>09/23/2024</b>: We just released a <a href="https://github.com/Anttwo/sugar_frosting_blender_addon/">Blender Add-On</a> to import, edit and animate SuGaR scenes without a single line of code! </li>
-      <li> <b>01/09/2024</b>: We've just added a dedicated viewer to explore in real-time scenes reconstructed with SuGaR. 
-        The viewer lets you switch between the hybrid representation (mesh+Gaussians), the textured mesh and the wireframe mesh! </li>
-      <li> <b>12/20/2023</b>: We released the code for SuGaR! </li>
-      <li> <b>11/28/2023</b>: We noticed a minor typo in Equation (6) in the earlier version of the paper. We updated the paper on arxiv.
-        <br> For any density function <i>d</i> (and not just 
-        <SPAN STYLE="text-decoration:overline; font-style:italic">d</SPAN>), we define an ideal distance function
-        <i>f</i> = <i>s<sub>g<sup>*</sup></sub></i> sqrt(-2log(<i>d</i>)).
-        As we show in the paper, in the case of an ideal density <SPAN STYLE="text-decoration:overline; font-style:italic">d</SPAN>, 
-        this function corresponds to the true surface of the scene. We use this distance function (involving <i>d</i> instead of <SPAN STYLE="text-decoration:overline; font-style:italic">d</SPAN>) 
-        to define the regularization term in Equation (8).
-      </li>
-      <li> <b>11/27/2023</b>: The full presentation video is finally here, just above the updates! </li>
-      <li> <b>11/24/2023</b>: Updated videos to illustrate how composition and animation can propagate to the Gaussian Splatting representation,
-         using the Gaussian Splatting rasterizer and bound gaussians. </li>
-      <li> <b>11/23/2023</b>: Added a few videos illustrating diverse tools for editing scenes. </li>
-      <li> <b>11/22/2023</b>: Added videos and images illustrating qualitative results on scenes from famous datasets. </li>
-      <li> <b>11/22/2023</b>: Initial release of the paper. </li>
-    </ul>
-  </p>
+  <div class="news-timeline">
+    <div class="news-item">
+      <div class="news-date">09-2024</div>
+      <div class="news-body">We just released a <a href="https://github.com/Anttwo/sugar_frosting_blender_addon/">Blender Add-On</a> to import, edit and animate SuGaR scenes without a single line of code!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">01-2024</div>
+      <div class="news-body">We've just added a dedicated viewer to explore in real-time scenes reconstructed with SuGaR. The viewer lets you switch between the hybrid representation (mesh+Gaussians), the textured mesh and the wireframe mesh!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">12-2023</div>
+      <div class="news-body">We released the code for SuGaR!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">11-2023</div>
+      <div class="news-body">We noticed a minor typo in Equation (6) in the earlier version of the paper. We updated the paper on arxiv.<br> For any density function <i>d</i> (and not just <span style="text-decoration:overline; font-style:italic">d</span>), we define an ideal distance function <i>f</i> = <i>s<sub>g<sup>*</sup></sub></i> sqrt(-2log(<i>d</i>)). As we show in the paper, in the case of an ideal density <span style="text-decoration:overline; font-style:italic">d</span>, this function corresponds to the true surface of the scene. We use this distance function (involving <i>d</i> instead of <span style="text-decoration:overline; font-style:italic">d</span>) to define the regularization term in Equation (8).</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">11-2023</div>
+      <div class="news-body">The full presentation video is finally here, just above the updates!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">11-2023</div>
+      <div class="news-body">Updated videos to illustrate how composition and animation can propagate to the Gaussian Splatting representation, using the Gaussian Splatting rasterizer and bound gaussians.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">11-2023</div>
+      <div class="news-body">Added a few videos illustrating diverse tools for editing scenes.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">11-2023</div>
+      <div class="news-body">Added videos and images illustrating qualitative results on scenes from famous datasets.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">11-2023</div>
+      <div class="news-body">Initial release of the paper.</div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
  <h2>Abstract</h2>
@@ -685,6 +703,8 @@
 
   document.body.appendChild(themeToggle);
 </script>
+
+<script src="../assets/project.js"></script>
 
 </body>
 </html>

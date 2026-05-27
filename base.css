@@ -166,33 +166,63 @@ table {
   background-color: var(--date-bg);
 }
 
-/* Theme toggle button */
+/* Theme toggle button — glass pill, matched to the lite-mode toggle so the
+   two corner controls form a cohesive pair. Icon-only (no text). */
 .theme-toggle {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  display: flex;
+  top: 22px;
+  right: 22px;
+  z-index: 1000;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  background: transparent;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   color: var(--text-color);
   cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  border-radius: 50%;
+  line-height: 1;
+  transition:
+    color 250ms ease,
+    background 250ms ease,
+    border-color 250ms ease,
+    transform 250ms ease;
 }
 
-.theme-toggle:hover {
-  background: var(--label-hover-bg);
-  color: var(--label-hover-color);
+.theme-toggle:hover,
+.theme-toggle:focus,
+.theme-toggle:active {
+  border-color: var(--accent, #5ee0d6) !important;
+  color: var(--accent, #5ee0d6) !important;
+  background: rgba(94, 224, 214, 0.10) !important;
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .theme-toggle .material-icons-outlined {
-  font-size: 28px;
-  font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' -25, 'opsz' 20;
+  font-size: 18px;
+  line-height: 1;
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 20;
+}
+
+[data-theme="light"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--hairline, rgba(0, 0, 0, 0.12));
+}
+
+@media (max-width: 600px) {
+  .theme-toggle {
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+  }
+  .theme-toggle .material-icons-outlined { font-size: 16px; }
 }
 
 /* Inline code styling */

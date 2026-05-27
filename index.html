@@ -1,581 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>Antoine Gu&eacutedon</title>
- <meta name="description" content="Antoine Gu&eacutedon"/>
- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
- <meta charset="utf-8">
+  <title>Antoine Gu&eacute;don</title>
+  <meta name="description" content="Antoine Gu&eacute;don — Postdoctoral researcher in 3D reconstruction and deep learning."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <meta charset="utf-8">
 
- <!--Facebook-->
- <meta property="og:image" content="https://anttwo.github.io/MACARONS/example.png">
- <meta property="og:image:type" content="image/jpg">
- <meta property="og:image:width" content="600">
- <meta property="og:image:height" content="400">
- <meta property="og:type" content="website"/>
- <meta property="og:url" content="https://anttwo.github.io/"/>
- <meta property="og:title" content="MACARONS"/>
- <meta property="og:description" content="Personal webpage of Antoine Gu&eacutedon."/>
+  <!-- OpenGraph -->
+  <meta property="og:image" content="https://anttwo.github.io/MACARONS/example.png">
+  <meta property="og:image:type" content="image/jpg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://anttwo.github.io/"/>
+  <meta property="og:title" content="Antoine Gu&eacute;don"/>
+  <meta property="og:description" content="Personal webpage of Antoine Gu&eacute;don."/>
 
- <!--Twitter-->
- <meta name="twitter:card" content="summary_large_image" />
- <meta name="twitter:title" content="Antoine Gu&eacutedon" />
- <meta property="twitter:description" content="Personal webpage of Antoine Gu&eacutedon."/>
- <meta name="twitter:image" content="https://anttwo.github.io/MACARONS/example.png">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Antoine Gu&eacute;don" />
+  <meta property="twitter:description" content="Personal webpage of Antoine Gu&eacute;don."/>
+  <meta name="twitter:image" content="https://anttwo.github.io/MACARONS/example.png">
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
- <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
- <!-- <link href="http://fonts.googleapis.com/css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">  -->
- 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
- <script src="https://kit.fontawesome.com/bacac70704.js" crossorigin="anonymous"></script>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
- <link rel="shortcut icon" href="resrc/icons/mathis_square_thumb_nobg.jpg">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
- <!-- <link href="style.css" rel="stylesheet"> -->
- <link href="./base.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/bacac70704.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="shortcut icon" href="resrc/icons/mathis_square_thumb_nobg.jpg">
 
-<!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <link href="./base.css?v=20260520d" rel="stylesheet">
+  <link href="./assets/site.css?v=20260520d" rel="stylesheet">
 
-  gtag('config', 'G-CDL4R10HKE');
-</script>
-<!-- End Google Analytics -->
+  <!-- TEMP: hide the Lite-mode toggle while the hero mesh is disabled.
+       Revert by deleting this <style> block. -->
+  <style>.lite-toggle { display: none !important; }</style>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CDL4R10HKE');
+  </script>
 </head>
 
-<body>
-    <div class="container" style="padding-top:2rem;">
-        <div class="col-lg-6" style="text-align:left; font-size: xx-large;">
-            <div class="row" style="padding-left: 1.5rem;">
-                <h1 style="font-size: 70px;">Antoine Gu&eacutedon</h1>
-                <h1 class="secondary" style="font-size: 55px;">Postdoc Researcher</h1>
-            </div>
-          <!--IMAGINE-->
-          <!-- <a href="https://imagine.enpc.fr/" style="font-weight: 400;">IMAGINE</a> /
-          <a href="http://ligm.u-pem.fr/accueil/" style="font-weight: 400;">LIGM</a><br>
-          <a href="https://www.ecoledesponts.fr/en">&Eacutecole des Ponts ParisTech (ENPC)</a>
-          <p style="font-size: large;">
-            6-8, Av Blaise Pascal - Cit&eacute Descartes <br>
-            Champs-sur-Marne <br>
-            77455 Marne-la-Vall&eacutee cedex 2 <br>
-            France <br>
-            &#9993 antoine (dot) guedon (at) enpc.fr <br>
-          </p> -->
-          <!--GeomeriX-->
-          <a href="https://team.inria.fr/geomerix/" style="font-weight: 400;">GeomeriX</a> /
-          <a href="https://www.lix.polytechnique.fr/" style="font-weight: 400;">LIX</a><br>
-          <a href="https://www.polytechnique.edu/">&Eacutecole polytechnique</a>
-          <p style="font-size: large;">
-            1 Rue Honoré d'Estienne d'Orves <br>
-            Palaiseau <br>
-            91120 <br>
-            France <br>
-            &#9993 antoine (dot) guedon (at) enpc.fr <br>
+<!-- TEMP: boot in lite mode (revert by removing `is-lite` from the body class) -->
+<body class="site-modern is-lite">
+
+  <!-- =================== HERO =================== -->
+  <header class="hero" id="top">
+    <!-- Stage: replace this canvas with a video / 3D scene later if desired -->
+    <div class="hero-stage">
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-vignette" aria-hidden="true"></div>
+    </div>
+
+    <a class="hero-scroll-cue" href="#about" aria-label="Scroll to content">
+      Scroll <i class="fa fa-chevron-down"></i>
+    </a>
+
+    <!-- Bottom card holding photo + basic info -->
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <div class="hero-card-photo">
+          <img src="./media/profile.jpg" alt="Antoine Gu&eacute;don">
+        </div>
+        <div class="hero-card-text">
+          <div class="hero-card-eyebrow">Postdoctoral Researcher</div>
+          <h1 class="hero-card-name">Antoine&nbsp;<span class="accent">Gu&eacute;don</span></h1>
+          <div class="hero-card-subtitle">Understanding 3D worlds through deep learning</div>
+          <p class="hero-card-tagline">
+            <a href="https://team.inria.fr/geomerix/">GeomeriX</a> /
+            <a href="https://www.lix.polytechnique.fr/">LIX</a>,
+            <a href="https://www.polytechnique.edu/">&Eacute;cole&nbsp;Polytechnique</a>
+            &nbsp;&middot;&nbsp;
+            Visiting <a href="https://bair.berkeley.edu/">UC&nbsp;Berkeley&nbsp;BAIR</a>
           </p>
-        </div>
-        
-        <div class="col-lg-6" style="text-align:center; padding-top: 2rem;">
-          <img src="./media/profile.jpg" alt="Profile picture" style="height: 400px; border-radius: 10px;"><br>
 
-          <h5 style="padding-top: 5px;">
-            <a href="mailto:antoine.guedon@enpc.fr" title="e-Mail" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a>
-            <a href="https://github.com/Anttwo" title="GitHub" target="_blank"><i class="fa fa-github-square fa-3x"></i></a>
-            <a href="https://www.linkedin.com/in/antoine-gu%C3%A9don-3a50b0156/" title="LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
-	        <a href="https://scholar.google.com/citations?user=uvg-I8sAAAAJ&hl=fr&oi=ao" title="Google Scholar" target="_blank"><i class="ai ai-google-scholar-square ai-3x"></i></a>
-	        <a href="https://arxiv.org/search/cs?query=Gu%C3%A9don%2C+A&searchtype=author&abstracts=show&order=-announced_date_first&size=50" target="_blank"><i class="ai ai-arxiv-square ai-3x"></i></a>
-        </h5>
-
-        </div>
-       </div>
-
-    <!-- PhD Defense Announcement -->
-    <!-- <div class="container" style="
-    background-color: var(--highlight-bg); 
-    border: 2px solid var(--border-color); 
-    padding: 2rem; 
-    margin-bottom: 2rem; 
-    border-radius: 10px;
-    ">
-        <h2 style="color: var(--highlight-color); margin-bottom: 1rem;"><i class="fa fa-graduation-cap"></i>&nbsp;&nbsp;PhD Defense Announcement</h2>
-        <p style="font-size: 20px; margin-bottom: 1rem;">
-            I will be defending my PhD thesis on <strong><i>Learning 3D Reconstruction from Capturing Images to Building Photorealistic Representations</i></strong> 
-            in <strong>September 2025</strong> at École des Ponts ParisTech.
-        </p>
-        <div style="text-align: center;">
-            <a href="https://anttwo.github.io/defense/" class="label label-info" style="font-size: 18px; padding: 10px 20px;">
-                <i class="fa fa-info-circle"></i>&nbsp;&nbsp;View Defense Details
+          <div class="hero-card-socials">
+            <a class="icon-pill" href="mailto:antoine.guedon@enpc.fr" title="Email" aria-label="Email">
+              <i class="fa fa-envelope"></i>
             </a>
+            <a class="icon-pill" href="https://github.com/Anttwo" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener">
+              <i class="fa fa-github"></i>
+            </a>
+            <a class="icon-pill" href="https://www.linkedin.com/in/antoine-gu%C3%A9don-3a50b0156/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <i class="fa fa-linkedin"></i>
+            </a>
+            <a class="icon-pill" href="https://scholar.google.com/citations?user=uvg-I8sAAAAJ&amp;hl=fr&amp;oi=ao" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener">
+              <i class="ai ai-google-scholar"></i>
+            </a>
+            <a class="icon-pill" href="https://arxiv.org/search/cs?query=Gu%C3%A9don%2C+A&amp;searchtype=author&amp;abstracts=show&amp;order=-announced_date_first&amp;size=50" title="arXiv" aria-label="arXiv" target="_blank" rel="noopener">
+              <i class="ai ai-arxiv"></i>
+            </a>
+          </div>
         </div>
-    </div> -->
+      </div>
+    </div>
+  </header>
 
-    <div class="container">
-        <h2>Introduction</h2>
-        <hr/>
-        <p style="text-align: justify;"> 
-            I am a postdoctoral researcher in the GeomeriX team at &Eacute;cole Polytechnique, advised by <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>. I'm currently visiting <a href="https://bair.berkeley.edu">UC Berkeley's AI Research lab (BAIR)</a> as a research scholar for a few months, hosted by <a href="https://people.eecs.berkeley.edu/~kanazawa/">Prof. Angjoo Kanazawa</a>.
-            Before that, I received my PhD from the IMAGINE computer vision team at &Eacute;cole des Ponts ParisTech (ENPC), where I was co-advised by <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a> and 
-            <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>.
-            My research focuses on reconstructing and understanding 3D worlds through deep learning. I have worked on autonomous agents that jointly learn to reconstruct and explore 3D environments, as well as on 3D reconstruction from images using Gaussian Splatting and, more recently, Flow Matching.
-            Earlier, I studied at &Eacute;cole Polytechnique and at &Eacute;cole Normale Sup&eacute;rieure Paris-Saclay, where I obtained the MVA MS degree.
+  <!-- =================== COMPACT HEADER (lite mode) =================== -->
+  <header class="site-header" id="top-lite">
+    <div class="site-header-inner">
+      <div class="header-text">
+        <div class="header-eyebrow">Postdoctoral Researcher</div>
+        <h1 class="header-title">Antoine&nbsp;<span class="accent">Gu&eacute;don</span></h1>
+        <div class="header-subtitle">Understanding 3D worlds through deep learning</div>
+        <p class="header-tagline">
+          <a href="https://team.inria.fr/geomerix/">GeomeriX</a> /
+          <a href="https://www.lix.polytechnique.fr/">LIX</a>,
+          <a href="https://www.polytechnique.edu/">&Eacute;cole&nbsp;Polytechnique</a><br>
+          Visiting <a href="https://bair.berkeley.edu/">UC&nbsp;Berkeley&nbsp;BAIR</a>
         </p>
+
+        <div class="header-socials">
+          <a class="icon-pill" href="mailto:antoine.guedon@enpc.fr" title="Email" aria-label="Email">
+            <i class="fa fa-envelope"></i>
+          </a>
+          <a class="icon-pill" href="https://github.com/Anttwo" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener">
+            <i class="fa fa-github"></i>
+          </a>
+          <a class="icon-pill" href="https://www.linkedin.com/in/antoine-gu%C3%A9don-3a50b0156/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <a class="icon-pill" href="https://scholar.google.com/citations?user=uvg-I8sAAAAJ&amp;hl=fr&amp;oi=ao" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener">
+            <i class="ai ai-google-scholar"></i>
+          </a>
+          <a class="icon-pill" href="https://arxiv.org/search/cs?query=Gu%C3%A9don%2C+A&amp;searchtype=author&amp;abstracts=show&amp;order=-announced_date_first&amp;size=50" title="arXiv" aria-label="arXiv" target="_blank" rel="noopener">
+            <i class="ai ai-arxiv"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="header-photo">
+        <div class="header-photo-wrap">
+          <img src="./media/profile.jpg" alt="Antoine Gu&eacute;don">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =================== ABOUT =================== -->
+  <section class="section section-tight" id="about">
+    <div class="section-header reveal">
+      <span class="index">01</span>
+      <h2>About</h2>
+      <span class="rule"></span>
     </div>
 
-    <div class="container">
-        <h2>News</h2>
-        <hr/>
-        <p class="label date">04-2026</p> <a href="https://shiyao-li.github.io/magician/">MAGICIAN</a> has been accepted and selected for an oral presentation at CVPR 2026!<br>
-        <p class="label date">10-2025</p> I'm currently visiting <a href="https://bair.berkeley.edu">UC Berkeley's AI Research lab (BAIR)</a> as a research scholar for a few months, under the supervision of <a href="https://people.eecs.berkeley.edu/~kanazawa/">Pr. Angjoo Kanazawa</a>!<br>
-        <p class="label date">10-2025</p> I am very honored to be selected as one of the <a href="https://iccv.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">Outstanding Reviewers for ICCV 2025</a>.<br>
-        <p class="label date">09-2025</p> We just released the code for <a href="https://github.com/Anttwo/MILo">MILo</a>!<br>
-        <p class="label date">08-2025</p> <a href="https://anttwo.github.io/milo/">MILo</a> has been accepted to SIGGRAPH Asia 2025 - Journal Track (TOG)!<br>
-        <p class="label date">05-2025</p> I am very honored to be selected as one of the <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">Outstanding Reviewers for CVPR 2025</a>.<br>
-        <p class="label date">04-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> has been selected for a Highlight at CVPR 2025!<br>
-        <p class="label date">04-2025</p> We just released the code for <a href="https://anttwo.github.io/matcha/">MAtCha</a>!<br>
-        <p class="label date">03-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> paper has been accepted to CVPR 2025!<br>
-        <p class="label date">11-2024</p> I am very honored to be selected as one of the <a href="https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers">Top Reviewers for NeurIPS 2024</a>.<br>
-        <!-- Old news are hidden by default-->
-        <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">
-            More <i class="fa fa-chevron-down"></i>
+    <div class="about-text reveal">
+      <p>
+        I am a postdoctoral researcher in the GeomeriX team at &Eacute;cole&nbsp;Polytechnique, advised by
+        <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>. I'm currently visiting
+        <a href="https://bair.berkeley.edu">UC&nbsp;Berkeley's AI Research lab (BAIR)</a> as a research scholar
+        for a few months, hosted by <a href="https://people.eecs.berkeley.edu/~kanazawa/">Prof. Angjoo Kanazawa</a>.
+        Before that, I received my PhD from the IMAGINE computer vision team at &Eacute;cole&nbsp;des&nbsp;Ponts ParisTech (ENPC),
+        where I was co-advised by <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a> and
+        <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>.
+      </p>
+      <p>
+        My research focuses on reconstructing and understanding 3D worlds through deep learning. I have worked on
+        autonomous agents that jointly learn to reconstruct and explore 3D environments, as well as on 3D reconstruction
+        from images using Gaussian Splatting and, more recently, Flow Matching.
+        Earlier, I studied at &Eacute;cole&nbsp;Polytechnique (X2016) and at &Eacute;cole&nbsp;Normale&nbsp;Sup&eacute;rieure
+        Paris-Saclay, where I obtained the MVA MS degree.
+      </p>
+
+      <div class="about-affiliation">
+        <span class="chip"><i class="fa fa-flask"></i> GeomeriX &middot; LIX</span>
+        <span class="chip"><i class="fa fa-university"></i> &Eacute;cole Polytechnique</span>
+        <span class="chip"><i class="fa fa-plane"></i> Visiting BAIR, UC Berkeley</span>
+        <span class="chip"><i class="fa fa-envelope"></i> antoine (dot) guedon (at) enpc.fr</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== NEWS =================== -->
+  <section class="section" id="news">
+    <div class="section-header reveal">
+      <span class="index">02</span>
+      <h2>News</h2>
+      <span class="rule"></span>
+    </div>
+
+    <div class="news-timeline reveal-stagger">
+      <div class="news-item">
+        <div class="news-date">05-2026</div>
+        <div class="news-body">I am very honored to be selected as one of the <a href="https://media.eventhosts.cc/Conferences/CVPR2026/CVPR_main_conf_2026_15.pdf">Outstanding Reviewers for CVPR 2026</a>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">04-2026</div>
+        <div class="news-body"><a href="https://shiyao-li.github.io/magician/">MAGICIAN</a> has been accepted and selected for an oral presentation at CVPR 2026!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">10-2025</div>
+        <div class="news-body">I'm currently visiting <a href="https://bair.berkeley.edu">UC Berkeley's AI Research lab (BAIR)</a> as a research scholar for a few months, under the supervision of <a href="https://people.eecs.berkeley.edu/~kanazawa/">Prof. Angjoo Kanazawa</a>!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">10-2025</div>
+        <div class="news-body">I am very honored to be selected as one of the <a href="https://iccv.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">Outstanding Reviewers for ICCV 2025</a>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">09-2025</div>
+        <div class="news-body">We just released the code for <a href="https://github.com/Anttwo/MILo">MILo</a>!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">08-2025</div>
+        <div class="news-body"><a href="https://anttwo.github.io/milo/">MILo</a> has been accepted to SIGGRAPH Asia 2025 — Journal Track (TOG)!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">05-2025</div>
+        <div class="news-body">I am very honored to be selected as one of the <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">Outstanding Reviewers for CVPR 2025</a>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">04-2025</div>
+        <div class="news-body"><a href="https://anttwo.github.io/matcha/">MAtCha</a> has been selected for a Highlight at CVPR 2025!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">04-2025</div>
+        <div class="news-body">We just released the code for <a href="https://anttwo.github.io/matcha/">MAtCha</a>!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">03-2025</div>
+        <div class="news-body"><a href="https://anttwo.github.io/matcha/">MAtCha</a> paper has been accepted to CVPR 2025!</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">11-2024</div>
+        <div class="news-body">I am very honored to be selected as one of the <a href="https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers">Top Reviewers for NeurIPS 2024</a>.</div>
+      </div>
+    </div>
+
+    <div class="news-collapse" data-news-collapse>
+      <div class="news-timeline" style="margin-top: 0.6rem;">
+        <div class="news-item">
+          <div class="news-date">10-2024</div>
+          <div class="news-body">I was in Milan for ECCV 2024, and had the pleasure to give an oral presentation of <a href="https://anttwo.github.io/frosting/">Frosting</a> and to meet many great people in the field.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">09-2024</div>
+          <div class="news-body">I am very honored to be selected as one of the <a href="https://eccv.ecva.net/Conferences/2024/Reviewers#all-outstanding-reviewers">Outstanding Reviewers for ECCV 2024</a>.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">09-2024</div>
+          <div class="news-body">We just released a <a href="https://github.com/Anttwo/sugar_frosting_blender_addon/">Blender Add-On</a> to import, edit and animate 3D scenes reconstructed with SuGaR and Frosting without a single line of code.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">08-2024</div>
+          <div class="news-body"><a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been selected for an oral presentation at ECCV 2024!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">07-2024</div>
+          <div class="news-body"><a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been accepted to ECCV 2024!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">04-2024</div>
+          <div class="news-body">I was invited by <a href="https://scholar.google.com/citations?user=SXXEZhYAAAAJ&amp;hl=en">Prof. Ko Nishino from Kyoto University</a> to work in Japan for 6 weeks. It really was a great experience!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">03-2024</div>
+          <div class="news-body">I was invited by <a href="https://grgkopanas.github.io/">George Kopanas</a> and <a href="https://snosixtyboo.github.io/">Bernhard Kerbl</a> to give a talk about Surface Reconstruction using Gaussian Splatting during the <a href="https://3dgstutorial.github.io/index.html">3DV 2024 tutorial on Gaussian Splatting</a>.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">02-2024</div>
+          <div class="news-body"><a href="https://anttwo.github.io/sugar/">SuGaR</a> paper has been accepted to CVPR 2024!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">03-2023</div>
+          <div class="news-body"><a href="https://anttwo.github.io/MACARONS/">MACARONS</a> paper has been accepted to CVPR 2023!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">11-2022</div>
+          <div class="news-body"><a href="https://arxiv.org/abs/2208.10449">SCONE</a> paper has received a Spotlight at NeurIPS 2022!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">08-2022</div>
+          <div class="news-body"><a href="https://arxiv.org/abs/2208.10449">SCONE</a> paper has been accepted to NeurIPS 2022!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">09-2021</div>
+          <div class="news-body">I'm starting my PhD!</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="news-toggle" type="button" data-news-toggle aria-expanded="false">
+      <span data-news-toggle-label>Show more</span>
+      <i class="fa fa-chevron-down"></i>
+    </button>
+  </section>
+
+  <!-- =================== PUBLICATIONS =================== -->
+  <section class="section" id="publications">
+    <div class="section-header reveal">
+      <span class="index">03</span>
+      <h2>Publications</h2>
+      <span class="rule"></span>
+    </div>
+
+    <div class="pub-grid">
+
+      <!-- From Blobs to Spokes -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://diego1401.github.io/BlobsToSpokesWebsite/">
+          <img src="./media/wrapping.jpg" alt="From Blobs to Spokes">
         </a>
-        <div class="collapse" id="collapse0">
-        <p class="label date">10-2024</p> I was in Milan for ECCV 2024, and had the pleasure to give an oral presentation of <a href="https://anttwo.github.io/frosting/">Frosting</a> and to meet many great people in the field.<br>
-        <p class="label date">09-2024</p> I am very honored to be selected as one of the <a href="https://eccv.ecva.net/Conferences/2024/Reviewers#all-outstanding-reviewers">Outstanding Reviewers for ECCV 2024</a>.<br>
-        <p class="label date">09-2024</p> We just released a <a href="https://github.com/Anttwo/sugar_frosting_blender_addon/">Blender Add-On</a> to import, edit and animate 3D scenes reconstructed with SuGaR and Frosting without a single line of code. <br>
-        <p class="label date">08-2024</p> <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been selected for an oral presentation at ECCV 2024!<br>
-        <p class="label date">07-2024</p> <a href="https://anttwo.github.io/frosting/">Gaussian Frosting</a> paper has been accepted to ECCV 2024!<br>
-        <p class="label date">04-2024</p> I was invited by <a href="https://scholar.google.com/citations?user=SXXEZhYAAAAJ&hl=en">Pr. Ko Nishino from Kyoto University</a> to work in Japan for 6 weeks. It really was a great experience!<br>
-        <p class="label date">03-2024</p> I was invited by <a href="https://grgkopanas.github.io/">George Kopanas</a> and <a href="https://snosixtyboo.github.io/">Bernhard Kerbl</a> 
-        to give a talk about Surface Reconstruction using Gaussian Splatting during the <a href="https://3dgstutorial.github.io/index.html">3DV 2024 tutorial on Gaussian Splatting</a>.<br>
-        <p class="label date">02-2024</p> <a href="https://anttwo.github.io/sugar/">SuGaR</a> paper has been accepted to CVPR 2024!<br>
-        <p class="label date">03-2023</p> <a href="https://anttwo.github.io/MACARONS/">MACARONS</a> paper has been accepted to CVPR 2023!<br>
-        <p class="label date">11-2022</p> <a href="https://arxiv.org/abs/2208.10449">SCONE</a> paper has received a Spotlight at NeurIPS 2022!<br>
-        <p class="label date">08-2022</p> <a href="https://arxiv.org/abs/2208.10449">SCONE</a> paper has been accepted to NeurIPS 2022!<br>
-        <p class="label date">09-2021</p> I'm starting my PhD!<br>
+        <div class="pub-body">
+          <span class="pub-venue">arXiv 2026</span>
+          <h3 class="pub-title">
+            <a href="https://diego1401.github.io/BlobsToSpokesWebsite/">From Blobs to Spokes: High-Fidelity Surface Reconstruction via Oriented Gaussians</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://diego1401.github.io/">Diego Gomez</a><span class="eq-mark">*</span>,
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a><span class="eq-mark">*</span>,
+            <a href="https://nissmar.github.io/">Nissim Maruani</a>,
+            <a href="https://s2.hk/">Bingchen Gong</a>,
+            <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>
+          </div>
+          <p class="pub-abstract">
+            We interpret 3D Gaussians as stochastic oriented surface elements and derive closed-form vacancy and normal fields,
+            enabling fast, watertight, and compact mesh extraction of full 3D scenes. Our method recovers extremely thin structures
+            such as bicycle spokes while producing meshes with significantly fewer vertices than concurrent works.
+          </p>
+          <div class="pub-equal">*Both authors contributed equally to the paper.</div>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2604.07337"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/diego1401/GaussianWrapping"><i class="fa fa-code"></i> Code</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-blobs"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-blobs">
+<pre>@misc{gomez2026blobsspokeshighfidelitysurface,
+    title={From Blobs to Spokes: High-Fidelity Surface Reconstruction via Oriented Gaussians},
+    author={Gomez, Diego and Gu{\'e}don, Antoine and Maruani, Nissim and Gong, Bingchen and Ovsjanikov, Maks},
+    year={2026},
+    eprint={2604.07337},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV},
+    url={https://arxiv.org/abs/2604.07337},
+}</pre>
+          </div>
         </div>
-    </div>
+      </article>
 
-    <!-- Publications -->
-     <br>
-    <div class="container">
-        <h2>Publications</h2>
-        <hr/>
-
-        <!-- From Blobs to Spokes -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://diego1401.github.io/BlobsToSpokesWebsite/">
-                    <img src="./media/wrapping.jpg" alt="blobs_to_spokes" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://diego1401.github.io/BlobsToSpokesWebsite/">
-                    <h4>From Blobs to Spokes: High-Fidelity Surface Reconstruction via Oriented Gaussians</h4>
-                </a>
-                <p style="font-size: 20px;">arXiv 2026</p>
-                <div>
-                    <a href="https://diego1401.github.io/">Diego Gomez</a>*,
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>*,
-                    <a href="https://nissmar.github.io/">Nissim Maruani</a>,
-                    <a href="https://s2.hk/">Bingchen Gong</a>,
-                    <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>
-                </div>
-                We interpret 3D Gaussians as stochastic oriented surface elements and derive closed-form
-                vacancy and normal fields, enabling fast, watertight, and compact mesh extraction of full 3D scenes.
-                Our method recovers extremely thin structures such as bicycle spokes while producing
-                meshes with significantly fewer vertices than concurrent works. <br>
-                <span style="font-size: 13px;">*Both authors contributed equally to the paper.</span><br>
-                <a class="label label-info" href="https://arxiv.org/abs/2604.07337"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/diego1401/GaussianWrapping"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse7">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @misc{gomez2026blobsspokeshighfidelitysurface,
-                                    title={From Blobs to Spokes: High-Fidelity Surface Reconstruction via Oriented Gaussians}, 
-                                    author={Gomez, Diego and Gu{\'e}don, Antoine and Maruani, Nissim and Gong, Bingchen and Ovsjanikov, Maks},
-                                    year={2026},
-                                    eprint={2604.07337},
-                                    archivePrefix={arXiv},
-                                    primaryClass={cs.CV},
-                                    url={https://arxiv.org/abs/2604.07337},
-                                }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
-        </div><br>
-        
-        <!-- MAGICIAN -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://shiyao-li.github.io/magician/">
-                    <img src="./media/magician.jpg" alt="magician" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://shiyao-li.github.io/magician/">
-                    <h4>MAGICIAN: Efficient Long-Term Planning with Imagined Gaussians for Active Mapping</h4>
-                </a>
-                <p style="font-size: 20px;">CVPR 2026 (Oral)</p>
-                <div>
-                    <a href="https://shiyao-li.github.io/">Shiyao Li</a>,
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>,
-                    <a href="https://cshizhe.github.io/">Shizhe Chen</a>,
-                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
-                </div>
-                We introduce MAGICIAN, a novel framework capable of generating long-horizon trajectories
-                for active 3D mapping. We propose Imagined Gaussians, derived from a neural occupancy field,
-                to enable efficient and reliable coverage gain prediction from new viewpoints in unknown scenes,
-                supporting feasible long-term planning with tree search. <br>
-                <a class="label label-info" href="https://arxiv.org/abs/2603.22650"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/shiyao-li/MAGICIAN"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse8">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @inproceedings{li2026magician,
-                                    title={MAGICIAN: Efficient Long-Term Planning with Imagined Gaussians for Active Mapping},
-                                    author={Li, Shiyao and Gu{\'e}don, Antoine and Chen, Shizhe and Lepetit, Vincent},
-                                    booktitle={CVPR},
-                                    year={2026},
-                                }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
-        </div><br>
-
-        <!-- MILo -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://anttwo.github.io/milo/">
-                    <img src="./media/milo.png" alt="milo" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://anttwo.github.io/milo/">
-                    <h4>MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction</h4>
-                </a>
-                <p style="font-size: 20px;">SIGGRAPH Asia 2025 - Journal Track (TOG)</p>
-                <div>
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>*,
-                    <a href="https://diego1401.github.io/">Diego Gomez</a>*,
-                    <a href="https://nissmar.github.io/">Nissim Maruani</a>,
-                    <a href="https://s2.hk/">Bingchen Gong</a>,
-                    <a href="https://www-sop.inria.fr/members/George.Drettakis/">George Drettakis</a>,
-                    <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>
-                </div>
-                We propose a novel differentiable mesh extraction framework that operates during the optimization 
-                of 3DGS representations. At every training iteration, we differentiably extract a mesh only
-                from Gaussian parameters. This enables gradient flow from the mesh to Gaussians, and guides 
-                Gaussians toward configurations better suited for surface reconstruction, resulting in better 
-                meshes with significantly fewer vertices. <br>
-                <span style="font-size: 13px;">*Both authors contributed equally to the paper.</span><br>
-                <a class="label label-info" href="https://arxiv.org/abs/2506.24096"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/Anttwo/MILo"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse6">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @article{guedon2025milo,
-                                    author       = {Gu{\'e}don, Antoine and Gomez, Diego and Maruani, Nissim and Gong, Bingchen and Drettakis, George and Ovsjanikov, Maks},
-                                    title        = {MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction},
-                                    journal      = {ACM Transactions on Graphics},
-                                    number       = {},
-                                    volume       = {},
-                                    month        = {},
-                                    year         = {2025},
-                                    url          = {https://anttwo.github.io/milo/}
-                                }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
-        </div><br>
-
-        <!-- MAtCha -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://anttwo.github.io/matcha/">
-                    <img src="./media/matcha.png" alt="matcha" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://anttwo.github.io/matcha/">
-                    <h4>MAtCha Gaussians: Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views</h4>
-                </a>
-                <p style="font-size: 20px;">CVPR 2025 (Highlight)</p>
-                <div>
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>, 
-                    <a href="https://scholar.google.com/citations?user=-LzEJVwAAAAJ&hl=en">Tomoki Ichikawa</a>,
-                    <a href="https://kyamashita5.github.io/">Kohei Yamashita</a>,
-                    <a href="https://vision.ist.i.kyoto-u.ac.jp/">Ko Nishino</a>
-                </div>
-                We propose a novel surface representation for reconstructing high-quality 3D meshes with photorealistic rendering from sparse-view images.
-                Our key idea is to model the underlying scene geometry as an Atlas of Charts which we render with 2D Gaussian surfels.
-                Combined with a sparse-view SfM model like MASt3R-SfM, MAtCha can recover sharp meshes of both foreground and background objects within minutes from a few unposed RGB images.  <br>
-                <a class="label label-info" href="https://arxiv.org/abs/2412.06767"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/Anttwo/MAtCha"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse5">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @article{guedon2025matcha,
-                                    title={MAtCha Gaussians: Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views}, 
-                                    author={Gu{\'e}don, Antoine and Ichikawa, Tomoki and Yamashita, Kohei and Nishino, Ko},
-                                    journal={CVPR},
-                                    year={2025},
-                                }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
-        </div><br>
-
-        <!-- Frosting -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://anttwo.github.io/frosting/">
-                    <img src="./media/frosting.png" alt="frosting" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://anttwo.github.io/frosting/">
-                    <h4>Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering</h4>
-                </a>
-                <p style="font-size: 20px;">ECCV 2024 (Oral)</p>
-                <div>
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>, 
-                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
-                </div>
-                We propose to represent surfaces by a mesh covered with a "Frosting" layer of varying thickness and made of 3D Gaussians. 
-                This representation captures both complex volumetric effects created by fuzzy materials such as hair or grass as well as flat surfaces. 
-                Built from RGB images only, it can be rendered in real-time and animated using traditional animation tools. <br>
-                <a class="label label-info" href="https://arxiv.org/abs/2403.14554"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/Anttwo/Frosting"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Blender Add-On</a>
-                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse4">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @article{guedon2024frosting,
-                                    title={Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering},
-                                    author={Gu{\'e}don, Antoine and Lepetit, Vincent},
-                                    journal={ECCV},
-                                    year={2024}
-                                }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
-        </div><br>
-        
-        <!-- SuGaR -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://anttwo.github.io/sugar/">
-                    <img src="./media/sugar.png" alt="sugar" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://anttwo.github.io/sugar/">
-                    <h4>SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering</h4>
-                </a>
-                <p style="font-size: 20px;">CVPR 2024</p>
-                <div>
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>, 
-                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
-                </div>
-                We introduce a method that extracts accurate and editable meshes 
-                from 3D Gaussian Splatting representations within minutes on a single GPU. 
-                This enables easy editing, sculpting, rigging, animating, or relighting of the Gaussians using traditional softwares 
-                (Blender, Unity, Unreal Engine, etc.) by manipulating the mesh instead of the Gaussians themselves. <br>
-                <a class="label label-info" href="https://arxiv.org/abs/2311.12775"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/Anttwo/SuGaR"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Blender Add-On</a>
-                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse3">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @article{guedon2023sugar,
-                                    title={SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering},
-                                    author={Gu{\'e}don, Antoine and Lepetit, Vincent},
-                                    journal={CVPR},
-                                    year={2024}
-                                }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
-        </div><br>
-        
-        <!-- MACARONS -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://anttwo.github.io/MACARONS/">
-                    <img src="./media/macarons.png" alt="macarons" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://anttwo.github.io/MACARONS/">
-                    <h4>MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision</h4>
-                </a>
-                <p style="font-size: 20px;">CVPR 2023</p>
-                <div>
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>, 
-                    <a href="https://www.tmonnier.com/">Tom Monnier</a>, 
-                    <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>, 
-                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
-                </div>
-                We introduce a novel method that simultaneously learns to explore new large
-                environments and to reconstruct them in 3D from color images only, in a self-supervised fashion.<br>
-                <a class="label label-info" href="https://arxiv.org/abs/2303.03315"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/Anttwo/MACARONS"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse2">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @inproceedings{guedon2023macarons,
-                                    title={{MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision}},
-                                    author={Gu{\'e}don, Antoine and Monnier, Tom and Monasse, Pascal and Lepetit, Vincent},
-                                    booktitle={{CVPR}},
-                                    year={2023},
-                                }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
-        </div><br>
-
-        <!-- SCONE -->
-        <div class="container" style="text-align:left; padding-top: 2rem; padding-bottom: 2rem;">
-            <div class="col-lg-4" style="text-align:left; padding-top: 2rem;">
-                <a href="https://arxiv.org/abs/2208.10449">
-                    <img src="./media/scone.png" alt="scone" style="width: 100%;">
-                </a>
-            </div>
-            <div  class="col-lg-8" style="text-align: left;">
-                <a href="https://arxiv.org/abs/2208.10449">
-                    <h4>SCONE: Surface Coverage Optimization in uNknown Environments by Volumetric Integration</h4>
-                </a>
-                <p style="font-size: 20px;">NeurIPS 2022 (Spotlight)</p>
-                <div>
-                    <a href="https://anttwo.github.io/"><b>Antoine Gu&eacutedon</b></a>, 
-                    <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>, 
-                    <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
-                </div>
-                We introduce a novel approach to solve the Next Best View problem for dense 3D reconstruction in unknown environments. 
-                Contrary to other learning-based methods, 
-                our approach scales to large 3D scenes and handles completely free camera motion at inference.<br>
-                <a class="label label-info" href="https://arxiv.org/abs/2208.10449"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-                <a class="label label-info" href="https://github.com/Anttwo/MACARONS"><i class="fa fa-code fa-lg" style="vertical-align: center; margin-top: 0px"></i>&nbsp;&nbsp;Code</a>
-                <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX</a> -->
-                <a class="label label-info" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                    <i class="fa fa-commenting fa-lg" style="vertical-align:center;margin-top:0px"></i>&nbsp;&nbsp;BibTeX
-                </a>
-                <div class="collapse" id="collapse1">
-                    <div class="card">
-                        <div class="card-block">
-                            <pre class="card-text clickselect">
-                                @inproceedings{guedon2022scone,
-                                    title={{SCONE: Surface Coverage Optimization in Unknown Environments by Volumetric Integration}},
-                                    author={Gu{\'e}don, Antoine and Monasse, Pascal and Lepetit, Vincent},
-                                    booktitle={{Advances in Neural Information Processing Systems}},
-                                    year={2022},
-                                  }
-                            </pre>
-                        </div>
-                      </div>
-                </div>
-            </div>
+      <!-- MAGICIAN -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://shiyao-li.github.io/magician/">
+          <img src="./media/magician.jpg" alt="MAGICIAN">
+        </a>
+        <div class="pub-body">
+          <span class="pub-venue">CVPR 2026 &middot; Oral</span>
+          <h3 class="pub-title">
+            <a href="https://shiyao-li.github.io/magician/">MAGICIAN: Efficient Long-Term Planning with Imagined Gaussians for Active Mapping</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://shiyao-li.github.io/">Shiyao Li</a>,
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a>,
+            <a href="https://cshizhe.github.io/">Shizhe Chen</a>,
+            <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+          </div>
+          <p class="pub-abstract">
+            We introduce MAGICIAN, a novel framework capable of generating long-horizon trajectories for active 3D mapping.
+            We propose Imagined Gaussians, derived from a neural occupancy field, to enable efficient and reliable
+            coverage gain prediction from new viewpoints in unknown scenes, supporting feasible long-term planning with tree search.
+          </p>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2603.22650"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/shiyao-li/MAGICIAN"><i class="fa fa-code"></i> Code</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-magician"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-magician">
+<pre>@inproceedings{li2026magician,
+    title={MAGICIAN: Efficient Long-Term Planning with Imagined Gaussians for Active Mapping},
+    author={Li, Shiyao and Gu{\'e}don, Antoine and Chen, Shizhe and Lepetit, Vincent},
+    booktitle={CVPR},
+    year={2026},
+}</pre>
+          </div>
         </div>
+      </article>
+
+      <!-- MILo -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://anttwo.github.io/milo/">
+          <img src="./media/milo.png" alt="MILo">
+        </a>
+        <div class="pub-body">
+          <span class="pub-venue">SIGGRAPH Asia 2025 &middot; TOG</span>
+          <h3 class="pub-title">
+            <a href="https://anttwo.github.io/milo/">MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a><span class="eq-mark">*</span>,
+            <a href="https://diego1401.github.io/">Diego Gomez</a><span class="eq-mark">*</span>,
+            <a href="https://nissmar.github.io/">Nissim Maruani</a>,
+            <a href="https://s2.hk/">Bingchen Gong</a>,
+            <a href="https://www-sop.inria.fr/members/George.Drettakis/">George Drettakis</a>,
+            <a href="https://www.lix.polytechnique.fr/~maks/">Maks Ovsjanikov</a>
+          </div>
+          <p class="pub-abstract">
+            We propose a novel differentiable mesh extraction framework that operates during the optimization of 3DGS representations.
+            At every training iteration, we differentiably extract a mesh only from Gaussian parameters. This enables gradient flow
+            from the mesh to Gaussians, and guides Gaussians toward configurations better suited for surface reconstruction,
+            resulting in better meshes with significantly fewer vertices.
+          </p>
+          <div class="pub-equal">*Both authors contributed equally to the paper.</div>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2506.24096"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/Anttwo/MILo"><i class="fa fa-code"></i> Code</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-milo"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-milo">
+<pre>@article{guedon2025milo,
+    author       = {Gu{\'e}don, Antoine and Gomez, Diego and Maruani, Nissim and Gong, Bingchen and Drettakis, George and Ovsjanikov, Maks},
+    title        = {MILo: Mesh-In-the-Loop Gaussian Splatting for Detailed and Efficient Surface Reconstruction},
+    journal      = {ACM Transactions on Graphics},
+    year         = {2025},
+    url          = {https://anttwo.github.io/milo/}
+}</pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- MAtCha -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://anttwo.github.io/matcha/">
+          <img src="./media/matcha.png" alt="MAtCha">
+        </a>
+        <div class="pub-body">
+          <span class="pub-venue">CVPR 2025 &middot; Highlight</span>
+          <h3 class="pub-title">
+            <a href="https://anttwo.github.io/matcha/">MAtCha Gaussians: Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a>,
+            <a href="https://scholar.google.com/citations?user=-LzEJVwAAAAJ&amp;hl=en">Tomoki Ichikawa</a>,
+            <a href="https://kyamashita5.github.io/">Kohei Yamashita</a>,
+            <a href="https://vision.ist.i.kyoto-u.ac.jp/">Ko Nishino</a>
+          </div>
+          <p class="pub-abstract">
+            We propose a novel surface representation for reconstructing high-quality 3D meshes with photorealistic rendering from
+            sparse-view images. Our key idea is to model the underlying scene geometry as an Atlas of Charts which we render with
+            2D Gaussian surfels. Combined with a sparse-view SfM model like MASt3R-SfM, MAtCha can recover sharp meshes of both
+            foreground and background objects within minutes from a few unposed RGB images.
+          </p>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2412.06767"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/Anttwo/MAtCha"><i class="fa fa-code"></i> Code</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-matcha"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-matcha">
+<pre>@article{guedon2025matcha,
+    title={MAtCha Gaussians: Atlas of Charts for High-Quality Geometry and Photorealism From Sparse Views},
+    author={Gu{\'e}don, Antoine and Ichikawa, Tomoki and Yamashita, Kohei and Nishino, Ko},
+    journal={CVPR},
+    year={2025},
+}</pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- Frosting -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://anttwo.github.io/frosting/">
+          <img src="./media/frosting.png" alt="Gaussian Frosting">
+        </a>
+        <div class="pub-body">
+          <span class="pub-venue">ECCV 2024 &middot; Oral</span>
+          <h3 class="pub-title">
+            <a href="https://anttwo.github.io/frosting/">Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a>,
+            <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+          </div>
+          <p class="pub-abstract">
+            We propose to represent surfaces by a mesh covered with a "Frosting" layer of varying thickness and made of 3D Gaussians.
+            This representation captures both complex volumetric effects created by fuzzy materials such as hair or grass as well as
+            flat surfaces. Built from RGB images only, it can be rendered in real-time and animated using traditional animation tools.
+          </p>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2403.14554"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/Anttwo/Frosting"><i class="fa fa-code"></i> Code</a>
+            <a class="label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad"></i> Blender Add-On</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-frosting"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-frosting">
+<pre>@article{guedon2024frosting,
+    title={Gaussian Frosting: Editable Complex Radiance Fields with Real-Time Rendering},
+    author={Gu{\'e}don, Antoine and Lepetit, Vincent},
+    journal={ECCV},
+    year={2024}
+}</pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SuGaR -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://anttwo.github.io/sugar/">
+          <img src="./media/sugar.png" alt="SuGaR">
+        </a>
+        <div class="pub-body">
+          <span class="pub-venue">CVPR 2024</span>
+          <h3 class="pub-title">
+            <a href="https://anttwo.github.io/sugar/">SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a>,
+            <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+          </div>
+          <p class="pub-abstract">
+            We introduce a method that extracts accurate and editable meshes from 3D Gaussian Splatting representations within
+            minutes on a single GPU. This enables easy editing, sculpting, rigging, animating, or relighting of the Gaussians
+            using traditional softwares (Blender, Unity, Unreal Engine, etc.) by manipulating the mesh instead of the Gaussians themselves.
+          </p>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2311.12775"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/Anttwo/SuGaR"><i class="fa fa-code"></i> Code</a>
+            <a class="label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad"></i> Blender Add-On</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-sugar"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-sugar">
+<pre>@article{guedon2023sugar,
+    title={SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering},
+    author={Gu{\'e}don, Antoine and Lepetit, Vincent},
+    journal={CVPR},
+    year={2024}
+}</pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- MACARONS -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://anttwo.github.io/MACARONS/">
+          <img src="./media/macarons.png" alt="MACARONS">
+        </a>
+        <div class="pub-body">
+          <span class="pub-venue">CVPR 2023</span>
+          <h3 class="pub-title">
+            <a href="https://anttwo.github.io/MACARONS/">MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a>,
+            <a href="https://www.tmonnier.com/">Tom Monnier</a>,
+            <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>,
+            <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+          </div>
+          <p class="pub-abstract">
+            We introduce a novel method that simultaneously learns to explore new large environments and to reconstruct them in 3D
+            from color images only, in a self-supervised fashion.
+          </p>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2303.03315"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/Anttwo/MACARONS"><i class="fa fa-code"></i> Code</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-macarons"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-macarons">
+<pre>@inproceedings{guedon2023macarons,
+    title={{MACARONS: Mapping And Coverage Anticipation with RGB ONline Self-supervision}},
+    author={Gu{\'e}don, Antoine and Monnier, Tom and Monasse, Pascal and Lepetit, Vincent},
+    booktitle={{CVPR}},
+    year={2023},
+}</pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SCONE -->
+      <article class="pub-card reveal">
+        <a class="pub-thumb" href="https://arxiv.org/abs/2208.10449">
+          <img src="./media/scone.png" alt="SCONE">
+        </a>
+        <div class="pub-body">
+          <span class="pub-venue">NeurIPS 2022 &middot; Spotlight</span>
+          <h3 class="pub-title">
+            <a href="https://arxiv.org/abs/2208.10449">SCONE: Surface Coverage Optimization in uNknown Environments by Volumetric Integration</a>
+          </h3>
+          <div class="pub-authors">
+            <a href="https://anttwo.github.io/"><b>Antoine Gu&eacute;don</b></a>,
+            <a href="https://imagine.enpc.fr/~monasse/">Pascal Monasse</a>,
+            <a href="https://vincentlepetit.github.io/">Vincent Lepetit</a>
+          </div>
+          <p class="pub-abstract">
+            We introduce a novel approach to solve the Next Best View problem for dense 3D reconstruction in unknown environments.
+            Contrary to other learning-based methods, our approach scales to large 3D scenes and handles completely free camera
+            motion at inference.
+          </p>
+          <div class="pub-actions">
+            <a class="label-info" href="https://arxiv.org/abs/2208.10449"><i class="fa fa-file-text"></i> Paper</a>
+            <a class="label-info" href="https://github.com/Anttwo/MACARONS"><i class="fa fa-code"></i> Code</a>
+            <button type="button" class="label-info" data-bibtex-toggle="bib-scone"><i class="fa fa-commenting"></i> BibTeX <i class="fa fa-chevron-down"></i></button>
+          </div>
+          <div class="pub-bibtex" id="bib-scone">
+<pre>@inproceedings{guedon2022scone,
+    title={{SCONE: Surface Coverage Optimization in Unknown Environments by Volumetric Integration}},
+    author={Gu{\'e}don, Antoine and Monasse, Pascal and Lepetit, Vincent},
+    booktitle={{Advances in Neural Information Processing Systems}},
+    year={2022},
+}</pre>
+          </div>
+        </div>
+      </article>
 
     </div>
+  </section>
 
-    <p style="text-align: center; padding-top: 2rem; font-size: 15px;">
-        &copy 2025 Antoine Guédon. You are welcome to copy the code, please attribute the source with a link back to this page.
-    </p>
+  <!-- =================== FOOTER =================== -->
+  <footer class="site-footer">
+    &copy; 2026 Antoine Gu&eacute;don &middot; You are welcome to copy the code, please attribute the source with a link back to this page.
+  </footer>
 
-    <!-- Dark mode toggle -->
-    <script>
-        const themeToggle = document.createElement('button');
-        themeToggle.className = 'theme-toggle';
-        themeToggle.innerHTML = '<span class="material-icons-outlined">dark_mode</span>';
+  <!-- Scripts -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./assets/vendor/three/build/three.module.js",
+      "three/addons/loaders/PLYLoader.js": "./assets/vendor/three/loaders/PLYLoader.js"
+    }
+  }
+  </script>
+  <!-- TEMP: hero-mesh disabled while we ship the rest of the page in lite mode.
+       Revert by uncommenting the script block below. -->
+  <!--
+  <script type="module">
+    // Boot the hero scene — surface any module-load failure clearly in the console
+    import('./assets/hero-mesh.js').catch((err) => {
+      console.error('[hero-mesh] module failed to load:', err);
+    });
+  </script>
+  -->
 
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeToggle.innerHTML = newTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
-        });
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        themeToggle.innerHTML = savedTheme === 'dark' ? '<span class="material-icons-outlined">light_mode</span>' : '<span class="material-icons-outlined">dark_mode</span>';
-
-        document.body.appendChild(themeToggle);
-
-        // Animate chevron arrow for older news collapse
-        $('#collapse6').on('show.bs.collapse', function () {
-            $('a[data-target="#collapse6"] i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
-        });
-        $('#collapse6').on('hide.bs.collapse', function () {
-            $('a[data-target="#collapse6"] i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
-        });
-    </script>
+  <script src="./assets/site.js"></script>
 
 </body>
+</html>

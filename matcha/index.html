@@ -37,6 +37,7 @@
  <!-- <link href="style_2.css" rel="stylesheet"> -->
  <!-- <link href="style.css" rel="stylesheet"> -->
  <link href="../base.css" rel="stylesheet">
+ <link href="../assets/project.css" rel="stylesheet">
 
 <!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
@@ -53,7 +54,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 </head>
-<body>
+<body class="project-page">
 
 <div class="container" style="text-align:center; padding-top:2rem 15px">
  <div class="row" style="text-align:center">
@@ -87,9 +88,9 @@
  <div class="row">
    <div class="col-xs-12">
    <h3 style="text-align:center; padding-bottom:1rem">
-     <a class="label label-info" href="https://arxiv.org/abs/2412.06767"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-     <a class="label label-info" href="https://github.com/Anttwo/MAtCha"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code</a>
-     <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a>
+     <a class="label label-info" href="https://arxiv.org/abs/2412.06767"><i class="fa fa-file-text"></i>Paper</a>
+     <a class="label label-info" href="https://github.com/Anttwo/MAtCha"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>Code</a>
+     <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>BibTeX</a>
    </h3>
    </div>
  </div>
@@ -123,12 +124,24 @@
 <div class="container">
   <h2>Updates</h2>
   <hr/>
-  <p>
-    <p class="label date">04-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> has been selected for a Highlight at CVPR 2025!<br>
-    <p class="label date">04-2025</p> We released <a href="https://github.com/Anttwo/MAtCha">MAtCha's code</a>!<br>
-    <p class="label date">03-2025</p> <a href="https://anttwo.github.io/matcha/">MAtCha</a> paper has been accepted to CVPR 2025!<br>
-    <p class="label date">12-2024</p> Initial release of the paper. <br>
-  </p>
+  <div class="news-timeline">
+    <div class="news-item">
+      <div class="news-date">04-2025</div>
+      <div class="news-body"><a href="https://anttwo.github.io/matcha/">MAtCha</a> has been selected for a Highlight at CVPR 2025!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">04-2025</div>
+      <div class="news-body">We released <a href="https://github.com/Anttwo/MAtCha">MAtCha's code</a>!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">03-2025</div>
+      <div class="news-body"><a href="https://anttwo.github.io/matcha/">MAtCha</a> paper has been accepted to CVPR 2025!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">12-2024</div>
+      <div class="news-body">Initial release of the paper.</div>
+    </div>
+  </div>
 <!-- </div> -->
 <p><br></p>
 
@@ -523,6 +536,8 @@
       background-image: none;  /* Remove the default gradient */
   }
 </style>
+
+<script src="../assets/project.js"></script>
 
 </body>
 </html>

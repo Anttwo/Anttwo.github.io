@@ -37,6 +37,7 @@
  <!-- <link href="style_2.css" rel="stylesheet"> -->
  <!-- <link href="style.css" rel="stylesheet"> -->
  <link href="../base.css" rel="stylesheet">
+ <link href="../assets/project.css" rel="stylesheet">
 
 <!--  Google Analytics (DO NOT copy/paste following section, setup your own analytics tag at https://analytics.google.com/analytics/web/)  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDL4R10HKE"></script>
@@ -53,7 +54,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 </head>
-<body>
+<body class="project-page">
 
 <!-- Video Carousel Banner -->
 <div class="container-fluid" style="padding: 0; margin-bottom: 2rem;">
@@ -221,12 +222,12 @@
  <div class="row">
    <div class="col-xs-12">
    <h3 style="text-align:center; padding-bottom:1rem">
-     <a class="label label-info" href="https://arxiv.org/abs/2506.24096"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Paper</a>
-     <a class="label label-info" href="https://github.com/Anttwo/MILo"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Code</a>
-     <!-- <a class="label label-info" href=""><i class="fa fa-camera" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Gallery</a> -->
-     <a class="label label-info" href="#gallery-section"><i class="fa fa-picture-o" style="vertical-align: top; margin-top: 6px"></i>&nbsp;&nbsp;Gallery</a>
-     <!-- <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>&nbsp;&nbsp;Blender Add-On</a> -->
-     <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>&nbsp;&nbsp;BibTeX</a> -->
+     <a class="label label-info" href="https://arxiv.org/abs/2506.24096"><i class="fa fa-file-text"></i>Paper</a>
+     <a class="label label-info" href="https://github.com/Anttwo/MILo"><i class="fa fa-code fa-lg" style="vertical-align: top; margin-top: 6px"></i>Code</a>
+     <!-- <a class="label label-info" href=""><i class="fa fa-camera" style="vertical-align: top; margin-top: 6px"></i>Gallery</a> -->
+     <a class="label label-info" href="#gallery-section"><i class="fa fa-picture-o" style="vertical-align: top; margin-top: 6px"></i>Gallery</a>
+     <!-- <a class="label label-info" href="https://github.com/Anttwo/sugar_frosting_blender_addon/"><i class="fa fa-gamepad fa-lg" style="vertical-align:top; margin-top:5px"></i>Blender Add-On</a> -->
+     <!-- <a class="label label-info" href="./ref.bib"><i class="fa fa-commenting fa-lg" style="vertical-align:top;margin-top:6px"></i>BibTeX</a> -->
    </h3>
    </div>
  </div>
@@ -263,11 +264,20 @@
 <div class="container">
   <h2>Updates</h2>
   <hr/>
-  <p>
-    <p class="label date">09-2025</p> <a href="https://github.com/Anttwo/MILo">Code</a> release.<br>
-    <p class="label date">08-2025</p> MILo has been accepted to SIGGRAPH Asia 2025 - Journal Track (TOG)!<br>
-    <p class="label date">06-2025</p> Preprint release on <a href="https://arxiv.org/abs/2506.24096">arXiv</a>
-  </p>
+  <div class="news-timeline">
+    <div class="news-item">
+      <div class="news-date">09-2025</div>
+      <div class="news-body"><a href="https://github.com/Anttwo/MILo">Code</a> release.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">08-2025</div>
+      <div class="news-body">MILo has been accepted to SIGGRAPH Asia 2025 - Journal Track (TOG)!</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">06-2025</div>
+      <div class="news-body">Preprint release on <a href="https://arxiv.org/abs/2506.24096">arXiv</a>.</div>
+    </div>
+  </div>
 <!-- </div> -->
 <p><br></p>
 
@@ -1071,6 +1081,8 @@
   });
 
 </script>
+
+<script src="../assets/project.js"></script>
 
 </body>
 </html>
