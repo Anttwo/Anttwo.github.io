@@ -74,7 +74,10 @@ function initHeroMesh(canvas, opts = {}) {
   // Desktop keeps the full-quality settings untouched.
   const isMobile = !!(window.matchMedia &&
     window.matchMedia('(max-width: 820px)').matches);
-  const PIXEL_RATIO = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+  const PIXEL_RATIO = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
+  // Render at the display's native refresh rate (no throttle): a capped
+  // frame rate read as choppier than the lighter full-rate loop.
+  const MIN_FRAME_MS = 0;
 
   // ---------- Renderer / scene ----------
   let renderer;
@@ -129,6 +132,10 @@ function initHeroMesh(canvas, opts = {}) {
   let revealAnim = null;
   let sparkle = null;
   let sparkleElapsedMs = 0;
+  // Mobile-only lightweight effect: a static particle cloud that simply
+  // cross-fades with the mesh (no per-vertex wave/twinkle shader).
+  let switchPoints = null;
+  let switchElapsedMs = 0;
   const EDGE_OPACITY = 0.12;
   const modelRotationOffset = new THREE.Euler(0, 0, 0);
 
@@ -265,6 +272,51 @@ function initHeroMesh(canvas, opts = {}) {
     console.info('[hero-mesh] sparkle layer ready —', N, 'points');
   }
 
+  // ---- Mobile switch layer ---------------------------------------------
+  // A static, non-animated particle cloud (positions never change, plain
+  // additive sprites — no wave/twinkle shader). The frame loop just
+  // cross-fades its opacity with the mesh's, and hides whichever object is
+  // invisible so we never pay for both at once. Far lighter than the
+  // sparkle layer while keeping a bit of life in the mobile hero.
+  function createSwitchLayer(srcGeometry) {
+    if (switchPoints || reduceMotion) return;
+    const src = srcGeometry.attributes.position.array;
+    const N_total = srcGeometry.attributes.position.count;
+    const MAX = 12000;
+    const stride = Math.max(1, Math.floor(N_total / MAX));
+    const N = Math.floor(N_total / stride);
+
+    const posArr = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      const s = i * stride * 3;
+      posArr[i * 3]     = src[s];
+      posArr[i * 3 + 1] = src[s + 1];
+      posArr[i * 3 + 2] = src[s + 2];
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+    const mat = new THREE.PointsMaterial({
+      size: 0.02,
+      map: makeParticleSprite(),
+      color: 0xc8fff0,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      sizeAttenuation: true,
+    });
+    switchPoints = new THREE.Points(geo, mat);
+    switchPoints.visible = false;
+    group.add(switchPoints);
+    switchElapsedMs = 0;
+    if (mesh) {
+      mesh.material.transparent = true;
+      mesh.material.opacity = 1;
+      mesh.material.needsUpdate = true;
+    }
+    console.info('[hero-mesh] mobile switch layer ready —', N, 'points');
+  }
+
   // If the PLY ships with per-vertex colors, render unlit so the texture
   // reads as an emissive RGB surface (matches the gallery viewers' look).
   // Otherwise fall back to the brand-green flat-shaded Phong material.
@@ -315,7 +367,7 @@ function initHeroMesh(canvas, opts = {}) {
     // Cap to keep the assembly silky-smooth even on integrated GPUs.
     // The reveal updates every particle's position on the CPU each frame,
     // so a lower budget on phones removes the initial stutter too.
-    const MAX_PARTICLES = isMobile ? 24000 : 60000;
+    const MAX_PARTICLES = isMobile ? 15000 : 60000;
     const stride = Math.max(1, Math.floor(N_total / MAX_PARTICLES));
     const N = Math.floor(N_total / stride);
 
@@ -417,8 +469,13 @@ function initHeroMesh(canvas, opts = {}) {
       }
       if (edgeOverlay) edgeOverlay.material.opacity = EDGE_OPACITY;
       revealAnim = null;
-      // Hand off to the persistent wave-glow sparkle layer
-      if (mesh) createSparkleLayer(mesh.geometry);
+      // Desktop: the full pulsing wave-glow sparkle layer.
+      // Mobile: a lightweight static particle ↔ mesh cross-fade instead of
+      // the per-frame animated additive cloud.
+      if (mesh) {
+        if (isMobile) createSwitchLayer(mesh.geometry);
+        else createSparkleLayer(mesh.geometry);
+      }
     }
   }
 
@@ -537,8 +594,13 @@ function initHeroMesh(canvas, opts = {}) {
     targetPY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
   }
   function onPointerLeave() { targetPX = 0; targetPY = 0; }
-  window.addEventListener('pointermove', onPointerMove, { passive: true });
-  window.addEventListener('pointerleave', onPointerLeave);
+  // Pointer parallax is a hover effect — pointless on touch, and the
+  // getBoundingClientRect() read on every move would fire during scroll.
+  // Skip it entirely on phones.
+  if (!isMobile) {
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerleave', onPointerLeave);
+  }
 
   // ---------- Visibility (pause off-screen) ----------
   let visible = true;
@@ -569,6 +631,10 @@ function initHeroMesh(canvas, opts = {}) {
     if (!running) return;
     requestAnimationFrame(frame);
     if (!visible) { last = now; return; }
+    // Frame-rate throttle (mobile only): skip this rAF tick until at least
+    // MIN_FRAME_MS has elapsed. `last` is left untouched so the next dt
+    // covers the full skipped interval and motion stays time-correct.
+    if (MIN_FRAME_MS && (now - last) < MIN_FRAME_MS) return;
     const dt = Math.min(50, now - last);
     last = now;
 
@@ -628,6 +694,41 @@ function initHeroMesh(canvas, opts = {}) {
       u.uBgIntensity.value = 1.0 - meshOp;
     }
 
+    // Mobile switch layer: hold mesh, fade to particles, hold particles,
+    // fade back — a plain opacity cross-fade with no per-vertex animation.
+    // Whichever object is invisible is also culled so we never render both.
+    if (switchPoints && mesh) {
+      switchElapsedMs += dt;
+      const t = switchElapsedMs * 0.001;
+      const FADE = 0.8;   // seconds spent cross-fading
+      const HOLD = 2.4;   // seconds spent holding each state
+      const FULL = 2 * (FADE + HOLD);
+      const tt = t % FULL;
+
+      let p; // particle-cloud opacity (0 = mesh, 1 = particles)
+      if (tt < HOLD) {
+        p = 0;
+      } else if (tt < HOLD + FADE) {
+        const x = (tt - HOLD) / FADE;
+        p = x * x * (3 - 2 * x);
+      } else if (tt < 2 * HOLD + FADE) {
+        p = 1;
+      } else {
+        const x = (tt - (2 * HOLD + FADE)) / FADE;
+        p = 1 - x * x * (3 - 2 * x);
+      }
+
+      const meshOp = 1 - p;
+      mesh.material.opacity = meshOp;
+      mesh.visible = meshOp > 0.003;
+      switchPoints.material.opacity = p;
+      switchPoints.visible = p > 0.003;
+      if (edgeOverlay) {
+        edgeOverlay.material.opacity = EDGE_OPACITY * meshOp;
+        edgeOverlay.visible = meshOp > 0.003;
+      }
+    }
+
     renderer.render(scene, camera);
   }
   requestAnimationFrame(frame);
@@ -659,6 +760,11 @@ function initHeroMesh(canvas, opts = {}) {
         try { sparkle.geometry.dispose(); } catch (e) {}
         try { sparkle.material.dispose(); } catch (e) {}
         sparkle = null;
+      }
+      if (switchPoints) {
+        try { switchPoints.geometry.dispose(); } catch (e) {}
+        try { switchPoints.material.dispose(); } catch (e) {}
+        switchPoints = null;
       }
       if (particleTexture) {
         try { particleTexture.dispose(); } catch (e) {}
