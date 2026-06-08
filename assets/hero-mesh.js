@@ -66,12 +66,22 @@ function initHeroMesh(canvas, opts = {}) {
     },
   };
 
+  // ---------- Mobile budget ----------
+  // On phones the hero stutters because every frame re-renders a textured
+  // mesh + a big additive-blended sparkle cloud into a high-DPR buffer.
+  // Fragment cost scales with DPR², and transparent overdraw is the worst
+  // case for mobile GPUs, so we dial those back on small viewports only.
+  // Desktop keeps the full-quality settings untouched.
+  const isMobile = !!(window.matchMedia &&
+    window.matchMedia('(max-width: 820px)').matches);
+  const PIXEL_RATIO = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+
   // ---------- Renderer / scene ----------
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: true,
+      antialias: !isMobile,
       alpha: true,
       powerPreference: 'high-performance',
     });
@@ -79,7 +89,7 @@ function initHeroMesh(canvas, opts = {}) {
     console.warn('[hero-mesh] WebGL unavailable:', e);
     return null;
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(PIXEL_RATIO);
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   console.info('[hero-mesh] WebGL renderer ready');
@@ -194,8 +204,9 @@ function initHeroMesh(canvas, opts = {}) {
     const src = srcGeometry.attributes.position.array;
     const N_total = srcGeometry.attributes.position.count;
     // Cap the sparkle layer well below the mesh's vertex count — 35K
-    // points is plenty for a dense glow without taxing weak GPUs.
-    const MAX = 35000;
+    // points is plenty for a dense glow without taxing weak GPUs. On phones
+    // this additive cloud is the dominant per-frame cost, so cut it hard.
+    const MAX = isMobile ? 11000 : 35000;
     const stride = Math.max(1, Math.floor(N_total / MAX));
     const N = Math.floor(N_total / stride);
 
@@ -229,7 +240,7 @@ function initHeroMesh(canvas, opts = {}) {
         // Driven by the JS frame loop (see frame()):
         uWavePhase:   { value: 0 }, // 0..1 within the current pulse
         uBgIntensity: { value: 0 }, // 0 = mesh mode, 1 = particle mode
-        uPixelRatio:  { value: Math.min(window.devicePixelRatio || 1, 2) },
+        uPixelRatio:  { value: PIXEL_RATIO },
         uColor:       { value: new THREE.Color(0x9affec) },
         uSprite:      { value: makeParticleSprite() },
       },
@@ -301,8 +312,10 @@ function initHeroMesh(canvas, opts = {}) {
   function setupParticleReveal(geometry) {
     const fullPos = geometry.attributes.position.array;
     const N_total = geometry.attributes.position.count;
-    // Cap to keep the assembly silky-smooth even on integrated GPUs
-    const MAX_PARTICLES = 60000;
+    // Cap to keep the assembly silky-smooth even on integrated GPUs.
+    // The reveal updates every particle's position on the CPU each frame,
+    // so a lower budget on phones removes the initial stutter too.
+    const MAX_PARTICLES = isMobile ? 24000 : 60000;
     const stride = Math.max(1, Math.floor(N_total / MAX_PARTICLES));
     const N = Math.floor(N_total / stride);
 
