@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Surflo: Consistent 3D Surface Flow from a Global State</title>
+  <meta name="description" content="Surflo — A flow-matching approach for reconstructing 3D surfaces from a variable number of unposed images, through a single global latent state."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <meta charset="utf-8">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://anttwo.github.io/surflo/"/>
+  <meta property="og:title" content="Surflo — Reconstructing surfaces from images with flow matching"/>
+  <meta property="og:description" content="Surflo turns a variable number of unposed images into a single global latent state, then decodes any surface resolution with independent flow-matching ODEs."/>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="shortcut icon" href="../resrc/icons/mathis_square_thumb_nobg.jpg">
+
+  <link href="../base.css?v=20260525j" rel="stylesheet">
+  <link href="../assets/site.css?v=20260525j" rel="stylesheet">
+  <link href="./surflo.css?v=20260601f" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+
+<body class="site-modern surflo-page">
+
+  <!-- =================== HERO =================== -->
+  <header class="hero" id="top">
+    <div class="hero-stage">
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-vignette" aria-hidden="true"></div>
+    </div>
+
+    <!-- Project title card -->
+    <figcaption class="hero-caption">
+      <span class="hero-caption-title" aria-label="Surflo">Surflo</span>
+      <span class="hero-caption-sub">
+        Consistent 3D Surface Flow from a Global State
+      </span>
+    </figcaption>
+
+    <a class="hero-scroll-cue" href="#meta" aria-label="Scroll to content">
+      Scroll <i class="fa fa-chevron-down"></i>
+    </a>
+  </header>
+
+  <!-- =================== META =================== -->
+  <section id="meta" class="section section-meta">
+    <div class="meta-inner">
+      <div class="meta-venue">
+        <span class="venue-badge">arXiv&nbsp;preprint &middot; 2026</span>
+      </div>
+
+      <div class="meta-authors">
+        <div class="author">
+          <span class="author-line">
+            <a href="https://anttwo.github.io/" class="author-name">Antoine&nbsp;Gu&eacute;don</a><span class="eq-mark">*</span>
+          </span>
+          <span class="author-aff">LIX, &Eacute;cole&nbsp;Polytechnique</span>
+        </div>
+        <div class="author">
+          <span class="author-line">
+            <a href="https://scholar.google.com/citations?user=ma_HN-YAAAAJ&hl=ja" class="author-name">Shu&nbsp;Nakamura</a><span class="eq-mark">*</span>
+          </span>
+          <span class="author-aff">Kyoto&nbsp;University</span>
+        </div>
+        <div class="author">
+          <span class="author-line">
+            <a href="https://nicolas-dufour.github.io/" class="author-name">Nicolas&nbsp;Dufour</a><span class="eq-mark">*</span>
+          </span>
+          <span class="author-aff">Kyutai</span>
+        </div>
+        <div class="author">
+          <span class="author-line">
+            <a href="https://jiahuilei.com/" class="author-name">Jiahui&nbsp;Lei</a>
+          </span>
+          <span class="author-aff">UC&nbsp;Berkeley</span>
+        </div>
+        <div class="author">
+          <span class="author-line">
+            <a href="https://vision.ist.i.kyoto-u.ac.jp/" class="author-name">Ko&nbsp;Nishino</a>
+          </span>
+          <span class="author-aff">Kyoto&nbsp;University</span>
+        </div>
+        <div class="author">
+          <span class="author-line">
+            <a href="https://people.eecs.berkeley.edu/~kanazawa/" class="author-name">Angjoo&nbsp;Kanazawa</a>
+          </span>
+          <span class="author-aff">UC&nbsp;Berkeley</span>
+        </div>
+      </div>
+      <p class="meta-equal"><span class="eq-mark">*</span> Equal contribution</p>
+
+      <div class="meta-actions">
+        <a class="action-btn" href="#" aria-label="arXiv">
+          <i class="ai ai-arxiv"></i><span>arXiv</span>
+        </a>
+        <a class="action-btn" href="https://github.com/Anttwo/Surflo" aria-label="Code">
+          <i class="fa fa-github"></i><span>Code</span>
+        </a>
+        <a class="action-btn" href="#" aria-label="Video">
+          <i class="fa fa-play-circle"></i><span>Video</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== TL;DR CARDS =================== -->
+  <section class="section section-tldr-cards reveal">
+    <p class="tldr-goal">
+      Fuse N&nbsp;views into a <span class="lav">global&nbsp;state</span>,<br>
+      then decode a single <span class="accent">coherent&nbsp;surface</span> from it.
+    </p>
+    <div class="tldr-cards">
+      <article class="tldr-card">
+        <span class="tldr-card-icon" aria-hidden="true"><i class="fa fa-compress"></i></span>
+        <h3 class="tldr-card-title">Variable views <br><span class="lav">&rarr;</span> one latent.</h3>
+        <p class="tldr-card-text">Fuse N views into a fixed state of <code>K=128</code> tokens.</p>
+      </article>
+      <article class="tldr-card">
+        <span class="tldr-card-icon" aria-hidden="true"><i class="fa fa-expand"></i></span>
+        <h3 class="tldr-card-title">Decode at any resolution.</h3>
+        <p class="tldr-card-text">Decode as many points as you want from one global state.</p>
+      </article>
+      <article class="tldr-card">
+        <span class="tldr-card-icon" aria-hidden="true"><i class="fa fa-link"></i></span>
+        <h3 class="tldr-card-title">Independent flow, coherent surface.</h3>
+        <p class="tldr-card-text">While points flow independently, our guidance couples them.</p>
+      </article>
+      <article class="tldr-card">
+        <span class="tldr-card-icon" aria-hidden="true"><i class="fa fa-trophy"></i></span>
+        <h3 class="tldr-card-title">State of the art performance.</h3>
+        <p class="tldr-card-text">Evaluated on 8 benchmarks, from 2 to 32 views.</p>
+      </article>
+      <article class="tldr-card">
+        <span class="tldr-card-icon" aria-hidden="true"><i class="fa fa-database"></i></span>
+        <h3 class="tldr-card-title">New surface dataset for real-world scenes.</h3>
+        <p class="tldr-card-text">~10.5K DL3DV scenes, full scene meshes.</p>
+      </article>
+    </div>
+  </section>
+  <br><br>
+
+  <!-- =================== OVERVIEW =================== -->
+  <section class="section section-tldr reveal">
+    <div class="section-header">
+      <span class="index">01</span>
+      <h2>Overview</h2>
+      <span class="rule"></span>
+    </div>
+
+    <!-- Pipeline diagram lives here as the visual summary of the method. -->
+    <div class="pipeline-stage" id="surflo-pipeline" aria-hidden="true">
+
+      <!-- LEFT: input image stack -->
+      <div class="pipe-block pipe-block-images">
+        <div class="pipe-label">N&nbsp;input&nbsp;views</div>
+        <div class="pipe-imagestack">
+          <span class="pipe-img" style="--i:0"></span>
+          <span class="pipe-img" style="--i:1"></span>
+          <span class="pipe-img" style="--i:2"></span>
+          <span class="pipe-img" style="--i:3"></span>
+          <span class="pipe-img" style="--i:4"></span>
+          <span class="pipe-img" style="--i:5"></span>
+          <span class="pipe-img" style="--i:6"></span>
+          <span class="pipe-img" style="--i:7"></span>
+        </div>
+        <div class="pipe-counter">
+          N&nbsp;=&nbsp;<span class="pipe-counter-n" id="pipe-counter-n">16</span>
+        </div>
+      </div>
+
+      <!-- ENCODER -->
+      <div class="pipe-block pipe-block-encoder">
+        <div class="pipe-block-title">Encoder&nbsp;<em>E<sub>&phi;</sub></em></div>
+        <div class="pipe-block-sub">VGGT&nbsp;backbone&nbsp;<br>+&nbsp;Perceiver compressor</div>
+        <div class="pipe-block-icon">
+          <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <path d="M5 20 L45 50 L5 80 Z M55 20 L95 50 L55 80 Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- LATENT -->
+      <div class="pipe-block pipe-block-latent">
+        <div class="pipe-block-title">Global state&nbsp;<em class="lav">z</em></div>
+        <div class="pipe-tokens" aria-hidden="true">
+          <!-- 8 x 16 grid of 128 tokens -->
+        </div>
+        <div class="pipe-block-sub">K&nbsp;=&nbsp;128 tokens &middot; <strong class="lav">fixed</strong> for any N</div>
+      </div>
+
+      <!-- DECODER -->
+      <div class="pipe-block pipe-block-decoder">
+        <div class="pipe-block-title">Decoder&nbsp;<em>v<sub>&theta;</sub></em></div>
+        <div class="pipe-block-sub">Per-point Flow-matching<br>ODE</div>
+        <div class="pipe-block-icon">
+          <!-- Tiny 2D flow-matching animation:
+               16 points start as Gaussian noise, flow to a smooth
+               sine-wave surface, then loop. Pure CSS, ~one keyframe. -->
+          <div class="pipe-decoder-anim" aria-hidden="true">
+            <span class="pipe-decoder-dot" style="--tx:-28px; --ty:0px;     --nx:10px;  --ny:-18px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:-24.27px; --ty:2.85px; --nx:-15px; --ny:12px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:-20.53px; --ty:5.20px; --nx:22px;  --ny:6px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:-16.80px; --ty:6.66px; --nx:-8px;  --ny:-22px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:-13.07px; --ty:6.97px; --nx:18px;  --ny:18px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:-9.33px;  --ty:6.06px; --nx:-20px; --ny:4px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:-5.60px;  --ty:4.12px; --nx:4px;   --ny:-12px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:-1.87px;  --ty:1.45px; --nx:-12px; --ny:20px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:1.87px;   --ty:-1.45px; --nx:15px;  --ny:-8px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:5.60px;   --ty:-4.12px; --nx:-22px; --ny:-16px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:9.33px;   --ty:-6.06px; --nx:8px;   --ny:22px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:13.07px;  --ty:-6.97px; --nx:24px;  --ny:-4px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:16.80px;  --ty:-6.66px; --nx:-16px; --ny:14px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:20.53px;  --ty:-5.20px; --nx:12px;  --ny:-20px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:24.27px;  --ty:-2.85px; --nx:-4px;  --ny:8px;"></span>
+            <span class="pipe-decoder-dot" style="--tx:28px;     --ty:0px;     --nx:-18px; --ny:-10px;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: output points -->
+      <div class="pipe-block pipe-block-output">
+        <div class="pipe-label">M&nbsp;oriented&nbsp;points</div>
+        <canvas class="pipe-output-canvas" id="pipe-output-canvas" width="320" height="240" aria-hidden="true"></canvas>
+        <div class="pipe-counter">
+          M&nbsp;up&nbsp;to&nbsp;<span class="pipe-counter-m">10<sup>6</sup></span>
+        </div>
+      </div>
+
+      <!-- Particle flow overlay (drawn by surflo.js) -->
+      <canvas class="pipe-flow-canvas" id="pipe-flow-canvas" aria-hidden="true"></canvas>
+    </div>
+
+    <br>
+    <!-- Option 1 -->
+    <!-- <div class="tldr-grid">
+      <p class="tldr-lead">
+        Surflo turns a <em>variable</em> number of unposed images into a
+        <strong>single global latent</strong>&mdash;not a stack of per-view tokens.<br><br>
+
+        Each surface point is then decoded <em>independently</em>, with a flow-matching ODE
+        conditioned on that latent: we can sample <strong>any number of points</strong> from one encoder pass.<br><br>
+        
+        We finally introduce a <strong>communication guidance</strong> mechanism relying on a shared rendering loss. At each step of the ODE integration, points are converted into 3D Gaussians and rendered with Gaussian Splatting. This rendering guidance limits disagreement between nearby query points.
+      </p>
+      <ul class="tldr-bullets">
+        <li><span class="kw">Global state.</span> A Perceiver-style encoder compresses a variable number of views N into a global state <code class="lav">z</code> containing <code>K = 128</code> tokens.</li>
+        <li><span class="kw">Arbitrary resolution.</span> The Flow-matching ODE, conditioned on z, decodes each query point independently, allowing for flowing any number of points.</li>
+        <li><span class="kw">Coupling via guidance.</span> A shared rendering loss lets points talk with each other during ODE integration.</li>
+      </ul>
+    </div> -->
+    <!-- Option 2 -->
+    <ul class="tldr-bullets">
+      <li><span class="kw">Global state.</span> Surflo turns a <em>variable</em> number of unposed images into a <strong>single global latent</strong>&mdash;not a stack of per-view tokens.</li>
+      <li><span class="kw">Arbitrary resolution.</span> Each surface point is then decoded <em>independently</em>, with a flow-matching ODE conditioned on that latent: we can sample <strong>any number of points</strong> from one encoder pass.</li>
+      <li><span class="kw">Coupling via guidance.</span> We finally introduce a <strong>communication guidance</strong> mechanism relying on a shared rendering loss. At each step of the ODE integration, points are converted into 3D Gaussians and rendered with Gaussian Splatting. This rendering guidance limits disagreement between nearby query points.</li>
+    </ul>
+  </section>
+
+  <!-- =================== ONE GLOBAL STATE =================== -->
+  <section class="section section-problem reveal">
+    <div class="section-header">
+      <span class="index">02</span>
+      <h2>One global state, One coherent surface</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-text">
+        <p>
+          Modern feed-forward 3D models &mdash; <span class="hl">VGGT</span>, DUSt3R,
+          DepthAnything-3 &mdash; produce a <em>pointmap per view</em>. The representation grows linearly with the number of views, and leads to both noise and redundancy.<br>
+          
+          Surflo encodes the entire image set into a
+          <strong class="accent">global state</strong>&nbsp;<em>z</em>&nbsp;&mdash;
+          one fixed-size representation, regardless of how many views you
+          provide. From it, we decode a single coherent surface at whichever
+          resolution we ask for.
+        </p>
+        <p>
+          <!-- The geometry of a scene is what <em>doesn't</em> depend on the
+          camera: the same surface, seen from many viewpoints. Surflo's
+          encoder is built around exactly that idea, recovering the invariant
+          Klein already pointed to: -->
+        </p>
+        <p class="problem-followup">
+          The result is a representation of geometry that, by construction,
+          captures only <strong class="accent">what is shared across views</strong>.
+        </p>
+        <blockquote class="quote">
+          <p>Geometry is what remains <em>invariant</em> under transformations of view.</p>
+          <footer>Felix Klein · <em>Erlangen Programme</em>, 1872</footer>
+        </blockquote>
+      </div>
+      <figure class="problem-figure image-compare">
+        <div class="image-compare-stage" tabindex="0" role="slider"
+             aria-label="Drag to compare Surflo and VGGT outputs"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="image-compare-img is-base"
+               src="./assets/images/surflo_points_2.jpg"
+               alt="Surflo: a single coherent surface decoded from one global state">
+          <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+            <span class="image-compare-label image-compare-label-left">Surflo</span>
+          </div>
+          <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+            <img class="image-compare-img is-overlay"
+                 src="./assets/images/vggt_pointmaps.jpg"
+                 alt="VGGT: per-view pointmaps stacked across views">
+            <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+          </div>
+          <div class="image-compare-divider" aria-hidden="true">
+            <span class="image-compare-handle">
+              <i class="fa fa-chevron-left"></i>
+              <i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+        <figcaption>
+          Drag to compare &mdash; one shared latent <em>vs</em> <em>N</em> independent pointmaps.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- =================== PARTICLE GALLERY =================== -->
+  <section class="section section-gallery reveal">
+    <div class="section-header">
+      <span class="index">03</span>
+      <h2>Decoding explicit surfaces</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede">
+      Each scene below is a Surflo reconstruction from <strong>16 unposed images</strong>. For each scene, a total of <strong>100K points</strong> are decoded from the global state before being assembled into a mesh. Please click on <strong class="accent">Normals</strong> to toggle normal shading.
+    </p>
+
+    <div class="viewer-carousel" data-kind="mesh"
+         data-items='[
+           {"name":"Buzz",         "meta":"16 views · Custom capture",     "url":"./assets/meshes/buzz1.ply?v=20260526a"},
+           {"name":"Robot",       "meta":"16 views · Custom capture",     "url":"./assets/meshes/gundam.ply?v=20260526a"},
+           {"name":"Garden",       "meta":"16 views · MipNeRF 360",     "url":"./assets/meshes/garden.ply?v=20260526a"},
+           {"name":"Woody",        "meta":"16 views · Custom capture",     "url":"./assets/meshes/woody1.ply?v=20260526a"},
+           {"name":"Totoro",       "meta":"16 views · Custom capture",     "url":"./assets/meshes/totoro.ply?v=20260529a"},
+           {"name":"36e2e9","meta":"16 views · DL3DV", "url":"./assets/meshes/dl3dv_36e2e9.ply?v=20260527a"},
+           {"name":"b1dc38","meta":"16 views · DL3DV", "url":"./assets/meshes/dl3dv_b1dc38.ply?v=20260527a"},
+           {"name":"61bac6","meta":"16 views · DL3DV", "url":"./assets/meshes/dl3dv_61bac6.ply?v=20260527a"},
+           {"name":"bcb18a","meta":"16 views · DL3DV", "url":"./assets/meshes/dl3dv_bcb18a.ply?v=20260531a"}
+         ]'>
+      <div class="viewer-carousel-stage">
+        <canvas class="viewer-carousel-canvas" aria-hidden="true"></canvas>
+        <div class="viewer-carousel-overlay" aria-live="polite">
+          <span class="viewer-carousel-overlay-name" data-role="name">Buzz</span>
+          <span class="viewer-carousel-overlay-meta" data-role="meta">16 views &middot; textured</span>
+        </div>
+        <button type="button" class="viewer-carousel-arrow viewer-carousel-prev" aria-label="Previous mesh">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button type="button" class="viewer-carousel-arrow viewer-carousel-next" aria-label="Next mesh">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+        <button type="button" class="viewer-carousel-shade"
+                aria-label="Toggle normal shading"
+                aria-pressed="false"
+                title="Toggle normal shading (view-space normals)">
+          <i class="fa fa-adjust"></i><span>Normals</span>
+        </button>
+        <div class="viewer-carousel-loader" aria-hidden="true"><span></span></div>
+      </div>
+      <nav class="viewer-carousel-tabs" aria-label="Mesh selector">
+        <button type="button" class="viewer-carousel-tab is-active" data-idx="0">Buzz</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="1">Robot</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="2">Garden</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="3">Woody</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="4">Totoro</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="5">36e2e9</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="7">b1dc38</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="6">61bac6</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="8">bcb18a</button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- =================== MULTI-VIEW SCALING =================== -->
+  <section class="section section-scaling reveal">
+    <div class="section-header">
+      <span class="index">04</span>
+      <h2>A Global State filtering out Redundancy</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede">
+      Adding more input images doesn't grow the global state. The <code class="lav">K&nbsp;=&nbsp;128</code> latent tokens simply see more information through cross-attention, leading to more complete reconstructions. 
+      Please visualize the Surflo points below, with increasing number of input images. For the sake of visualization, RGB colors are computed by naively averaging over input images.
+    </p>
+
+    <div class="viewer-carousel" data-kind="points" data-point-style="rgb"
+         data-items='[
+           {"name":"Woody · 3 views",  "meta":"3 input images · K=128 latent",  "url":"./assets/points/woody_mv3.ply?v=20260608b"},
+           {"name":"Woody · 9 views",  "meta":"9 input images · K=128 latent",  "url":"./assets/points/woody_mv9.ply?v=20260526b"},
+           {"name":"Woody · 17 views", "meta":"17 input images · K=128 latent", "url":"./assets/points/woody_mv17.ply?v=20260526b"},
+           {"name":"Woody · 33 views", "meta":"33 input images · K=128 latent", "url":"./assets/points/woody_mv33.ply?v=20260526b"},
+           {"name":"Woody · 65 views", "meta":"65 input images · K=128 latent", "url":"./assets/points/woody_mv65.ply?v=20260526b"}
+         ]'>
+      <div class="viewer-carousel-stage">
+        <canvas class="viewer-carousel-canvas" aria-hidden="true"></canvas>
+        <div class="viewer-carousel-overlay" aria-live="polite">
+          <span class="viewer-carousel-overlay-name" data-role="name">Woody &middot; 17 views</span>
+          <span class="viewer-carousel-overlay-meta" data-role="meta">17 input images &middot; K=128 latent</span>
+        </div>
+        <button type="button" class="viewer-carousel-arrow viewer-carousel-prev" aria-label="Fewer views">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button type="button" class="viewer-carousel-arrow viewer-carousel-next" aria-label="More views">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+        <div class="viewer-carousel-loader" aria-hidden="true"><span></span></div>
+      </div>
+      <nav class="viewer-carousel-tabs" aria-label="Number of input views">
+        <button type="button" class="viewer-carousel-tab" data-idx="0">3 views</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="1">9 views</button>
+        <button type="button" class="viewer-carousel-tab is-active" data-idx="2">17 views</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="3">33 views</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="4">65 views</button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- =================== MULTI-RES =================== -->
+  <section class="section section-resolution reveal">
+    <div class="section-header">
+      <span class="index">05</span>
+      <h2>One latent, Any output resolution</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede">
+      One encoder forward pass, one global state &mdash; decode the surface at
+      whichever density you can afford. No re-encoding required.
+    </p>
+
+    <div class="strip-grid strip-grid-3 resolution-strip">
+
+      <!-- ===== 8K ===== -->
+      <figure class="image-compare">
+        <div class="image-compare-stage" tabindex="0" role="slider"
+             aria-label="Drag to compare Surflo points and mesh at 8K resolution"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="image-compare-img is-base"
+               src="./assets/images/truck_surflo_8Kpts.jpg"
+               alt="Surflo points · 8K">
+          <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+            <span class="image-compare-label image-compare-label-left">Points</span>
+          </div>
+          <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+            <img class="image-compare-img is-overlay"
+                 src="./assets/images/truck_surflo_8Kpts_mesh.jpg"
+                 alt="Surflo mesh · 8K">
+            <span class="image-compare-label image-compare-label-right">Mesh</span>
+          </div>
+          <div class="image-compare-divider" aria-hidden="true">
+            <span class="image-compare-handle">
+              <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+        <figcaption><strong>8K</strong> points</figcaption>
+      </figure>
+
+      <!-- ===== 32K ===== -->
+      <figure class="image-compare">
+        <div class="image-compare-stage" tabindex="0" role="slider"
+             aria-label="Drag to compare Surflo points and mesh at 32K resolution"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="image-compare-img is-base"
+               src="./assets/images/truck_surflo_32Kpts.jpg"
+               alt="Surflo points · 32K">
+          <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+            <span class="image-compare-label image-compare-label-left">Points</span>
+          </div>
+          <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+            <img class="image-compare-img is-overlay"
+                 src="./assets/images/truck_surflo_32Kpts_mesh.jpg"
+                 alt="Surflo mesh · 32K">
+            <span class="image-compare-label image-compare-label-right">Mesh</span>
+          </div>
+          <div class="image-compare-divider" aria-hidden="true">
+            <span class="image-compare-handle">
+              <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+        <figcaption><strong>32K</strong> points</figcaption>
+      </figure>
+
+      <!-- ===== 128K ===== -->
+      <figure class="image-compare">
+        <div class="image-compare-stage" tabindex="0" role="slider"
+             aria-label="Drag to compare Surflo points and mesh at 128K resolution"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="image-compare-img is-base"
+               src="./assets/images/truck_surflo_128Kpts.jpg"
+               alt="Surflo points · 128K">
+          <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+            <span class="image-compare-label image-compare-label-left">Points</span>
+          </div>
+          <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+            <img class="image-compare-img is-overlay"
+                 src="./assets/images/truck_surflo_128Kpts_mesh.jpg"
+                 alt="Surflo mesh · 128K">
+            <span class="image-compare-label image-compare-label-right">Mesh</span>
+          </div>
+          <div class="image-compare-divider" aria-hidden="true">
+            <span class="image-compare-handle">
+              <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+        <figcaption><strong>128K</strong> points</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- =================== GUIDANCE ABLATION =================== -->
+  <section class="section section-guidance reveal">
+    <div class="section-header">
+      <span class="index">06</span>
+      <h2>Points communicate through rendering</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede">
+      Independent ODEs are cheap and parallel, but two nearby queries can lock onto
+      different surface ambiguities. We couple the points at inference time with a guidance mechanism: At each ODE step, we render the points with Gaussian splatting, back-propagate an image-space loss and update the velocities. The rendering gradient is the channel through which points communicate.
+    </p>
+
+    <div class="strip-grid strip-grid-3 guidance-strip">
+      <figure class="strip-card">
+        <div class="strip-card-stage">
+          <canvas class="strip-card-canvas" data-ply="./assets/points/no_guidance.ply?v=20260526a" data-kind="points" aria-hidden="true"></canvas>
+        </div>
+        <figcaption><span class="hl-rose">no guidance</span><br>Plain flow matching</figcaption>
+      </figure>
+      <figure class="strip-card">
+        <div class="strip-card-stage">
+          <canvas class="strip-card-canvas" data-ply="./assets/points/photo_guidance.ply?v=20260526a" data-kind="points" aria-hidden="true"></canvas>
+        </div>
+        <figcaption><span class="hl-accent">+ photometric</span><br>L<sub>1</sub>&nbsp;+&nbsp;DSSIM</figcaption>
+      </figure>
+      <figure class="strip-card">
+        <div class="strip-card-stage">
+          <canvas class="strip-card-canvas" data-ply="./assets/points/monodepth_expert_guidance.ply?v=20260526a" data-kind="points" aria-hidden="true"></canvas>
+        </div>
+        <figcaption><span class="hl-accent">+ monodepth&nbsp;expert</span><br>Depth order regulariser</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- =================== COMPARISON =================== -->
+  <section class="section section-comparison reveal">
+    <div class="section-header">
+      <span class="index">07</span>
+      <h2>Comparison with state-of-the-art</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede comparison-lede">
+      Drag the dividers to compare Surflo against VGGT and Gaussian Wrapping, the leading method for surface reconstruction from images. Surflo holds up even on tough captures with strong exposure variation and transparent objects &mdash; see for instance the translucent Totoro figurine in Scene&nbsp;05.
+    </p>
+
+    <div class="comparison-grid">
+
+      <!-- ===== Scene 01 ===== -->
+      <article class="comparison-row">
+        <header class="comparison-row-header">
+          <span class="comparison-scene-tag">Scene 01</span>
+          <h3>Caterpillar</h3>
+          <span class="comparison-scene-meta">Tanks &amp; Temples &middot; 16 views</span>
+        </header>
+        <div class="comparison-row-pair">
+          <figure class="image-compare comparison-ref">
+            <div class="comparison-ref-stage">
+              <img src="./assets/images/caterpillar_ref.jpg" alt="Caterpillar reference photo">
+              <span class="image-compare-label comparison-ref-label">Reference</span>
+            </div>
+            <figcaption>Reference image</figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/caterpillar_surflo_points.jpg"
+                   alt="Surflo points">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/caterpillar_vggt_points.jpg"
+                     alt="VGGT pointmaps">
+                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/caterpillar_surflo_mesh.jpg"
+                   alt="Surflo mesh">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/caterpillar_wrapping_mesh.jpg"
+                     alt="Gaussian Wrapping mesh">
+                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- ===== Scene 02 ===== -->
+      <article class="comparison-row">
+        <header class="comparison-row-header">
+          <span class="comparison-scene-tag">Scene 02</span>
+          <h3>Garden</h3>
+          <span class="comparison-scene-meta">Mip-NeRF 360 &middot; 16 views</span>
+        </header>
+        <div class="comparison-row-pair">
+          <figure class="image-compare comparison-ref">
+            <div class="comparison-ref-stage">
+              <img src="./assets/images/garden_ref.jpg" alt="Garden reference photo">
+              <span class="image-compare-label comparison-ref-label">Reference</span>
+            </div>
+            <figcaption>Reference image</figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/garden_surflo_points.jpg"
+                   alt="Surflo points">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/garden_vggt_points.jpg"
+                     alt="VGGT pointmaps">
+                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/garden_surflo_mesh.jpg"
+                   alt="Surflo mesh">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/garden_wrapping_mesh.jpg"
+                     alt="Gaussian Wrapping mesh">
+                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- ===== Scene 03 ===== -->
+      <article class="comparison-row">
+        <header class="comparison-row-header">
+          <span class="comparison-scene-tag">Scene 03</span>
+          <h3>Ignatius</h3>
+          <span class="comparison-scene-meta">Tanks &amp; Temples &middot; 16 views</span>
+        </header>
+        <div class="comparison-row-pair">
+          <figure class="image-compare comparison-ref">
+            <div class="comparison-ref-stage">
+              <img src="./assets/images/ignatius_ref.jpg" alt="Ignatius reference photo">
+              <span class="image-compare-label comparison-ref-label">Reference</span>
+            </div>
+            <figcaption>Reference image</figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/ignatius_surflo_points.jpg"
+                   alt="Surflo points">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/ignatius_vggt_points.jpg"
+                     alt="VGGT pointmaps">
+                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/ignatius_surflo_mesh.jpg"
+                   alt="Surflo mesh">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/ignatius_wrapping_mesh.jpg"
+                     alt="Gaussian Wrapping mesh">
+                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- ===== Scene 04 ===== -->
+      <article class="comparison-row">
+        <header class="comparison-row-header">
+          <span class="comparison-scene-tag">Scene 04</span>
+          <h3>Robot</h3>
+          <span class="comparison-scene-meta">Custom capture &middot; 16 views</span>
+        </header>
+        <div class="comparison-row-pair">
+          <figure class="image-compare comparison-ref">
+            <div class="comparison-ref-stage">
+              <img src="./assets/images/gundam1_ref.jpg" alt="Robot reference photo">
+              <span class="image-compare-label comparison-ref-label">Reference</span>
+            </div>
+            <figcaption>Reference image</figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/gundam1_surflo_points.jpg"
+                   alt="Surflo points">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/gundam1_vggt_points_2.jpg"
+                     alt="VGGT pointmaps">
+                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/gundam1_surflo_mesh.jpg"
+                   alt="Surflo mesh">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/gundam1_wrapping_mesh.jpg"
+                     alt="Gaussian Wrapping mesh">
+                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- ===== Scene 05 ===== -->
+      <article class="comparison-row">
+        <header class="comparison-row-header">
+          <span class="comparison-scene-tag">Scene 05</span>
+          <h3>Totoro</h3>
+          <span class="comparison-scene-meta">Custom capture &middot; 16 views &middot; transparent figurine</span>
+        </header>
+        <div class="comparison-row-pair">
+          <figure class="image-compare comparison-ref">
+            <div class="comparison-ref-stage">
+              <img src="./assets/images/totoro_ref1.jpg?v=20260530a" alt="Totoro reference photo">
+              <span class="image-compare-label comparison-ref-label">Reference</span>
+            </div>
+            <figcaption>Reference image</figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/totoro_surflo_points.jpg?v=20260530a"
+                   alt="Surflo points">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/totoro_vggt_points.jpg?v=20260530a"
+                     alt="VGGT pointmaps">
+                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/totoro_surflo_mesh.jpg?v=20260530a"
+                   alt="Surflo mesh">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/totoro_wrapping_mesh.jpg?v=20260530a"
+                     alt="Gaussian Wrapping mesh">
+                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
+          </figure>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- =================== QUANTITATIVE =================== -->
+  <section class="section section-quantitative reveal">
+    <div class="section-header">
+      <span class="index">08</span>
+      <h2>Numbers</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede">
+      Surflo is trained on our augmented version of DL3DV only, and evaluated on eight benchmarks &mdash; four standard novel-view synthesis datasets with reference surfaces computed from dense views using the state-of-the-art meshing method <em>Gaussian Wrapping</em>, 
+      and four benchmarks with native surface
+      ground truth. Every method sees the same 16 unposed input views per
+      scene; we report Chamfer Distance (CD&nbsp;&darr;) and F1-score
+      (F1&nbsp;&uarr;).
+      Per-view feed-forward baselines are reported with TSDF fusion to a
+      single global mesh. Both Surflo rows highlighted &mdash; with and
+      without the shared rendering guidance.
+    </p>
+
+    <!-- Bar widths are set via --w (0–100%) and are normalised per chart
+         relative to the worst (CD) or best (F1) value, so each chart fills
+         its frame regardless of dataset difficulty. The bar value next to
+         each row is the raw number from the eval table. -->
+
+    <!-- ===================================================
+         GROUP 1 — Standard benchmarks · proxy surfaces
+         =================================================== -->
+    <div class="quant-group">
+      <h3 class="quant-group-title">
+        <span class="quant-group-tag">Proxy surfaces obtained from dense views</span>
+      </h3>
+
+      <div class="quant-tabset">
+        <nav class="quant-tablist" role="tablist" aria-label="Standard benchmarks">
+          <button type="button" class="quant-tab is-active" role="tab" aria-selected="true" data-idx="0">DL3DV<span class="quant-tab-tag">in-distribution</span></button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="1">Tanks &amp; Temples</button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="2">Mip-NeRF&nbsp;360</button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="3">DeepBlending</button>
+        </nav>
+
+        <div class="quant-panels">
+
+          <!-- DL3DV -->
+          <div class="quant-panel is-active" role="tabpanel" data-idx="0">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:27%"></span></div><span class="bar-value">0.0126</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:26%"></span></div><span class="bar-value">0.0120</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0459</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:36%"></span></div><span class="bar-value">0.0163</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:36%"></span></div><span class="bar-value">0.0166</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">0.0168</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:16%"></span></div><span class="bar-value">0.0072</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:18%"></span></div><span class="bar-value">0.0083</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:85%"></span></div><span class="bar-value">69.23</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:88%"></span></div><span class="bar-value">72.30</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">30.51</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:73%"></span></div><span class="bar-value">60.10</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:73%"></span></div><span class="bar-value">59.48</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:74%"></span></div><span class="bar-value">60.67</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">81.92</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:96%"></span></div><span class="bar-value">78.55</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tanks & Temples -->
+          <div class="quant-panel" role="tabpanel" data-idx="1">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:26%"></span></div><span class="bar-value">0.0113</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:41%"></span></div><span class="bar-value">0.0177</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0432</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">0.0161</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:39%"></span></div><span class="bar-value">0.0170</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:36%"></span></div><span class="bar-value">0.0157</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:12%"></span></div><span class="bar-value">0.0053</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:13%"></span></div><span class="bar-value">0.0056</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:88%"></span></div><span class="bar-value">77.46</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:80%"></span></div><span class="bar-value">70.80</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">32.99</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">62.95</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:70%"></span></div><span class="bar-value">61.67</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:73%"></span></div><span class="bar-value">64.94</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">88.57</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:98%"></span></div><span class="bar-value">86.40</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mip-NeRF 360 -->
+          <div class="quant-panel" role="tabpanel" data-idx="2">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:42%"></span></div><span class="bar-value">0.0178</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:42%"></span></div><span class="bar-value">0.0182</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0429</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:52%"></span></div><span class="bar-value">0.0222</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:52%"></span></div><span class="bar-value">0.0224</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:47%"></span></div><span class="bar-value">0.0201</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:16%"></span></div><span class="bar-value">0.0068</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:24%"></span></div><span class="bar-value">0.0103</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:74%"></span></div><span class="bar-value">60.64</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:73%"></span></div><span class="bar-value">59.91</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:31%"></span></div><span class="bar-value">25.60</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:62%"></span></div><span class="bar-value">51.08</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:62%"></span></div><span class="bar-value">50.83</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">57.86</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">82.00</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:93%"></span></div><span class="bar-value">76.57</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- DeepBlending -->
+          <div class="quant-panel" role="tabpanel" data-idx="3">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:35%"></span></div><span class="bar-value">0.0193</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:38%"></span></div><span class="bar-value">0.0210</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0550</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">0.0204</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">0.0202</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:30%"></span></div><span class="bar-value">0.0164</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:21%"></span></div><span class="bar-value">0.0116</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:20%"></span></div><span class="bar-value">0.0109</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:83%"></span></div><span class="bar-value">62.30</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:72%"></span></div><span class="bar-value">54.03</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">27.61</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:79%"></span></div><span class="bar-value">59.54</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:80%"></span></div><span class="bar-value">60.04</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:86%"></span></div><span class="bar-value">64.54</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:95%"></span></div><span class="bar-value">70.96</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">75.09</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         GROUP 2 — OOD benchmarks · native surface GT
+         =================================================== -->
+    <div class="quant-group">
+      <h3 class="quant-group-title">
+        <span class="quant-group-tag">Native surface ground truth</span>
+      </h3>
+
+      <div class="quant-tabset">
+        <nav class="quant-tablist" role="tablist" aria-label="Out-of-distribution benchmarks">
+          <button type="button" class="quant-tab is-active" role="tab" aria-selected="true" data-idx="0">ML-Hypersim</button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="1">BlendedMVS</button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="2">DTU</button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="3">SCRREAM</button>
+        </nav>
+
+        <div class="quant-panels">
+
+          <!-- ML-Hypersim -->
+          <div class="quant-panel is-active" role="tabpanel" data-idx="0">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:22%"></span></div><span class="bar-value">0.0138</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:24%"></span></div><span class="bar-value">0.0151</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0635</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:28%"></span></div><span class="bar-value">0.0176</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:27%"></span></div><span class="bar-value">0.0174</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:23%"></span></div><span class="bar-value">0.0145</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:15%"></span></div><span class="bar-value">0.0097</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:12%"></span></div><span class="bar-value">0.0079</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:84%"></span></div><span class="bar-value">74.08</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:79%"></span></div><span class="bar-value">69.07</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:31%"></span></div><span class="bar-value">27.65</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">62.03</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">62.68</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:76%"></span></div><span class="bar-value">66.86</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:89%"></span></div><span class="bar-value">77.98</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">87.97</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- BlendedMVS -->
+          <div class="quant-panel" role="tabpanel" data-idx="1">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:31%"></span></div><span class="bar-value">0.0270</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0875</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:47%"></span></div><span class="bar-value">0.0413</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:34%"></span></div><span class="bar-value">0.0295</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:35%"></span></div><span class="bar-value">0.0303</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:30%"></span></div><span class="bar-value">0.0259</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:12%"></span></div><span class="bar-value">0.0103</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:13%"></span></div><span class="bar-value">0.0114</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:77%"></span></div><span class="bar-value">59.64</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:68%"></span></div><span class="bar-value">52.61</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:42%"></span></div><span class="bar-value">32.13</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:62%"></span></div><span class="bar-value">48.19</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:63%"></span></div><span class="bar-value">48.85</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:72%"></span></div><span class="bar-value">55.64</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:99%"></span></div><span class="bar-value">76.50</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">77.28</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- DTU -->
+          <div class="quant-panel" role="tabpanel" data-idx="2">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:47%"></span></div><span class="bar-value">0.0380</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0801</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:38%"></span></div><span class="bar-value">0.0307</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:49%"></span></div><span class="bar-value">0.0394</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:49%"></span></div><span class="bar-value">0.0393</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:57%"></span></div><span class="bar-value">0.0460</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:30%"></span></div><span class="bar-value">0.0242</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:30%"></span></div><span class="bar-value">0.0240</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:69%"></span></div><span class="bar-value">28.93</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:43%"></span></div><span class="bar-value">17.93</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:75%"></span></div><span class="bar-value">31.41</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:68%"></span></div><span class="bar-value">28.78</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:67%"></span></div><span class="bar-value">28.30</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:72%"></span></div><span class="bar-value">30.17</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:93%"></span></div><span class="bar-value">39.23</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">42.05</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCRREAM -->
+          <div class="quant-panel" role="tabpanel" data-idx="3">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:29%"></span></div><span class="bar-value">0.0226</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:29%"></span></div><span class="bar-value">0.0220</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0771</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:30%"></span></div><span class="bar-value">0.0234</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:31%"></span></div><span class="bar-value">0.0242</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:16%"></span></div><span class="bar-value">0.0123</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:15%"></span></div><span class="bar-value">0.0114</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:9%"></span></div><span class="bar-value">0.0070</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:74%"></span></div><span class="bar-value">59.89</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:75%"></span></div><span class="bar-value">60.95</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:34%"></span></div><span class="bar-value">27.41</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:66%"></span></div><span class="bar-value">53.57</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:66%"></span></div><span class="bar-value">53.52</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:78%"></span></div><span class="bar-value">62.96</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:75%"></span></div><span class="bar-value">61.20</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">81.11</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         GROUP 3 — Varying number of input views
+         =================================================== -->
+    <p class="section-lede">
+      Surflo still performs better than the baselines when changing the number of input views. We vary the number of unposed views per scene from 2 to 32 and report
+      the same Chamfer Distance (CD&nbsp;&darr;) and F1-score
+      (F1&nbsp;&uarr;) on the OOD datasets Tanks&nbsp;&amp;&nbsp;Temples and
+      Mip-NeRF&nbsp;360. Surflo leads at every view count, including the
+      hard 2-view regime.
+    </p>
+
+    <div class="quant-group">
+      <h3 class="quant-group-title">
+        <span class="quant-group-tag">Varying input views</span>
+      </h3>
+
+      <div class="quant-tabset">
+        <nav class="quant-tablist" role="tablist" aria-label="Varying number of input views">
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="0">2 views<span class="quant-tab-tag">T&amp;T</span></button>
+          <button type="button" class="quant-tab is-active" role="tab" aria-selected="true" data-idx="1">4 views<span class="quant-tab-tag">T&amp;T</span></button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="2">8 views<span class="quant-tab-tag">T&amp;T</span></button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="3">32 views<span class="quant-tab-tag">T&amp;T</span></button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="4">2 views<span class="quant-tab-tag">360</span></button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="5">4 views<span class="quant-tab-tag">360</span></button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="6">8 views<span class="quant-tab-tag">360</span></button>
+          <button type="button" class="quant-tab" role="tab" aria-selected="false" data-idx="7">32 views<span class="quant-tab-tag">360</span></button>
+        </nav>
+
+        <div class="quant-panels">
+
+          <!-- T&T · 2 views -->
+          <div class="quant-panel" role="tabpanel" data-idx="0">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:55%"></span></div><span class="bar-value">0.1444</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:55%"></span></div><span class="bar-value">0.1428</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.2620</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:55%"></span></div><span class="bar-value">0.1453</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:56%"></span></div><span class="bar-value">0.1454</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:56%"></span></div><span class="bar-value">0.1476</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:51%"></span></div><span class="bar-value">0.1345</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:54%"></span></div><span class="bar-value">0.1416</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:74%"></span></div><span class="bar-value">6.83</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:75%"></span></div><span class="bar-value">6.97</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:62%"></span></div><span class="bar-value">5.78</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:66%"></span></div><span class="bar-value">6.09</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:68%"></span></div><span class="bar-value">6.30</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:56%"></span></div><span class="bar-value">5.24</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">9.28</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:76%"></span></div><span class="bar-value">7.08</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- T&T · 4 views -->
+          <div class="quant-panel is-active" role="tabpanel" data-idx="1">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:57%"></span></div><span class="bar-value">0.0285</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:58%"></span></div><span class="bar-value">0.0293</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0502</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:63%"></span></div><span class="bar-value">0.0316</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:63%"></span></div><span class="bar-value">0.0314</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:62%"></span></div><span class="bar-value">0.0313</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:27%"></span></div><span class="bar-value">0.0135</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:39%"></span></div><span class="bar-value">0.0198</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">53.62</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:64%"></span></div><span class="bar-value">47.90</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:40%"></span></div><span class="bar-value">30.29</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:57%"></span></div><span class="bar-value">43.05</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:57%"></span></div><span class="bar-value">42.60</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:60%"></span></div><span class="bar-value">45.28</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">75.07</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:97%"></span></div><span class="bar-value">72.65</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- T&T · 8 views -->
+          <div class="quant-panel" role="tabpanel" data-idx="2">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:25%"></span></div><span class="bar-value">0.0138</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:38%"></span></div><span class="bar-value">0.0210</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0557</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:34%"></span></div><span class="bar-value">0.0187</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:34%"></span></div><span class="bar-value">0.0191</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:32%"></span></div><span class="bar-value">0.0176</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:11%"></span></div><span class="bar-value">0.0059</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:11%"></span></div><span class="bar-value">0.0061</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:82%"></span></div><span class="bar-value">70.85</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">61.64</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">31.78</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:65%"></span></div><span class="bar-value">55.95</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:64%"></span></div><span class="bar-value">55.67</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:69%"></span></div><span class="bar-value">60.04</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">86.59</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">86.25</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- T&T · 32 views -->
+          <div class="quant-panel" role="tabpanel" data-idx="3">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:22%"></span></div><span class="bar-value">0.0094</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:33%"></span></div><span class="bar-value">0.0140</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0423</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:36%"></span></div><span class="bar-value">0.0152</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:37%"></span></div><span class="bar-value">0.0156</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:31%"></span></div><span class="bar-value">0.0133</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:12%"></span></div><span class="bar-value">0.0049</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:12%"></span></div><span class="bar-value">0.0049</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:93%"></span></div><span class="bar-value">84.83</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:82%"></span></div><span class="bar-value">74.59</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:39%"></span></div><span class="bar-value">35.54</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:75%"></span></div><span class="bar-value">68.43</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:73%"></span></div><span class="bar-value">66.24</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:79%"></span></div><span class="bar-value">72.10</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">90.76</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">90.34</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 360 · 2 views -->
+          <div class="quant-panel" role="tabpanel" data-idx="4">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:95%"></span></div><span class="bar-value">0.0755</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:94%"></span></div><span class="bar-value">0.0746</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0795</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:95%"></span></div><span class="bar-value">0.0754</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:95%"></span></div><span class="bar-value">0.0756</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:96%"></span></div><span class="bar-value">0.0766</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:90%"></span></div><span class="bar-value">0.0714</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:93%"></span></div><span class="bar-value">0.0736</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:74%"></span></div><span class="bar-value">9.63</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">9.24</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:65%"></span></div><span class="bar-value">8.46</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:67%"></span></div><span class="bar-value">8.73</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:67%"></span></div><span class="bar-value">8.76</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:56%"></span></div><span class="bar-value">7.28</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">13.07</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:80%"></span></div><span class="bar-value">10.40</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 360 · 4 views -->
+          <div class="quant-panel" role="tabpanel" data-idx="5">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:51%"></span></div><span class="bar-value">0.0326</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:50%"></span></div><span class="bar-value">0.0322</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0642</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:54%"></span></div><span class="bar-value">0.0344</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:55%"></span></div><span class="bar-value">0.0352</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:53%"></span></div><span class="bar-value">0.0339</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:30%"></span></div><span class="bar-value">0.0192</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:41%"></span></div><span class="bar-value">0.0263</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:70%"></span></div><span class="bar-value">40.79</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:69%"></span></div><span class="bar-value">40.31</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:36%"></span></div><span class="bar-value">21.41</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:63%"></span></div><span class="bar-value">37.15</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:63%"></span></div><span class="bar-value">37.11</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:71%"></span></div><span class="bar-value">41.61</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">58.68</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:92%"></span></div><span class="bar-value">53.71</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 360 · 8 views -->
+          <div class="quant-panel" role="tabpanel" data-idx="6">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:50%"></span></div><span class="bar-value">0.0244</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:45%"></span></div><span class="bar-value">0.0220</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0492</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:58%"></span></div><span class="bar-value">0.0283</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:60%"></span></div><span class="bar-value">0.0293</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:51%"></span></div><span class="bar-value">0.0251</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:26%"></span></div><span class="bar-value">0.0127</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:29%"></span></div><span class="bar-value">0.0145</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:75%"></span></div><span class="bar-value">55.29</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:74%"></span></div><span class="bar-value">55.17</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:38%"></span></div><span class="bar-value">28.01</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:64%"></span></div><span class="bar-value">47.45</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:65%"></span></div><span class="bar-value">47.89</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:73%"></span></div><span class="bar-value">53.97</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">74.07</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:99%"></span></div><span class="bar-value">73.44</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 360 · 32 views -->
+          <div class="quant-panel" role="tabpanel" data-idx="7">
+            <div class="bar-charts">
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">Chamfer distance &darr;</h3>
+                <p class="bar-chart-sub">lower is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:29%"></span></div><span class="bar-value">0.0161</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:29%"></span></div><span class="bar-value">0.0162</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">0.0562</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:39%"></span></div><span class="bar-value">0.0217</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:38%"></span></div><span class="bar-value">0.0215</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:29%"></span></div><span class="bar-value">0.0162</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:13%"></span></div><span class="bar-value">0.0071</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:24%"></span></div><span class="bar-value">0.0137</span></li>
+                </ul>
+              </div>
+              <div class="bar-chart">
+                <h3 class="bar-chart-title">F1-score &uarr;</h3>
+                <p class="bar-chart-sub">higher is better</p>
+                <ul class="bar-list">
+                  <li class="bar-row"><span class="bar-name">VGGT + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:81%"></span></div><span class="bar-value">65.56</span></li>
+                  <li class="bar-row"><span class="bar-name">DA3 + TSDF</span><div class="bar-track"><span class="bar-fill" style="--w:80%"></span></div><span class="bar-value">64.75</span></li>
+                  <li class="bar-row"><span class="bar-name">NOVA3R</span><div class="bar-track"><span class="bar-fill" style="--w:23%"></span></div><span class="bar-value">18.95</span></li>
+                  <li class="bar-row"><span class="bar-name">2DGS</span><div class="bar-track"><span class="bar-fill" style="--w:64%"></span></div><span class="bar-value">52.13</span></li>
+                  <li class="bar-row"><span class="bar-name">RaDe-GS</span><div class="bar-track"><span class="bar-fill" style="--w:65%"></span></div><span class="bar-value">53.08</span></li>
+                  <li class="bar-row"><span class="bar-name">Gaussian Wrapping</span><div class="bar-track"><span class="bar-fill" style="--w:77%"></span></div><span class="bar-value">62.41</span></li>
+                  <li class="bar-row is-ours-prev"><span class="bar-name">Surflo (no guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:100%"></span></div><span class="bar-value">81.24</span></li>
+                  <li class="bar-row is-ours"><span class="bar-name">Surflo (guid.)</span><div class="bar-track"><span class="bar-fill" style="--w:99%"></span></div><span class="bar-value">80.66</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =================== DATASET RELEASE =================== -->
+  <section class="section section-dataset reveal">
+    <div class="section-header">
+      <span class="index">09</span>
+      <h2>A new Dataset for Surface Reconstruction</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede">
+      Alongside Surflo we will release an augmented version of <a href="https://dl3dv-10k.github.io/DL3DV-10K/" target="_blank" rel="noopener">DL3DV</a>
+      where every scene ships with a full surface mesh covering both
+      <em>foreground and background</em> geometry. Each mesh is computed
+      with the state-of-the-art <em>Gaussian Wrapping</em> pipeline, giving
+      the community a large, scene-level supervision signal for surface reconstruction.
+    </p>
+
+    <p class="dataset-meta">
+      <span class="dataset-meta-item"><strong>~10.5K</strong> scenes</span>
+      <span class="dataset-meta-sep" aria-hidden="true">&middot;</span>
+      <span class="dataset-meta-item">indoor &amp; outdoor</span>
+      <span class="dataset-meta-sep" aria-hidden="true">&middot;</span>
+      <span class="dataset-meta-item">foreground&nbsp;+&nbsp;background</span>
+      <span class="dataset-meta-sep" aria-hidden="true">&middot;</span>
+      <span class="dataset-meta-item">posed images, depth, mesh</span>
+    </p>
+
+    <div class="strip-grid strip-grid-3 dataset-strip">
+
+      <!-- ===== Scene 01 ===== -->
+      <figure class="image-compare">
+        <div class="image-compare-stage" tabindex="0" role="slider"
+             aria-label="Drag to compare reference photo and Gaussian Wrapping mesh render — Scene 01"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="image-compare-img is-base"
+               src="./assets/dataset_images/dl3dv_1_ref.jpg?v=20260531a"
+               alt="Scene 01 — reference photo">
+          <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+            <span class="image-compare-label image-compare-label-left">Reference</span>
+          </div>
+          <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+            <img class="image-compare-img is-overlay"
+                 src="./assets/dataset_images/dl3dv_1_mesh.jpg?v=20260531a"
+                 alt="Scene 01 — Gaussian Wrapping mesh render">
+            <span class="image-compare-label image-compare-label-right">Mesh</span>
+          </div>
+          <div class="image-compare-divider" aria-hidden="true">
+            <span class="image-compare-handle">
+              <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+        <figcaption><strong>Scene 01</strong> &mdash; reference vs Gaussian Wrapping mesh</figcaption>
+      </figure>
+
+      <!-- ===== Scene 02 ===== -->
+      <figure class="image-compare">
+        <div class="image-compare-stage" tabindex="0" role="slider"
+             aria-label="Drag to compare reference photo and Gaussian Wrapping mesh render — Scene 02"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="image-compare-img is-base"
+               src="./assets/dataset_images/dl3dv_2_ref.jpg?v=20260531a"
+               alt="Scene 02 — reference photo">
+          <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+            <span class="image-compare-label image-compare-label-left">Reference</span>
+          </div>
+          <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+            <img class="image-compare-img is-overlay"
+                 src="./assets/dataset_images/dl3dv_2_mesh.jpg?v=20260531a"
+                 alt="Scene 02 — Gaussian Wrapping mesh render">
+            <span class="image-compare-label image-compare-label-right">Mesh</span>
+          </div>
+          <div class="image-compare-divider" aria-hidden="true">
+            <span class="image-compare-handle">
+              <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+        <figcaption><strong>Scene 02</strong> &mdash; reference vs Gaussian Wrapping mesh</figcaption>
+      </figure>
+
+      <!-- ===== Scene 03 ===== -->
+      <figure class="image-compare">
+        <div class="image-compare-stage" tabindex="0" role="slider"
+             aria-label="Drag to compare reference photo and Gaussian Wrapping mesh render — Scene 03"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="image-compare-img is-base"
+               src="./assets/dataset_images/dl3dv_3_ref.jpg?v=20260531a"
+               alt="Scene 03 — reference photo">
+          <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+            <span class="image-compare-label image-compare-label-left">Reference</span>
+          </div>
+          <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+            <img class="image-compare-img is-overlay"
+                 src="./assets/dataset_images/dl3dv_3_mesh.jpg?v=20260531a"
+                 alt="Scene 03 — Gaussian Wrapping mesh render">
+            <span class="image-compare-label image-compare-label-right">Mesh</span>
+          </div>
+          <div class="image-compare-divider" aria-hidden="true">
+            <span class="image-compare-handle">
+              <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+        <figcaption><strong>Scene 03</strong> &mdash; reference vs Gaussian Wrapping mesh</figcaption>
+      </figure>
+
+    </div>
+
+  </section>
+
+  <!-- =================== TAKE-AWAYS =================== -->
+  <!-- <section class="section section-takeaways reveal">
+    <div class="section-header">
+      <span class="index">10</span>
+      <h2>Three moves, one story.</h2>
+      <span class="rule"></span>
+    </div>
+
+    <ol class="takeaways-list">
+      <li>
+        <span class="num">1</span>
+        <div>
+          <span class="kw">Global latent</span>, not per-view tokens.
+          <span class="quiet">K = 128 tokens for any number of input views.</span>
+        </div>
+      </li>
+      <li>
+        <span class="num">2</span>
+        <div>
+          <span class="kw">Independent decoding</span>, with flow matching.
+          <span class="quiet">Any resolution, any subset, one shared encoder pass.</span>
+        </div>
+      </li>
+      <li>
+        <span class="num">3</span>
+        <div>
+          <span class="kw">Guidance</span> lets the points talk.
+          <span class="quiet">A shared rendering loss couples all M points at inference time.</span>
+        </div>
+      </li>
+    </ol>
+  </section> -->
+
+  <!-- =================== CITATION =================== -->
+  <section class="section section-cite reveal">
+    <div class="section-header">
+      <span class="index">11</span>
+      <h2>Citation</h2>
+      <span class="rule"></span>
+    </div>
+
+    <div class="cite-wrap">
+      <button type="button" class="cite-copy" data-copy-target="#cite-bibtex" aria-label="Copy citation to clipboard">
+        <i class="fa fa-clipboard" aria-hidden="true"></i><span>Copy</span>
+      </button>
+      <pre class="cite-block"><code id="cite-bibtex">@article{guedon2026surflo,
+  title       = {Surflo: Consistent 3D Surface Flow from a Global State},
+  author      = {Gu{\'e}don, Antoine and Nakamura, Shu and Dufour, Nicolas
+                  and Lei, Jiahui and Nishino, Ko and Kanazawa, Angjoo},
+  journal     = {arXiv preprint},
+  year        = {2026}
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="surflo-footer">
+    <p class="quiet">
+      &copy; 2026 The Surflo authors &middot; <a href="../">anttwo.github.io</a>
+    </p>
+  </footer>
+
+  <!-- =================== SCRIPTS =================== -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "../assets/vendor/three/build/three.module.js",
+      "three/addons/loaders/PLYLoader.js": "../assets/vendor/three/loaders/PLYLoader.js",
+      "three/addons/controls/OrbitControls.js": "../assets/vendor/three/controls/OrbitControls.js"
+    }
+  }
+  </script>
+
+  <!-- Hero mesh + surflo viewer (both ES modules) -->
+  <script type="module">
+    import('../assets/hero-mesh.js?v=20260527o').catch((err) => {
+      console.error('[surflo] hero-mesh.js failed to load:', err);
+    });
+    import('./surflo.js?v=20260601a').catch((err) => {
+      console.error('[surflo] surflo.js failed to load:', err);
+    });
+  </script>
+
+  <!-- Site-wide micro-interactions (theme toggle, reveal-on-scroll, magnetic buttons) -->
+  <script src="../assets/site.js?v=20260520d"></script>
+
+</body>
+</html>
