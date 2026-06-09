@@ -403,13 +403,13 @@
       Please visualize the Surflo points below, with increasing number of input images. For the sake of visualization, RGB colors are computed by naively averaging over input images.
     </p>
 
-    <div class="viewer-carousel" data-kind="points" data-point-style="rgb"
+    <div class="viewer-carousel" data-kind="points" data-point-style="rgb" data-cam-z="2.1"
          data-items='[
-           {"name":"Woody · 3 views",  "meta":"3 input images · K=128 latent",  "url":"./assets/points/woody_mv3.ply?v=20260608b"},
-           {"name":"Woody · 9 views",  "meta":"9 input images · K=128 latent",  "url":"./assets/points/woody_mv9.ply?v=20260526b"},
-           {"name":"Woody · 17 views", "meta":"17 input images · K=128 latent", "url":"./assets/points/woody_mv17.ply?v=20260526b"},
-           {"name":"Woody · 33 views", "meta":"33 input images · K=128 latent", "url":"./assets/points/woody_mv33.ply?v=20260526b"},
-           {"name":"Woody · 65 views", "meta":"65 input images · K=128 latent", "url":"./assets/points/woody_mv65.ply?v=20260526b"}
+           {"name":"Woody · 3 views",  "meta":"3 input images · K=128 latent",  "url":"./assets/points/woody_mv3.ply?v=20260608b",  "camZ":0.75, "center":{"x":-0.3,"y":0,"z":0}},
+           {"name":"Woody · 9 views",  "meta":"9 input images · K=128 latent",  "url":"./assets/points/woody_mv9.ply?v=20260526b",  "camZ":0.4, "center":{"x":-0.3,"y":-0.05,"z":0}},
+           {"name":"Woody · 17 views", "meta":"17 input images · K=128 latent", "url":"./assets/points/woody_mv17.ply?v=20260526b", "camZ":0.25, "center":{"x":-0.2,"y":0.04,"z":0}},
+           {"name":"Woody · 33 views", "meta":"33 input images · K=128 latent", "url":"./assets/points/woody_mv33.ply?v=20260526b", "camZ":0.22, "center":{"x":-0.2,"y":0.035,"z":0}},
+           {"name":"Woody · 65 views", "meta":"65 input images · K=128 latent", "url":"./assets/points/woody_mv65.ply?v=20260526b", "camZ":0.22, "center":{"x":-0.125,"y":0.035,"z":0}}
          ]'>
       <div class="viewer-carousel-stage">
         <canvas class="viewer-carousel-canvas" aria-hidden="true"></canvas>
@@ -1749,7 +1749,7 @@
     import('../assets/hero-mesh.js?v=20260608mobileswitch').catch((err) => {
       console.error('[surflo] hero-mesh.js failed to load:', err);
     });
-    import('./surflo.js?v=20260601a').catch((err) => {
+    import('./surflo.js?v=20260609camz2').catch((err) => {
       console.error('[surflo] surflo.js failed to load:', err);
     });
   </script>

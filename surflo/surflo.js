@@ -389,7 +389,15 @@ function createSurfloViewer(canvas, opts = {}) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.01, 100);
-  camera.position.set(0, 0, 3.0);
+  // Starting dolly distance (camera looks at the scene centre). Lower = closer.
+  const camZ = Number.isFinite(opts.cameraZ) ? opts.cameraZ : 3.0;
+  // Optional scene-centre shift: moves both the orbit target and the camera
+  // so a different point ends up framed at the centre of the viewport.
+  const ctr = opts.center || {};
+  const cx = Number.isFinite(ctr.x) ? ctr.x : 0;
+  const cy = Number.isFinite(ctr.y) ? ctr.y : 0;
+  const cz = Number.isFinite(ctr.z) ? ctr.z : 0;
+  camera.position.set(cx, cy, cz + camZ);
 
   // Lights (kept world-space; the model is a static, OrbitControls moves
   // the camera around it).
@@ -421,6 +429,9 @@ function createSurfloViewer(canvas, opts = {}) {
   controls.rotateSpeed = 0.75;
   controls.autoRotate = !reduceMotion;
   controls.autoRotateSpeed = opts.autoRotateSpeed ?? 0.7;
+  // Orbit around the (optionally shifted) scene centre.
+  controls.target.set(cx, cy, cz);
+  controls.update();
   // Once the user grabs the model, stop auto-spinning.
   controls.addEventListener('start', () => { controls.autoRotate = false; });
 
@@ -791,6 +802,9 @@ function setupCarousel(root) {
   // raw per-vertex colours, opaque and unshaded (emission look), instead
   // of the default glowy green additive particles.
   const plainColors = (root.dataset.pointStyle || '') === 'rgb';
+  // Optional per-carousel starting camera distance (closer = smaller).
+  const camZAttr = parseFloat(root.dataset.camZ);
+  const camZ = Number.isFinite(camZAttr) ? camZAttr : undefined;
   const stage  = root.querySelector('.viewer-carousel-stage');
   if (!stage) return;
   const tabs   = root.querySelectorAll('.viewer-carousel-tab');
@@ -854,6 +868,10 @@ function setupCarousel(root) {
         kind: item.kind || kind,
         normalShading: useNormalShading,
         plainColors,
+        // Per-item camera framing overrides the carousel-level default, so
+        // each "N views" point cloud can be centred/zoomed independently.
+        cameraZ: Number.isFinite(item.camZ) ? item.camZ : camZ,
+        center: item.center,
       });
       requestAnimationFrame(() => {
         stage.classList.remove('is-fading');
