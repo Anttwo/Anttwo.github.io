@@ -341,7 +341,9 @@
     </div>
 
     <p class="section-lede">
-      Each scene below is a Surflo reconstruction from <strong>16 unposed images</strong>. For each scene, a total of <strong>100K points</strong> are decoded from the global state before being assembled into a mesh. Please click on <strong class="accent">Normals</strong> to toggle normal shading.
+      Each scene below is a Surflo reconstruction from <strong>16 unposed images</strong>. For each scene, a total of <strong>100K points</strong> are decoded from the global state before being assembled into a mesh. 
+      For the sake of visualization, RGB colors were computed by naively averaging over input images.
+      Please click on <strong class="accent">Normals</strong> to toggle normal shading.
     </p>
 
     <div class="viewer-carousel" data-kind="mesh"
@@ -400,7 +402,7 @@
 
     <p class="section-lede">
       Adding more input images doesn't grow the global state. The <code class="lav">K&nbsp;=&nbsp;128</code> latent tokens simply see more information through cross-attention, leading to more complete reconstructions. 
-      Please visualize the Surflo points below, with increasing number of input images. For the sake of visualization, RGB colors are computed by naively averaging over input images.
+      Please see the Surflo points below, with increasing number of input images. For the sake of visualization, RGB colors are computed by naively averaging over input images.
     </p>
 
     <div class="viewer-carousel" data-kind="points" data-point-style="rgb" data-cam-z="2.1"
