@@ -602,7 +602,7 @@
     </div>
 
     <p class="section-lede comparison-lede">
-      Drag the dividers to compare Surflo against VGGT and Gaussian Wrapping, the leading method for surface reconstruction from images. Surflo holds up even on tough captures with strong exposure variation and transparent objects &mdash; see for instance the translucent Totoro figurine in Scene&nbsp;05.
+      Drag the dividers to compare Surflo against VGGT and Gaussian Wrapping, the leading method for surface reconstruction from images. Surflo holds up even on tough captures with strong exposure variation and transparent objects &mdash; see for instance the translucent Totoro figurine in Scene&nbsp;01.
     </p>
 
     <div class="comparison-grid">
@@ -611,6 +611,138 @@
       <article class="comparison-row">
         <header class="comparison-row-header">
           <span class="comparison-scene-tag">Scene 01</span>
+          <h3>Totoro</h3>
+          <span class="comparison-scene-meta">Custom capture &middot; 16 views &middot; transparent figurine</span>
+        </header>
+        <div class="comparison-row-pair">
+          <figure class="image-compare comparison-ref">
+            <div class="comparison-ref-stage">
+              <img src="./assets/images/totoro_ref1.jpg?v=20260530a" alt="Totoro reference photo">
+              <span class="image-compare-label comparison-ref-label">Reference</span>
+            </div>
+            <figcaption>Reference image</figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/totoro_surflo_points.jpg?v=20260530a"
+                   alt="Surflo points">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/totoro_vggt_points.jpg?v=20260530a"
+                     alt="VGGT pointmaps">
+                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/totoro_surflo_mesh.jpg?v=20260530a"
+                   alt="Surflo mesh">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/totoro_wrapping_mesh.jpg?v=20260530a"
+                     alt="Gaussian Wrapping mesh">
+                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- ===== Scene 02 ===== -->
+      <article class="comparison-row">
+        <header class="comparison-row-header">
+          <span class="comparison-scene-tag">Scene 02</span>
+          <h3>Gallos</h3>
+          <span class="comparison-scene-meta">Custom capture &middot; 16 views</span>
+        </header>
+        <div class="comparison-row-pair">
+          <figure class="image-compare comparison-ref">
+            <div class="comparison-ref-stage">
+              <img src="./assets/images/gallos_ref_1.jpg?v=20260612a" alt="Gallos reference photo">
+              <span class="image-compare-label comparison-ref-label">Reference</span>
+            </div>
+            <figcaption>Reference image</figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/gallos_surflo_points.jpg?v=20260612a"
+                   alt="Surflo points">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/gallos_vggt_points_close.jpg?v=20260612a"
+                     alt="VGGT pointmaps">
+                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
+          </figure>
+          <figure class="image-compare">
+            <div class="image-compare-stage" tabindex="0" role="slider"
+                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img class="image-compare-img is-base"
+                   src="./assets/images/gallos_surflo_mesh.jpg?v=20260612a"
+                   alt="Surflo mesh">
+              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
+                <span class="image-compare-label image-compare-label-left">Surflo</span>
+              </div>
+              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
+                <img class="image-compare-img is-overlay"
+                     src="./assets/images/gallos_wrapping_mesh.jpg?v=20260612a"
+                     alt="Gaussian Wrapping mesh">
+                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
+              </div>
+              <div class="image-compare-divider" aria-hidden="true">
+                <span class="image-compare-handle">
+                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- ===== Scene 03 ===== -->
+      <article class="comparison-row">
+        <header class="comparison-row-header">
+          <span class="comparison-scene-tag">Scene 03</span>
           <h3>Caterpillar</h3>
           <span class="comparison-scene-meta">Tanks &amp; Temples &middot; 16 views</span>
         </header>
@@ -673,10 +805,10 @@
         </div>
       </article>
 
-      <!-- ===== Scene 02 ===== -->
+      <!-- ===== Scene 04 ===== -->
       <article class="comparison-row">
         <header class="comparison-row-header">
-          <span class="comparison-scene-tag">Scene 02</span>
+          <span class="comparison-scene-tag">Scene 04</span>
           <h3>Garden</h3>
           <span class="comparison-scene-meta">Mip-NeRF 360 &middot; 16 views</span>
         </header>
@@ -739,10 +871,10 @@
         </div>
       </article>
 
-      <!-- ===== Scene 03 ===== -->
+      <!-- ===== Scene 05 ===== -->
       <article class="comparison-row">
         <header class="comparison-row-header">
-          <span class="comparison-scene-tag">Scene 03</span>
+          <span class="comparison-scene-tag">Scene 05</span>
           <h3>Ignatius</h3>
           <span class="comparison-scene-meta">Tanks &amp; Temples &middot; 16 views</span>
         </header>
@@ -805,10 +937,10 @@
         </div>
       </article>
 
-      <!-- ===== Scene 04 ===== -->
+      <!-- ===== Scene 06 ===== -->
       <article class="comparison-row">
         <header class="comparison-row-header">
-          <span class="comparison-scene-tag">Scene 04</span>
+          <span class="comparison-scene-tag">Scene 06</span>
           <h3>Robot</h3>
           <span class="comparison-scene-meta">Custom capture &middot; 16 views</span>
         </header>
@@ -857,72 +989,6 @@
               <div class="image-compare-side image-compare-side-right" aria-hidden="true">
                 <img class="image-compare-img is-overlay"
                      src="./assets/images/gundam1_wrapping_mesh.jpg"
-                     alt="Gaussian Wrapping mesh">
-                <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
-              </div>
-              <div class="image-compare-divider" aria-hidden="true">
-                <span class="image-compare-handle">
-                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
-                </span>
-              </div>
-            </div>
-            <figcaption>Mesh &mdash; <em>Surflo</em> vs <em>Gaussian Wrapping</em></figcaption>
-          </figure>
-        </div>
-      </article>
-
-      <!-- ===== Scene 05 ===== -->
-      <article class="comparison-row">
-        <header class="comparison-row-header">
-          <span class="comparison-scene-tag">Scene 05</span>
-          <h3>Totoro</h3>
-          <span class="comparison-scene-meta">Custom capture &middot; 16 views &middot; transparent figurine</span>
-        </header>
-        <div class="comparison-row-pair">
-          <figure class="image-compare comparison-ref">
-            <div class="comparison-ref-stage">
-              <img src="./assets/images/totoro_ref1.jpg?v=20260530a" alt="Totoro reference photo">
-              <span class="image-compare-label comparison-ref-label">Reference</span>
-            </div>
-            <figcaption>Reference image</figcaption>
-          </figure>
-          <figure class="image-compare">
-            <div class="image-compare-stage" tabindex="0" role="slider"
-                 aria-label="Drag to compare Surflo points and VGGT pointmaps"
-                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-              <img class="image-compare-img is-base"
-                   src="./assets/images/totoro_surflo_points.jpg?v=20260530a"
-                   alt="Surflo points">
-              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
-                <span class="image-compare-label image-compare-label-left">Surflo</span>
-              </div>
-              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
-                <img class="image-compare-img is-overlay"
-                     src="./assets/images/totoro_vggt_points.jpg?v=20260530a"
-                     alt="VGGT pointmaps">
-                <span class="image-compare-label image-compare-label-right">VGGT pointmaps</span>
-              </div>
-              <div class="image-compare-divider" aria-hidden="true">
-                <span class="image-compare-handle">
-                  <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
-                </span>
-              </div>
-            </div>
-            <figcaption>Points &mdash; <em>Surflo</em> vs <em>VGGT pointmaps</em></figcaption>
-          </figure>
-          <figure class="image-compare">
-            <div class="image-compare-stage" tabindex="0" role="slider"
-                 aria-label="Drag to compare Surflo mesh and Gaussian Wrapping mesh"
-                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-              <img class="image-compare-img is-base"
-                   src="./assets/images/totoro_surflo_mesh.jpg?v=20260530a"
-                   alt="Surflo mesh">
-              <div class="image-compare-side image-compare-side-left" aria-hidden="true">
-                <span class="image-compare-label image-compare-label-left">Surflo</span>
-              </div>
-              <div class="image-compare-side image-compare-side-right" aria-hidden="true">
-                <img class="image-compare-img is-overlay"
-                     src="./assets/images/totoro_wrapping_mesh.jpg?v=20260530a"
                      alt="Gaussian Wrapping mesh">
                 <span class="image-compare-label image-compare-label-right">Gaussian Wrapping</span>
               </div>
