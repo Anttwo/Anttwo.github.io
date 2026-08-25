@@ -1512,6 +1512,13 @@
 }
 [data-theme="light"] .dataset-meta-sep { color: rgba(0, 0, 0, 0.18); }
 
+/* Centred CTA under the dataset comparison strip; reuses .action-btn. */
+.dataset-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .dataset-coming {
   margin-top: 1.2rem;
   text-align: center;
