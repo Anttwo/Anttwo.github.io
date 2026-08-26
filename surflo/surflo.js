@@ -442,6 +442,11 @@ function createSurfloViewer(canvas, opts = {}) {
   let points = null;
   let revealAnim = null;
   const sprite = makeParticleSprite();
+  // Sampling used by the live point cloud, kept so setColorVariant() can
+  // repaint it from another PLY that shares the exact same vertex order.
+  let pointSampling = null;      // { stride, N }
+  let pendingColorGeo = null;    // colours that arrived before the points did
+  let colorReq = 0;              // guards against out-of-order variant loads
 
   function buildFromGeometry(geometry) {
     // Auto center + uniform scale so every asset fits a unit-ish box
@@ -539,7 +544,9 @@ function createSurfloViewer(canvas, opts = {}) {
   function setupParticleReveal(geometry) {
     const fullPos = geometry.attributes.position.array;
     const N_total = geometry.attributes.position.count;
-    const MAX = 30000;  // small viewer = lower particle budget
+    // Small viewer = lower particle budget. Viewers whose whole point is
+    // the point cloud itself (the latent-PCA switcher) raise it via opts.
+    const MAX = opts.maxPoints ?? 30000;
     const stride = Math.max(1, Math.floor(N_total / MAX));
     const N = Math.floor(N_total / stride);
 
@@ -586,7 +593,8 @@ function createSurfloViewer(canvas, opts = {}) {
       ? new THREE.PointsMaterial({
           // Raw vertex colours, no sprite/tint, no additive glow:
           // each point is a flat, opaque dot in its own colour.
-          size: 3.0,
+          // Denser clouds want smaller dots — hence the opt-in override.
+          size: opts.pointSize ?? 3.0,
           vertexColors: true,
           transparent: true,   // only so the reveal can fade opacity 0->1
           opacity: 0,
@@ -618,6 +626,63 @@ function createSurfloViewer(canvas, opts = {}) {
       startArr, curArr, finalArr,
       pgeo, pmat,
     };
+
+    if (plainColors) {
+      pointSampling = { stride, N };
+      if (pendingColorGeo) {
+        const g = pendingColorGeo;
+        pendingColorGeo = null;
+        applyColorGeometry(g);
+      }
+    }
+  }
+
+  /* Repaint the live point cloud from a PLY that shares this one's vertex
+     order (same geometry, different per-vertex colours). Positions are left
+     untouched, so the camera pose and the reveal keep running. */
+  function applyColorGeometry(geometry) {
+    const src = geometry.attributes.color;
+    if (!src) return false;
+    if (!points || !pointSampling) {
+      // Geometry still loading — repaint as soon as the points exist.
+      pendingColorGeo = geometry;
+      return false;
+    }
+    const dst = points.geometry.attributes.color;
+    if (!dst) return false;
+    const { stride, N } = pointSampling;
+    const a = src.array, b = dst.array;
+    for (let i = 0; i < N; i++) {
+      const s = i * stride * 3;
+      b[i * 3]     = a[s];
+      b[i * 3 + 1] = a[s + 1];
+      b[i * 3 + 2] = a[s + 2];
+    }
+    dst.needsUpdate = true;
+    return true;
+  }
+
+  function setColorVariant(variantUrl, done) {
+    const finish = () => { if (typeof done === 'function') done(); };
+    if (!variantUrl) { finish(); return; }
+    // Clicking through variants faster than they download would otherwise
+    // let a slow earlier response land on top of a newer selection.
+    const req = ++colorReq;
+    if (PLY_CACHE[variantUrl]) {
+      applyColorGeometry(PLY_CACHE[variantUrl]);
+      finish();
+      return;
+    }
+    new PLYLoader().load(
+      variantUrl,
+      (geometry) => {
+        PLY_CACHE[variantUrl] = geometry;
+        if (req === colorReq) applyColorGeometry(geometry);
+        finish();
+      },
+      undefined,
+      (err) => { console.error('[surflo] failed to load', variantUrl, err); finish(); }
+    );
   }
 
   function tickReveal(dt) {
@@ -729,6 +794,7 @@ function createSurfloViewer(canvas, opts = {}) {
 
   return {
     setNormalShading,
+    setColorVariant,
     destroy() {
       running = false;
       try { ro && ro.disconnect(); } catch (e) {}
@@ -805,6 +871,16 @@ function setupCarousel(root) {
   // Optional per-carousel starting camera distance (closer = smaller).
   const camZAttr = parseFloat(root.dataset.camZ);
   const camZ = Number.isFinite(camZAttr) ? camZAttr : undefined;
+  // Opt-in point budget / dot size for point carousels.
+  const maxPointsAttr = parseFloat(root.dataset.maxPoints);
+  const maxPoints = Number.isFinite(maxPointsAttr) ? maxPointsAttr : undefined;
+  const pointSizeAttr = parseFloat(root.dataset.pointSize);
+  const pointSize = Number.isFinite(pointSizeAttr) ? pointSizeAttr : undefined;
+  // Opt-in: every item here is the SAME point cloud painted differently
+  // (the latent-PCA visualisations). Rather than tear the viewer down on
+  // each switch we keep it alive and swap only the colour attribute, so the
+  // comparison is instant and the camera keeps whatever pose the user set.
+  const swapColors = root.dataset.swapColors === '1';
   const stage  = root.querySelector('.viewer-carousel-stage');
   if (!stage) return;
   const tabs   = root.querySelectorAll('.viewer-carousel-tab');
@@ -857,6 +933,13 @@ function setupCarousel(root) {
       t.setAttribute('aria-selected', on ? 'true' : 'false');
     });
 
+    // Colour-swap carousels: repaint in place, no fade, no camera reset.
+    if (swapColors && currentViewer && currentViewer.setColorVariant) {
+      showLoader(true);
+      currentViewer.setColorVariant(item.url, () => showLoader(false));
+      return;
+    }
+
     stage.classList.add('is-fading');
     showLoader(true);
 
@@ -872,6 +955,8 @@ function setupCarousel(root) {
         // each "N views" point cloud can be centred/zoomed independently.
         cameraZ: Number.isFinite(item.camZ) ? item.camZ : camZ,
         center: item.center,
+        maxPoints,
+        pointSize,
       });
       requestAnimationFrame(() => {
         stage.classList.remove('is-fading');

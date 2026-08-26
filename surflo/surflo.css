@@ -1268,7 +1268,8 @@
    Used by both the particle gallery (section 04) and the multi-view
    carousel (section 05). One stage, one viewer alive at a time. */
 .section-gallery,
-.section-scaling { padding-bottom: 5rem; }
+.section-scaling,
+.section-latent { padding-bottom: 5rem; }
 .viewer-carousel {
   max-width: 1100px;
   margin: 0 auto;
@@ -1476,6 +1477,20 @@
   transition: opacity 220ms ease;
 }
 .viewer-carousel-stage.is-fading .viewer-carousel-canvas { opacity: 0; }
+
+/* ---------- Latent semantics section ----------------------------
+   Caption under the colour switcher; the viewer itself is the generic
+   .viewer-carousel above, in colour-swap mode. */
+.latent-note {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--subdued-text-color);
+}
 
 /* ---------- Dataset release section ----------------------------- */
 .dataset-meta {

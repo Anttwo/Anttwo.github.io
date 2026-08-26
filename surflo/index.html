@@ -26,7 +26,7 @@
 
   <link href="../base.css?v=20260525j" rel="stylesheet">
   <link href="../assets/site.css?v=20260525j" rel="stylesheet">
-  <link href="./surflo.css?v=20260825data" rel="stylesheet">
+  <link href="./surflo.css?v=20260826latent" rel="stylesheet">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -596,10 +596,70 @@
     </div>
   </section>
 
+  <!-- =================== LATENT SEMANTICS =================== -->
+  <section class="section section-latent reveal">
+    <div class="section-header">
+      <span class="index">07</span>
+      <h2>A Global State carrying Semantics</h2>
+      <span class="rule"></span>
+    </div>
+
+    <p class="section-lede">
+      Inside the decoder, 3D points are tokenized and cross-attend to the global state:
+      each point <em>queries</em> the <code class="lav">K&nbsp;=&nbsp;128</code> latent tokens and comes back
+      with its own feature vector. To look at those features, we run a DINO-style PCA over
+      all the point features of a scene and map three singular directions to the RGB channels.
+    </p>
+
+    <p class="section-lede secondary">
+      The result is a clean, unsupervised segmentation of the scene. The three leading
+      directions (rank&nbsp;0&ndash;2) carve out the coarse structure &mdash; the table separates from
+      the garden in one shot; smaller directions (rank&nbsp;5&ndash;7) split much finer parts, such as
+      the vase and the individual legs of the table. Nothing in training asks for this, which
+      suggests the global state carries <strong>semantic</strong> information and could be reused for
+      downstream applications such as 3D segmentation.
+    </p>
+
+    <div class="viewer-carousel" data-kind="points" data-point-style="rgb"
+         data-swap-colors="1" data-max-points="300000" data-point-size="2.2"
+         data-cam-z="2.0"
+         data-items='[
+           {"name":"Garden &middot; RGB",  "meta":"colors averaged over input views",  "url":"./assets/latent/surflo_rgb_step75.ply?v=20260826a"},
+           {"name":"Garden &middot; Normals",  "meta":"predicted normals as RGB",  "url":"./assets/latent/surflo_normals_step75.ply?v=20260826a"},
+           {"name":"Garden &middot; Latent PCA, rank 0&ndash;2", "meta":"three leading directions &rarr; RGB", "url":"./assets/latent/surflo_pca-softmax-k0_L2_step75.ply?v=20260826a"},
+           {"name":"Garden &middot; Latent PCA, rank 5&ndash;7", "meta":"finer directions &rarr; RGB", "url":"./assets/latent/surflo_pca-point-k5_L2_step75.ply?v=20260826a"}
+         ]'>
+      <div class="viewer-carousel-stage">
+        <canvas class="viewer-carousel-canvas" aria-hidden="true"></canvas>
+        <div class="viewer-carousel-overlay" aria-live="polite">
+          <span class="viewer-carousel-overlay-name" data-role="name">Garden &middot; Latent PCA, rank 5&ndash;7</span>
+          <span class="viewer-carousel-overlay-meta" data-role="meta">finer directions &rarr; RGB</span>
+        </div>
+        <button type="button" class="viewer-carousel-arrow viewer-carousel-prev" aria-label="Previous coloring">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button type="button" class="viewer-carousel-arrow viewer-carousel-next" aria-label="Next coloring">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+        <div class="viewer-carousel-loader" aria-hidden="true"><span></span></div>
+      </div>
+      <nav class="viewer-carousel-tabs" aria-label="Point cloud coloring">
+        <button type="button" class="viewer-carousel-tab" data-idx="0">RGB</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="1">Normals</button>
+        <button type="button" class="viewer-carousel-tab" data-idx="2">PCA &middot; rank&nbsp;0&ndash;2</button>
+        <button type="button" class="viewer-carousel-tab is-active" data-idx="3">PCA &middot; rank&nbsp;5&ndash;7</button>
+      </nav>
+    </div>
+
+    <p class="latent-note">
+      Same points, same viewpoint &mdash; only the colors change. Drag to orbit, scroll to zoom.
+    </p>
+  </section>
+
   <!-- =================== COMPARISON =================== -->
   <section class="section section-comparison reveal">
     <div class="section-header">
-      <span class="index">07</span>
+      <span class="index">08</span>
       <h2>Comparison with state-of-the-art</h2>
       <span class="rule"></span>
     </div>
@@ -1012,7 +1072,7 @@
   <!-- =================== QUANTITATIVE =================== -->
   <section class="section section-quantitative reveal">
     <div class="section-header">
-      <span class="index">08</span>
+      <span class="index">09</span>
       <h2>Numbers</h2>
       <span class="rule"></span>
     </div>
@@ -1660,7 +1720,7 @@
   <!-- =================== DATASET RELEASE =================== -->
   <section class="section section-dataset reveal">
     <div class="section-header">
-      <span class="index">09</span>
+      <span class="index">10</span>
       <h2>A new Dataset for Surface Reconstruction</h2>
       <span class="rule"></span>
     </div>
@@ -1777,7 +1837,7 @@
   <!-- =================== TAKE-AWAYS =================== -->
   <!-- <section class="section section-takeaways reveal">
     <div class="section-header">
-      <span class="index">10</span>
+      <span class="index">11</span>
       <h2>Three moves, one story.</h2>
       <span class="rule"></span>
     </div>
@@ -1810,7 +1870,7 @@
   <!-- =================== CITATION =================== -->
   <section class="section section-cite reveal">
     <div class="section-header">
-      <span class="index">11</span>
+      <span class="index">12</span>
       <h2>Citation</h2>
       <span class="rule"></span>
     </div>
@@ -1852,7 +1912,7 @@
     import('../assets/hero-mesh.js?v=20260608mobileswitch').catch((err) => {
       console.error('[surflo] hero-mesh.js failed to load:', err);
     });
-    import('./surflo.js?v=20260609camz2').catch((err) => {
+    import('./surflo.js?v=20260826latent').catch((err) => {
       console.error('[surflo] surflo.js failed to load:', err);
     });
   </script>
